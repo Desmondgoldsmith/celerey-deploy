@@ -1,7 +1,10 @@
-export default function SignIn() {
+import SignIn from "../Features/auth/components/templates/signin";
+import AuthLayout from "../Features/auth/components/templates/authLayout";
+
+export default function SignInPage() {
   return (
-    <div>
-      <h1>Signup</h1>
-    </div>
+    <AuthLayout>
+      <SignIn />
+    </AuthLayout>
   );
 }

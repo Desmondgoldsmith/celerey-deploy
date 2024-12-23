@@ -1,1 +1,6 @@
-// this is where we define schemas for the Auth Feature
+import * as z from "zod";
+
+export const signInSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
