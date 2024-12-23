@@ -15,7 +15,7 @@ const SignIn = () => {
       <div className="flex justify-center mb-12">
         <div className="relative w-64 h-64">
           <Image
-            src="/illustration.svg"
+            src="/assets/SignupImage.svg"
             alt="Financial Illustration"
             fill
             className="object-contain"

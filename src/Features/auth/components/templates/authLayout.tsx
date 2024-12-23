@@ -13,7 +13,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
           <div className="w-32">
             {/* Logo placeholder */}
             <Image
-              src="/logo.svg"
+              src="/assets/logo2.svg"
               alt="Celerey"
               width={120}
               height={40}
