@@ -1,5 +1,10 @@
-const OTPPage = () => {
-  return <h1>This is the OTP page!</h1>;
-};
+import AuthLayout from "@/Features/auth/components/templates/authLayout";
+import { OTPTemplate } from "@/Features/auth/components/templates/otpTemplate";
 
-export default OTPPage;
+export default function OTPPage() {
+  return (
+    <AuthLayout>
+      <OTPTemplate />
+    </AuthLayout>
+  );
+}

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Welcome = () => {
   return (
@@ -44,10 +45,12 @@ const Welcome = () => {
       </div>
 
       <div className="flex justify-center gap-4">
-        <Button variant="outline" className="outline-navy text-navy">
-          Sign in to your account
-        </Button>
-        <Button className="bg-navy text-white hover:bg-navy">
+        <Link href="/auth/signin" passHref>
+          <Button variant="outline" className="outline-navy text-navy">
+            Sign in to my account
+          </Button>
+        </Link>
+        <Button className="bg-navy text-white hover:bg-navyLight">
           Create an account
         </Button>
       </div>

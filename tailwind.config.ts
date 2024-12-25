@@ -12,6 +12,7 @@ export default {
     extend: {
       colors: {
         navy: "#1B1856",
+        navyLight: "#8C80F8",
         offWhite: "#F8F8F8",
         white: "#FFFEFE",
       },

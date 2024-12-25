@@ -7,11 +7,10 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen flex flex-col">
       <nav className="px-6 py-4 border-b bg-white">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="w-32">
-            {/* Logo placeholder */}
             <Image
               src="/assets/logo2.svg"
               alt="Celerey"
@@ -33,10 +32,10 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
           </div>
         </div>
       </nav>
-      <div className="w-full bg-offWhite">
+      <div className="flex-grow bg-offWhite">
         <main className="max-w-7xl mx-auto px-6 py-8">{children}</main>
       </div>
-      <footer className="border-t mt-auto bg-white">
+      <footer className="border-t bg-white">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <span className="text-sm font-helvetica text-gray-500">
             © Celerey 2024
