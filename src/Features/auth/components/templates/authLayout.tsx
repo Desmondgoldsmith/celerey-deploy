@@ -7,41 +7,45 @@ interface AuthLayoutProps {
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
-    <div className="min-h-screen bg-white">
-      <nav className="px-6 py-4 border-b">
+    <div className="min-h-screen ">
+      <nav className="px-6 py-4 border-b bg-white">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="w-32">
             {/* Logo placeholder */}
             <Image
               src="/assets/logo2.svg"
               alt="Celerey"
-              width={120}
-              height={40}
+              width={80}
+              height={30}
               priority
             />
           </div>
           <div className="flex gap-4">
-            <a href="#" className="text-sm text-gray-600">
+            <a href="#" className="text-sm font-helvetica text-gray-600">
               Tax Calculator
             </a>
-            <a href="#" className="text-sm text-gray-600">
+            <a href="#" className="text-sm font-helvetica text-gray-600">
               Goals & Planning
             </a>
-            <a href="#" className="text-sm text-gray-600">
+            <a href="#" className="text-sm font-helvetica text-gray-600">
               Knowledge Hub
             </a>
           </div>
         </div>
       </nav>
-      <main className="max-w-7xl mx-auto px-6 py-8">{children}</main>
-      <footer className="border-t mt-auto">
+      <div className="w-full bg-offWhite">
+        <main className="max-w-7xl mx-auto px-6 py-8">{children}</main>
+      </div>
+      <footer className="border-t mt-auto bg-white">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <span className="text-sm text-gray-500">© Celerey 2024</span>
+          <span className="text-sm font-helvetica text-gray-500">
+            © Celerey 2024
+          </span>
           <div className="flex gap-4">
-            <a href="#" className="text-sm text-gray-500">
+            <a href="#" className="text-sm font-helvetica text-gray-500">
               Help
             </a>
-            <a href="#" className="text-sm text-gray-500">
+            <a href="#" className="text-sm font-helvetica text-gray-500">
               Privacy Policy
             </a>
           </div>

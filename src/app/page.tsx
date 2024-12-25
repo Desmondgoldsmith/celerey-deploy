@@ -1,10 +1,10 @@
-import SignIn from "../Features/auth/components/templates/signin";
+import Welcome from "../Features/auth/components/templates/welcome";
 import AuthLayout from "../Features/auth/components/templates/authLayout";
 
-export default function SignInPage() {
+export default function WelcomePage() {
   return (
     <AuthLayout>
-      <SignIn />
+      <Welcome />
     </AuthLayout>
   );
 }

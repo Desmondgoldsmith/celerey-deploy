@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 export default {
   darkMode: ["class"],
@@ -10,8 +11,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        navy: "#1B1856",
+        offWhite: "#F8F8F8",
+        white: "#FFFEFE",
+      },
+      fontFamily: {
+        cirka: ["var(--font-cirka)"],
+        helvetica: ["Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
