@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { SocialLoginButton } from "../molecules/socialLoginButton";
+import { SocialSignupButton } from "../molecules/socialSignupButton";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export const SignInTemplate = () => {
+export const SignUpTemplate = () => {
   const [email, setEmail] = useState("");
   const router = useRouter();
 
@@ -17,7 +17,7 @@ export const SignInTemplate = () => {
   };
 
   const handleSignup = () => {
-    router.push("/auth/signup");
+    router.push("/auth/signin");
   };
 
   return (
@@ -30,15 +30,12 @@ export const SignInTemplate = () => {
           height={60}
           className="mx-auto"
         />
-        <h1 className="text-4xl font-cirka font-light mt-4 mb-2">Sign In</h1>
+        <h1 className="text-4xl font-cirka font-light mt-4 mb-2">
+          Create your Celerey Account
+        </h1>
         <p className="text-sm text-gray-600 font-helvetica">
-          New to Celerey?{" "}
-          <a
-            onClick={handleSignup}
-            className="text-navyLight hover:cursor-pointer hover:text-navy hover:underline"
-          >
-            Get Started
-          </a>
+          Signup with a Google or Linkedin account, or enter your email address
+          and we will send you a code to get started
         </p>
       </div>
 
@@ -55,7 +52,7 @@ export const SignInTemplate = () => {
             type="submit"
             className="w-[450px] bg-navy hover:bg-navyLight text-white"
           >
-            Continue
+            send me a code
           </Button>
         </Link>
       </form>
@@ -70,12 +67,18 @@ export const SignInTemplate = () => {
       </div>
 
       <div className="space-y-3">
-        <SocialLoginButton provider="google" onClick={() => {}} />
-        <SocialLoginButton provider="linkedin" onClick={() => {}} />
+        <SocialSignupButton provider="google" onClick={() => {}} />
+        <SocialSignupButton provider="linkedin" onClick={() => {}} />
       </div>
 
-      <p className="mt-6 text-sm hover:cursor-pointer hover:text-navy hover:underline text-navyLight">
-        Need help signing in?
+      <p className="mt-6 text-sm h">
+        <span className="text-navy">Already have an account ?</span>{" "}
+        <span
+          onClick={handleSignup}
+          className="text-navyLight hover:cursor-pointer hover:underline "
+        >
+          Signup
+        </span>
       </p>
     </div>
   );

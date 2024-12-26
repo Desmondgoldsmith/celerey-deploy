@@ -50,9 +50,11 @@ const Welcome = () => {
             Sign in to my account
           </Button>
         </Link>
-        <Button className="bg-navy text-white hover:bg-navyLight">
-          Create an account
-        </Button>
+        <Link href="/auth/signup" passHref>
+          <Button className="bg-navy text-white hover:bg-navyLight">
+            Create an account
+          </Button>
+        </Link>
       </div>
     </div>
   );

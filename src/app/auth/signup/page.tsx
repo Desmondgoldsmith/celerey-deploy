@@ -1,5 +1,10 @@
-const SignUp = () => {
-  return <h1>This is the signUp page!</h1>;
-};
+import AuthLayout from "@/Features/auth/components/templates/authLayout";
+import { SignUpTemplate } from "@/Features/auth/components/templates/signupTemplate";
 
-export default SignUp;
+export default function SignInPage() {
+  return (
+    <AuthLayout>
+      <SignUpTemplate />
+    </AuthLayout>
+  );
+}
