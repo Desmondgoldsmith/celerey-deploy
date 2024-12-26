@@ -31,7 +31,7 @@ export const OTPTemplate = () => {
 
       <OTPInput length={6} value={otpValues} onChange={setOTPValues} />
 
-      <Button className="w-full bg-navy text-white mb-4 hover:bg-navyLight">
+      <Button className="w-80 bg-navy text-white mb-4 hover:bg-navyLight">
         Sign in to my dashboard
       </Button>
 

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SocialLoginButton } from "../molecules/socialLoginButton";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const SignInTemplate = () => {
   const [email, setEmail] = useState("");
@@ -41,23 +42,25 @@ export const SignInTemplate = () => {
         <input
           type="text"
           placeholder="Enter Email address or Mobile No."
-          className="w-full p-3 border rounded-md focus:border-navy focus:ring-1 focus:ring-navy"
+          className="w-full p-3 border mb-4 rounded-md focus:border-navy focus:ring-1 focus:ring-navy"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <Button
-          type="submit"
-          className="w-full bg-navy hover:bg-navyLight text-white"
-        >
-          Continue
-        </Button>
+        <Link href="/auth/otp" passHref>
+          <Button
+            type="submit"
+            className="w-[450px] bg-navy hover:bg-navyLight text-white"
+          >
+            Continue
+          </Button>
+        </Link>
       </form>
 
       <div className="relative mb-6">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t"></div>
         </div>
-        <div className="relative flex justify-center text-sm">
+        <div className="relative flex justify-center text-sm mb-6 mt-6">
           <span className="px-2 bg-white text-gray-500">or</span>
         </div>
       </div>
