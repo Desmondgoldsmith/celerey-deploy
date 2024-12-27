@@ -18,17 +18,15 @@ export interface RadioGroupProps {
 }
 
 // Screen-specific types
+export interface DependentsData {
+  hasDependents: string;
+  numberOfDependents: string;
+  agesOfDependents: string;
+}
+
 export interface DependentsScreenProps extends BaseScreenProps {
-  value: {
-    hasDependents: string;
-    numberOfDependents: string;
-    ageOfDependents: string;
-  };
-  onChange: (value: {
-    hasDependents: string;
-    numberOfDependents: string;
-    ageOfDependents: string;
-  }) => void;
+  value: DependentsData;
+  onChange: (value: DependentsData) => void;
 }
 
 export interface MaritalStatusScreenProps extends BaseScreenProps {
@@ -48,11 +46,7 @@ export interface PersonalInfoFormData {
   birthDate: string;
   citizenship: string;
   dualCitizenship: string;
-  dependents: {
-    hasDependents: "";
-    numberOfDependents: "";
-    ageOfDependents: "";
-  };
+  dependents: DependentsData;
   maritalStatus: string;
   occupation: string;
   address: {

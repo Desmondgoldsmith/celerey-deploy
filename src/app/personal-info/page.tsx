@@ -51,7 +51,7 @@ export default function PersonalInfo() {
     dependents: {
       hasDependents: "",
       numberOfDependents: "",
-      ageOfDependents: "",
+      agesOfDependents: "",
     },
     maritalStatus: "",
     occupation: "",
