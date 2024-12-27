@@ -40,6 +40,7 @@ export const LastNameScreen = ({
         placeholder="Enter Last Name"
         value={value}
         onChange={onChange}
+        type="text"
         required
       />
       <div className="flex gap-4 mt-12">

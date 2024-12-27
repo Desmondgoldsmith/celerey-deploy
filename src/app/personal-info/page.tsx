@@ -48,7 +48,11 @@ export default function PersonalInfo() {
     birthDate: "",
     citizenship: "",
     dualCitizenship: "",
-    dependents: "",
+    dependents: {
+      hasDependents: "",
+      numberOfDependents: "",
+      ageOfDependents: "",
+    },
     maritalStatus: "",
     occupation: "",
     address: {

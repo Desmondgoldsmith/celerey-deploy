@@ -4,6 +4,7 @@ interface FormInputProps {
   value: string;
   onChange: (value: string) => void;
   required?: boolean;
+  type?: string;
 }
 
 export const FormInput = ({

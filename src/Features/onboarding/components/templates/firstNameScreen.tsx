@@ -38,6 +38,7 @@ export const FirstNameScreen = ({
         value={value}
         onChange={onChange}
         required
+        type="text"
       />
       <div className="flex gap-4 mt-8">
         <Button
