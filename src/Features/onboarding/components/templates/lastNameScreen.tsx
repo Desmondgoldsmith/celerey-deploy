@@ -54,7 +54,7 @@ export const LastNameScreen = ({
         </Button>
         <Button
           type="submit"
-          className="flex-1 bg-purple-900 text-white hover:bg-purple-800"
+          className="flex-1 bg-navy text-white hover:bg-navyLight"
           disabled={!value.trim()}
         >
           Continue

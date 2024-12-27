@@ -63,7 +63,7 @@ export const HomeAddressScreen = ({
 
   return (
     <div className="text-center max-w-xl mx-auto">
-      <h1 className="text-3xl font-cirka mb-12">
+      <h1 className="text-4xl font-cirka mb-12">
         What&apos;s your home address
       </h1>
 

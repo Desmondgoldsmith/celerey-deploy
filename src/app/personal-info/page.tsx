@@ -17,7 +17,7 @@ const SECTIONS = [
   {
     id: "personal",
     title: "Personal Information",
-    totalSteps: 11,
+    totalSteps: 10,
     isActive: true,
   },
   {
