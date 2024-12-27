@@ -1,7 +1,10 @@
 "use client";
 
 import { SectionProgressBars } from "@/Features/onboarding/components/molecules/progressBar";
+import { CitizenshipStatusScreen } from "@/Features/onboarding/components/templates/citizenshipStatusScreen";
+import { DateOfBirthScreen } from "@/Features/onboarding/components/templates/dateOfBirthScreen";
 import { FirstNameScreen } from "@/Features/onboarding/components/templates/firstNameScreen";
+import { HomeAddressScreen } from "@/Features/onboarding/components/templates/homeAddressScreen";
 import { LastNameScreen } from "@/Features/onboarding/components/templates/lastNameScreen";
 import { OnboardingLayout } from "@/Features/onboarding/components/templates/personalInfoLayout";
 import { WelcomeTemplate } from "@/Features/onboarding/components/templates/welcomeTemplate";
@@ -40,6 +43,16 @@ export default function PersonalInfo() {
     firstName: "",
     lastName: "",
     birthDate: "",
+    citizenship: "",
+    dualCitizenship: "",
+    address: {
+      line1: "",
+      line2: "",
+      city: "",
+      state: "",
+      postalCode: "",
+      country: "",
+    },
   });
 
   const handleBack = () => {
@@ -47,7 +60,7 @@ export default function PersonalInfo() {
   };
 
   const handleContinue = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 3));
+    setCurrentStep((prev) => Math.min(prev + 1, 5));
   };
 
   const sectionsWithProgress = SECTIONS.map((section) => ({
@@ -74,6 +87,45 @@ export default function PersonalInfo() {
             firstName={formData.firstName}
             value={formData.lastName}
             onChange={(value) => setFormData({ ...formData, lastName: value })}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 3:
+        return (
+          <DateOfBirthScreen
+            value={formData.birthDate}
+            onChange={(value) => setFormData({ ...formData, birthDate: value })}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 4:
+        return (
+          <CitizenshipStatusScreen
+            value={formData.citizenship}
+            dualCitizenship={formData.dualCitizenship}
+            onChange={(value, dualValue) =>
+              setFormData({
+                ...formData,
+                citizenship: value,
+                dualCitizenship: dualValue || formData.dualCitizenship,
+              })
+            }
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 5:
+        return (
+          <HomeAddressScreen
+            values={formData.address}
+            onChange={(field, value) =>
+              setFormData({
+                ...formData,
+                address: { ...formData.address, [field]: value },
+              })
+            }
             onBack={handleBack}
             onContinue={handleContinue}
           />

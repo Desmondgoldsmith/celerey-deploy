@@ -21,6 +21,17 @@ export const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({
               priority
             />
           </div>
+          <div className="flex gap-4">
+            <a href="#" className="text-sm font-helvetica text-gray-600">
+              Tax Calculator
+            </a>
+            <a href="#" className="text-sm font-helvetica text-gray-600">
+              Goals & Planning
+            </a>
+            <a href="#" className="text-sm font-helvetica text-gray-600">
+              Knowledge Hub
+            </a>
+          </div>
         </div>
       </nav>
       <div className="flex-grow bg-white">
