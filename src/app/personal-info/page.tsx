@@ -6,8 +6,11 @@ import { DateOfBirthScreen } from "@/Features/onboarding/components/templates/da
 import { FirstNameScreen } from "@/Features/onboarding/components/templates/firstNameScreen";
 import { HomeAddressScreen } from "@/Features/onboarding/components/templates/homeAddressScreen";
 import { LastNameScreen } from "@/Features/onboarding/components/templates/lastNameScreen";
-import { OnboardingLayout } from "@/Features/onboarding/components/templates/personalInfoLayout";
+import { OnboardingLayout } from "@/Features/onboarding/components/templates/onboardingLayout";
 import { WelcomeTemplate } from "@/Features/onboarding/components/templates/welcomeTemplate";
+import { OccupationScreen } from "@/Features/onboarding/components/templates/occupationScreen";
+import { MaritalStatusScreen } from "@/Features/onboarding/components/templates/maritalStatusScreen";
+import { DependentsScreen } from "@/Features/onboarding/components/templates/dependantsScreen";
 import { useState } from "react";
 
 const SECTIONS = [
@@ -45,6 +48,9 @@ export default function PersonalInfo() {
     birthDate: "",
     citizenship: "",
     dualCitizenship: "",
+    dependents: "",
+    maritalStatus: "",
+    occupation: "",
     address: {
       line1: "",
       line2: "",
@@ -60,7 +66,7 @@ export default function PersonalInfo() {
   };
 
   const handleContinue = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 5));
+    setCurrentStep((prev) => Math.min(prev + 1, 11));
   };
 
   const sectionsWithProgress = SECTIONS.map((section) => ({
@@ -102,6 +108,17 @@ export default function PersonalInfo() {
         );
       case 4:
         return (
+          <OccupationScreen
+            value={formData.occupation}
+            onChange={(value) =>
+              setFormData({ ...formData, occupation: value })
+            }
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 5:
+        return (
           <CitizenshipStatusScreen
             value={formData.citizenship}
             dualCitizenship={formData.dualCitizenship}
@@ -116,7 +133,7 @@ export default function PersonalInfo() {
             onContinue={handleContinue}
           />
         );
-      case 5:
+      case 6:
         return (
           <HomeAddressScreen
             values={formData.address}
@@ -125,6 +142,28 @@ export default function PersonalInfo() {
                 ...formData,
                 address: { ...formData.address, [field]: value },
               })
+            }
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 7:
+        return (
+          <MaritalStatusScreen
+            value={formData.maritalStatus}
+            onChange={(value) =>
+              setFormData({ ...formData, maritalStatus: value })
+            }
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 8:
+        return (
+          <DependentsScreen
+            value={formData.dependents}
+            onChange={(value) =>
+              setFormData({ ...formData, dependents: value })
             }
             onBack={handleBack}
             onContinue={handleContinue}
