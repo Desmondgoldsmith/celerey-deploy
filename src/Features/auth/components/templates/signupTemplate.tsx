@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SocialSignupButton } from "../molecules/socialSignupButton";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 export const SignUpTemplate = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +12,7 @@ export const SignUpTemplate = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/auth/otp");
+    router.push("/auth/signup-otp");
   };
 
   const handleSignup = () => {
@@ -43,18 +42,16 @@ export const SignUpTemplate = () => {
         <input
           type="text"
           placeholder="Enter Email address or Mobile No."
-          className="w-full p-3 border mb-4 rounded-md focus:border-navy focus:ring-1 focus:ring-navy"
+          className="w-full p-3 border mb-2 rounded-md focus:border-navy focus:ring-1 focus:ring-navy"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <Link href="/auth/otp" passHref>
-          <Button
-            type="submit"
-            className="w-[450px] bg-navy hover:bg-navyLight text-white"
-          >
-            send me a code
-          </Button>
-        </Link>
+        <Button
+          type="submit"
+          className="w-[450px] bg-navy hover:bg-navyLight text-white"
+        >
+          send me a code
+        </Button>
       </form>
 
       <div className="relative mb-6">
