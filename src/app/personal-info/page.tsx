@@ -32,12 +32,18 @@ export default function PersonalInfo() {
   } = useOnboardingStore();
 
   useEffect(() => {
-    const shouldReset = !sections.personal.currentStep;
+    const shouldReset =
+      !sections.personal.currentStep && !sections.personal.isCompleted;
     if (shouldReset) {
       resetOnboarding();
     }
     setActiveSection("personal");
-  }, [setActiveSection, sections.personal.currentStep, resetOnboarding]);
+  }, [
+    setActiveSection,
+    sections.personal.currentStep,
+    sections.personal.isCompleted,
+    resetOnboarding,
+  ]);
 
   const handleFormUpdate = useCallback(
     (updates: Partial<PersonalInfoSchema>) => {

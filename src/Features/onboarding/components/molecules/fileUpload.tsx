@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { FileCheck2, Upload, X } from "lucide-react";
 import { FileUploadProps } from "../../types";
 
@@ -13,6 +13,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Cleanup interval on unmount
   useEffect(() => {
     return () => {
       if (progressIntervalRef.current) {
@@ -21,52 +22,87 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     };
   }, []);
 
-  const simulateUpload = (file: File) => {
-    setUploadProgress(0);
-    onChange({
-      file,
-      fileName: file.name,
-      uploadStatus: "uploading",
-    });
-
-    progressIntervalRef.current = setInterval(() => {
-      setUploadProgress((currentProgress) => {
-        if (currentProgress >= 100) {
-          if (progressIntervalRef.current) {
-            clearInterval(progressIntervalRef.current);
-          }
-          onChange({
-            file,
-            fileName: file.name,
-            uploadStatus: "completed",
-          });
-          return 100;
+  const updateProgress = useCallback(() => {
+    setUploadProgress((currentProgress) => {
+      const newProgress = currentProgress + 10;
+      if (newProgress >= 100) {
+        if (progressIntervalRef.current) {
+          clearInterval(progressIntervalRef.current);
         }
-        return currentProgress + 10;
+        return 100;
+      }
+      return newProgress;
+    });
+  }, []);
+
+  // Handle file upload completion
+  const handleUploadComplete = useCallback(
+    (file: File) => {
+      onChange({
+        file,
+        fileName: file.name,
+        uploadStatus: "completed",
       });
-    }, 200);
-  };
+    },
+    [onChange]
+  );
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    simulateUpload(file);
-  };
+  const simulateUpload = useCallback(
+    (file: File) => {
+      setUploadProgress(0);
 
-  const handleRemoveFile = () => {
+      // Initial upload state
+      onChange({
+        file,
+        fileName: file.name,
+        uploadStatus: "uploading",
+      });
+
+      // Clear any existing interval
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+      }
+
+      // Start progress simulation
+      progressIntervalRef.current = setInterval(() => {
+        updateProgress();
+      }, 200);
+
+      // Set completion timeout
+      setTimeout(() => {
+        if (progressIntervalRef.current) {
+          clearInterval(progressIntervalRef.current);
+        }
+        setUploadProgress(100);
+        handleUploadComplete(file);
+      }, 2200);
+    },
+    [onChange, updateProgress, handleUploadComplete]
+  );
+
+  const handleFileSelect = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      simulateUpload(file);
+    },
+    [simulateUpload]
+  );
+
+  const handleRemoveFile = useCallback(() => {
     if (progressIntervalRef.current) {
       clearInterval(progressIntervalRef.current);
     }
+    setUploadProgress(0);
     onChange({
       file: null,
       fileName: "",
       uploadStatus: "idle",
     });
-    setUploadProgress(0);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-  };
+  }, [onChange]);
 
   if (value.uploadStatus === "idle") {
     return (

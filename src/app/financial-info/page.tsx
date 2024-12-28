@@ -15,8 +15,12 @@ export default function FinancialInfo() {
       router.push("/personal-info");
       return;
     }
-    setActiveSection("financial");
-  }, [sections.personal.isCompleted, router, setActiveSection]);
+
+    if (currentSection !== "financial") {
+      setActiveSection("financial");
+    }
+  }, [sections.personal.isCompleted, currentSection, router, setActiveSection]);
+
   return (
     <OnboardingLayout>
       <div className="max-w-3xl mx-auto px-4 py-8">
