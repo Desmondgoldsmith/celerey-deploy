@@ -1,7 +1,20 @@
-// Common types
 export interface BaseScreenProps {
   onBack: () => void;
   onContinue: () => void;
+}
+
+export interface FileUploadProps {
+  label: string;
+  value: {
+    file: File | null;
+    fileName: string;
+    uploadStatus: "idle" | "uploading" | "completed" | "error";
+  };
+  onChange: (value: {
+    file: File | null;
+    fileName: string;
+    uploadStatus: "idle" | "uploading" | "completed" | "error";
+  }) => void;
 }
 
 // RadioGroup types

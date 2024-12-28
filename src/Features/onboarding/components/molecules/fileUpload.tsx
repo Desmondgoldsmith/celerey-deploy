@@ -1,19 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { FileCheck2, Upload, X } from "lucide-react";
-
-interface FileUploadProps {
-  label: string;
-  value: {
-    file: File | null;
-    fileName: string;
-    uploadStatus: "idle" | "uploading" | "completed" | "error";
-  };
-  onChange: (value: {
-    file: File | null;
-    fileName: string;
-    uploadStatus: "idle" | "uploading" | "completed" | "error";
-  }) => void;
-}
+import { FileUploadProps } from "../../types";
 
 export const FileUpload: React.FC<FileUploadProps> = ({
   label,
