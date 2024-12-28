@@ -51,6 +51,11 @@ export interface IdentificationScreenProps extends BaseScreenProps {
   onChange: (value: IdentificationDocument) => void;
 }
 
+export interface OptionsScreenProps extends BaseScreenProps {
+  value: string[];
+  onChange: (value: string[]) => void;
+}
+
 // PersonalInfo form data type
 export interface PersonalInfoFormData {
   firstName: string;
@@ -70,4 +75,5 @@ export interface PersonalInfoFormData {
     country: string;
   };
   identification: IdentificationDocument;
+  options: string[];
 }

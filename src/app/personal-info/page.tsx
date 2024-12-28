@@ -14,12 +14,13 @@ import { DependentsScreen } from "@/Features/onboarding/components/templates/dep
 import { useState } from "react";
 import { IdentificationScreen } from "@/Features/onboarding/components/templates/identificationScreen";
 import { PersonalInfoFormData } from "@/Features/onboarding/types";
+import { OptionsSelectionScreen } from "@/Features/onboarding/components/templates/optionsSelectionScreen";
 
 const SECTIONS = [
   {
     id: "personal",
     title: "Personal Information",
-    totalSteps: 9,
+    totalSteps: 10,
     isActive: true,
   },
   {
@@ -71,6 +72,7 @@ export default function PersonalInfo() {
       fileName: "",
       uploadStatus: "idle",
     },
+    options: [],
   });
 
   const handleBack = () => {
@@ -78,7 +80,7 @@ export default function PersonalInfo() {
   };
 
   const handleContinue = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 9));
+    setCurrentStep((prev) => Math.min(prev + 1, 10));
   };
 
   const sectionsWithProgress = SECTIONS.map((section) => ({
@@ -188,6 +190,15 @@ export default function PersonalInfo() {
             onChange={(value) =>
               setFormData({ ...formData, identification: value })
             }
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 10:
+        return (
+          <OptionsSelectionScreen
+            value={formData.options}
+            onChange={(value) => setFormData({ ...formData, options: value })}
             onBack={handleBack}
             onContinue={handleContinue}
           />
