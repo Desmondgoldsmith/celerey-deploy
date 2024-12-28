@@ -39,6 +39,18 @@ export interface OccupationScreenProps extends BaseScreenProps {
   onChange: (value: string) => void;
 }
 
+export interface IdentificationDocument {
+  type: string;
+  file: File | null;
+  fileName: string;
+  uploadStatus: "idle" | "uploading" | "completed" | "error";
+}
+
+export interface IdentificationScreenProps extends BaseScreenProps {
+  value: IdentificationDocument;
+  onChange: (value: IdentificationDocument) => void;
+}
+
 // PersonalInfo form data type
 export interface PersonalInfoFormData {
   firstName: string;
@@ -57,4 +69,5 @@ export interface PersonalInfoFormData {
     postalCode: string;
     country: string;
   };
+  identification: IdentificationDocument;
 }

@@ -12,12 +12,14 @@ import { OccupationScreen } from "@/Features/onboarding/components/templates/occ
 import { MaritalStatusScreen } from "@/Features/onboarding/components/templates/maritalStatusScreen";
 import { DependentsScreen } from "@/Features/onboarding/components/templates/dependantsScreen";
 import { useState } from "react";
+import { IdentificationScreen } from "@/Features/onboarding/components/templates/identificationScreen";
+import { PersonalInfoFormData } from "@/Features/onboarding/types";
 
 const SECTIONS = [
   {
     id: "personal",
     title: "Personal Information",
-    totalSteps: 10,
+    totalSteps: 9,
     isActive: true,
   },
   {
@@ -42,7 +44,7 @@ const SECTIONS = [
 
 export default function PersonalInfo() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<PersonalInfoFormData>({
     firstName: "",
     lastName: "",
     birthDate: "",
@@ -63,6 +65,12 @@ export default function PersonalInfo() {
       postalCode: "",
       country: "",
     },
+    identification: {
+      type: "",
+      file: null,
+      fileName: "",
+      uploadStatus: "idle",
+    },
   });
 
   const handleBack = () => {
@@ -70,7 +78,7 @@ export default function PersonalInfo() {
   };
 
   const handleContinue = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 11));
+    setCurrentStep((prev) => Math.min(prev + 1, 9));
   };
 
   const sectionsWithProgress = SECTIONS.map((section) => ({
@@ -168,6 +176,17 @@ export default function PersonalInfo() {
             value={formData.dependents}
             onChange={(value) =>
               setFormData({ ...formData, dependents: value })
+            }
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 9:
+        return (
+          <IdentificationScreen
+            value={formData.identification}
+            onChange={(value) =>
+              setFormData({ ...formData, identification: value })
             }
             onBack={handleBack}
             onContinue={handleContinue}
