@@ -5,6 +5,7 @@ import { Section } from "./types";
 
 export type SectionId = "personal" | "financial" | "goals" | "risk";
 
+// the various section structures
 const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   personal: {
     id: "personal",
@@ -45,6 +46,7 @@ interface OnboardingFormData {
   financial: FinancialInfoSchema;
 }
 
+// setting the shape of the onboarding data
 const DEFAULT_FORM_DATA: OnboardingFormData = {
   personal: {
     firstName: "",
@@ -86,6 +88,7 @@ interface OnboardingState {
   formData: OnboardingFormData;
 }
 
+// the various actions we can perform
 interface OnboardingStore extends OnboardingState {
   updateFormData: <T extends keyof OnboardingFormData>(
     section: T,
