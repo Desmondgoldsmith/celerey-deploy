@@ -76,19 +76,7 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
     options: [],
   },
   financial: {
-    income: {
-      employmentType: "",
-      annualIncome: 0,
-      otherIncome: 0,
-      incomeSource: "",
-    },
-    expenses: {
-      monthlyExpenses: 0,
-      majorExpenses: [],
-    },
-    assets: [],
-    liabilities: [],
-    investments: [],
+    name: "",
   },
 };
 

@@ -28,36 +28,7 @@ export interface PersonalInfoSchema {
   options: string[];
 }
 
-export interface FinancialInfoSchema {
-  income: {
-    employmentType: string;
-    annualIncome: number;
-    otherIncome?: number;
-    incomeSource?: string;
-  };
-  expenses: {
-    monthlyExpenses: number;
-    majorExpenses: {
-      type: string;
-      amount: number;
-    }[];
-  };
-  assets: {
-    type: string;
-    value: number;
-    description?: string;
-  }[];
-  liabilities: {
-    type: string;
-    amount: number;
-    interestRate?: number;
-  }[];
-  investments: {
-    type: string;
-    value: number;
-    institution?: string;
-  }[];
-}
+export interface FinancialInfoSchema {name: string}
 
 export interface OnboardingFormData {
   personal: PersonalInfoSchema;
