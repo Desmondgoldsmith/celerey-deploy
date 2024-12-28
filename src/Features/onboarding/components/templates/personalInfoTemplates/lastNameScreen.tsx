@@ -1,14 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { FormInput } from "../../molecules/formInput";
 import BottomSection from "../../molecules/bottomSection";
-
-interface LastNameScreenProps {
-  firstName: string;
-  value: string;
-  onChange: (value: string) => void;
-  onBack: () => void;
-  onContinue: () => void;
-}
+import { LastNameScreenProps } from "@/Features/onboarding/types";
 
 export const LastNameScreen = ({
   firstName,

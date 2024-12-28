@@ -1,12 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { DateOfBirthScreenProps } from "@/Features/onboarding/types";
 import { useState } from "react";
-
-interface DateOfBirthScreenProps {
-  value: string;
-  onChange: (value: string) => void;
-  onBack: () => void;
-  onContinue: () => void;
-}
 
 export const DateOfBirthScreen = ({
   value,

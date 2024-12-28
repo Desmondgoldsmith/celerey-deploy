@@ -1,12 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { BaseScreenProps } from "../../../types";
+import { BaseScreenProps, Option } from "../../../types";
 import { OptionCard } from "../../molecules/optionCard";
-
-interface Option {
-  id: string;
-  title: string;
-  description: string;
-}
 
 export interface OptionsSelectionScreenProps extends BaseScreenProps {
   value: string[];

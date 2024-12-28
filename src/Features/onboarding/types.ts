@@ -52,6 +52,34 @@ export interface CitizenshipStatusScreenProps {
   onContinue: () => void;
 }
 
+export interface DateOfBirthScreenProps {
+  value: string;
+  onChange: (value: string) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
+
+export interface FirstNameScreenProps {
+  value: string;
+  onChange: (value: string) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
+
+export interface LastNameScreenProps {
+  firstName: string;
+  value: string;
+  onChange: (value: string) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
+
+export interface Option {
+  id: string;
+  title: string;
+  description: string;
+}
+
 // RadioGroup types
 export interface RadioOption {
   value: string;
