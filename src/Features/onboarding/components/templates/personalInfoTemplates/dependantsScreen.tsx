@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import RadioGroupButton from "../molecules/radioGroupButton";
-import { DependentsScreenProps } from "../../types";
+import RadioGroupButton from "../../molecules/radioGroupButton";
+import { DependentsScreenProps } from "../../../types";
 import { useEffect, useState } from "react";
 
 export const DependentsScreen: React.FC<DependentsScreenProps> = ({

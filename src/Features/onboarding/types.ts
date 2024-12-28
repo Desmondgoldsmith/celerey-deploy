@@ -56,6 +56,20 @@ export interface OptionsScreenProps extends BaseScreenProps {
   onChange: (value: string[]) => void;
 }
 
+export interface Section {
+  id: "personal" | "financial" | "goals" | "risk";
+  title: string;
+  totalSteps: number;
+  currentStep: number;
+  isCompleted: boolean;
+  isActive: boolean;
+}
+
+export interface OnboardingState {
+  currentSection: Section["id"];
+  sections: Record<Section["id"], Section>;
+}
+
 // PersonalInfo form data type
 export interface PersonalInfoFormData {
   firstName: string;

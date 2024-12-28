@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { FormInput } from "../molecules/formInput";
-import BottomSection from "../molecules/bottomSection";
+import { FormInput } from "../../molecules/formInput";
+import BottomSection from "../../molecules/bottomSection";
 
 interface FirstNameScreenProps {
   value: string;

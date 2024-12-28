@@ -1,33 +1,31 @@
 import { Button } from "@/components/ui/button";
-import RadioGroupButton from "../molecules/radioGroupButton";
-import { MaritalStatusScreenProps } from "../../types";
+import RadioGroupButton from "../../molecules/radioGroupButton";
+import { OccupationScreenProps } from "../../../types";
 
-export const MaritalStatusScreen: React.FC<MaritalStatusScreenProps> = ({
+export const OccupationScreen: React.FC<OccupationScreenProps> = ({
   value,
   onChange,
   onBack,
   onContinue,
 }) => {
   const options = [
-    { value: "married", label: "Married" },
-    { value: "unmarried", label: "Unmarried" },
-    { value: "single", label: "Single" },
-    { value: "widowed", label: "Widowed" },
-    { value: "separated", label: "Separated" },
-    { value: "divorced", label: "Divorced" },
+    { value: "student", label: "Student" },
+    { value: "business", label: "Business" },
+    { value: "retired", label: "Retired" },
+    { value: "employed", label: "Employed" },
+    { value: "unemployed", label: "Unemployed" },
+    { value: "homemaker", label: "Homemaker" },
   ];
 
   return (
     <div className="text-center max-w-xl mx-auto">
-      <h1 className="text-4xl font-cirka mb-12">
-        What&apos;s your marital status
-      </h1>
+      <h1 className="text-4xl font-cirka mb-12">What&apos;s your occupation</h1>
 
       <RadioGroupButton
         options={options}
         value={value}
         onChange={onChange}
-        name="maritalStatus"
+        name="occupation"
       />
 
       <div className="flex gap-4 mt-8">

@@ -6,8 +6,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { IdentificationScreenProps } from "../../types";
-import { FileUpload } from "../molecules/fileUpload";
+import { IdentificationScreenProps } from "../../../types";
+import { FileUpload } from "../../molecules/fileUpload";
 
 export const IdentificationScreen: React.FC<IdentificationScreenProps> = ({
   value,

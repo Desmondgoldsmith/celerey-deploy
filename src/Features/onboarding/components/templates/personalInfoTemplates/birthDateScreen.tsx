@@ -1,4 +1,4 @@
-import { NavigationButtons } from "../molecules/navButtons";
+import { NavigationButtons } from "../../molecules/navButtons";
 
 export const BirthDateScreen = ({
   onBack,
