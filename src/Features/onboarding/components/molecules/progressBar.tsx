@@ -1,9 +1,4 @@
-import { Section } from "../../types";
-
-interface SectionProgressBarProps {
-  sections: Record<Section["id"], Section>;
-  currentSection: Section["id"];
-}
+import { SectionProgressBarProps } from "../../types";
 
 export const SectionProgressBars = ({
   sections,

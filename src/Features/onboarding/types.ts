@@ -17,6 +17,41 @@ export interface FileUploadProps {
   }) => void;
 }
 
+export interface FormInputProps {
+  //   label: string;
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
+  required?: boolean;
+  type?: string;
+}
+
+export interface NavigationButtonsProps {
+  onBack?: () => void;
+  onContinue: () => void;
+  showBack?: boolean;
+}
+
+export interface OptionCardProps {
+  title: string;
+  description: string;
+  selected: boolean;
+  onClick: () => void;
+}
+
+export interface SectionProgressBarProps {
+  sections: Record<Section["id"], Section>;
+  currentSection: Section["id"];
+}
+
+export interface CitizenshipStatusScreenProps {
+  value: string;
+  dualCitizenship: string;
+  onChange: (value: string, dualValue?: string) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
+
 // RadioGroup types
 export interface RadioOption {
   value: string;

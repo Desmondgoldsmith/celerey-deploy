@@ -6,14 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-interface CitizenshipStatusScreenProps {
-  value: string;
-  dualCitizenship: string;
-  onChange: (value: string, dualValue?: string) => void;
-  onBack: () => void;
-  onContinue: () => void;
-}
+import { CitizenshipStatusScreenProps } from "@/Features/onboarding/types";
 
 const CITIZENSHIP_OPTIONS = [
   "Afghan",

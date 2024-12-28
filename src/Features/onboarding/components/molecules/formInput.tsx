@@ -1,11 +1,4 @@
-interface FormInputProps {
-  //   label: string;
-  placeholder: string;
-  value: string;
-  onChange: (value: string) => void;
-  required?: boolean;
-  type?: string;
-}
+import { FormInputProps } from "../../types";
 
 export const FormInput = ({
   //   label,

@@ -1,10 +1,5 @@
 import { Button } from "@/components/ui/button";
-
-interface NavigationButtonsProps {
-  onBack?: () => void;
-  onContinue: () => void;
-  showBack?: boolean;
-}
+import { NavigationButtonsProps } from "../../types";
 
 export const NavigationButtons = ({
   onBack,

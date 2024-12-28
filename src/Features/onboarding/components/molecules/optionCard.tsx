@@ -1,11 +1,5 @@
 import { Check } from "lucide-react";
-
-interface OptionCardProps {
-  title: string;
-  description: string;
-  selected: boolean;
-  onClick: () => void;
-}
+import { OptionCardProps } from "../../types";
 
 export const OptionCard: React.FC<OptionCardProps> = ({
   title,
