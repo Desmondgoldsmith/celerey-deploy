@@ -1,10 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-interface SocialLoginButtonProps {
-  provider: "google" | "linkedin";
-  onClick: () => void;
-}
+import { SocialLoginButtonProps } from "../../types";
 
 export const SocialLoginButton = ({
   provider,

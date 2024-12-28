@@ -1,10 +1,5 @@
 import { useRef, KeyboardEvent } from "react";
-
-interface OTPInputProps {
-  length: number;
-  value: string[];
-  onChange: (value: string[]) => void;
-}
+import { OTPInputProps } from "../../types";
 
 export const OTPInput = ({ length, value, onChange }: OTPInputProps) => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
