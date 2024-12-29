@@ -132,6 +132,15 @@ export interface OptionsScreenProps extends BaseScreenProps {
   onChange: (value: string[]) => void;
 }
 
+
+// FinancialInfo Screen Props
+export interface CurrencyScreenProps {
+  value: string;
+  onChange: (value: string) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
+
 export interface Section {
   id: "personal" | "financial" | "goals" | "risk";
   title: string;
@@ -166,4 +175,35 @@ export interface PersonalInfoFormData {
   };
   identification: IdentificationDocument;
   options: string[];
+}
+
+export interface FinancialInfoFormData {
+  currency: string;
+  passiveIncome: {
+    rentalIncome: number;
+    dividends: number;
+    interestIncome: number;
+    otherIncome: number;
+  };
+  annualExpenses: {
+    home: number;
+    childcare: number;
+    education: number;
+    healthcare: number;
+    travel: number;
+    giving: number;
+  };
+  assets: {
+    realEstate: number;
+    cash: number;
+    publicSecurities: number;
+    privateSecurities: number;
+  };
+  liabilities: {
+    mortgages: number;
+    loans: number;
+    creditCards: number;
+    assetFinance: number;
+    otherLiabilities: number;
+  };
 }

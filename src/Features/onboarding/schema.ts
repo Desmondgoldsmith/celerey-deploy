@@ -28,7 +28,36 @@ export interface PersonalInfoSchema {
   options: string[];
 }
 
-export interface FinancialInfoSchema {name: string}
+export interface FinancialInfoSchema {
+  currency: string;
+  passiveIncome: {
+    rentalIncome: number;
+    dividends: number;
+    interestIncome: number;
+    otherIncome: number;
+  };
+  annualExpenses: {
+    home: number;
+    childcare: number;
+    education: number;
+    healthcare: number;
+    travel: number;
+    giving: number;
+  };
+  assets: {
+    realEstate: number;
+    cash: number;
+    publicSecurities: number;
+    privateSecurities: number;
+  };
+  liabilities: {
+    mortgages: number;
+    loans: number;
+    creditCards: number;
+    assetFinance: number;
+    otherLiabilities: number;
+  };
+}
 
 export interface OnboardingFormData {
   personal: PersonalInfoSchema;

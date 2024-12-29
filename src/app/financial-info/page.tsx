@@ -5,12 +5,22 @@ import { OnboardingLayout } from "@/Features/onboarding/components/templates/sha
 import { useOnboardingStore } from "@/Features/onboarding/state";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { CurrencyScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/currencyScreen";
+
 
 export default function FinancialInfo() {
   const router = useRouter();
-  const { sections, currentSection, setActiveSection } = useOnboardingStore();
+  const {
+    sections,
+    currentSection,
+    formData,
+    updateFormData,
+    updateSectionProgress,
+    completeSection,
+    setActiveSection,
+  } = useOnboardingStore();
+
   useEffect(() => {
-    // Check if personal section is completed
     if (!sections.personal.isCompleted) {
       router.push("/personal-info");
       return;
@@ -21,6 +31,34 @@ export default function FinancialInfo() {
     }
   }, [sections.personal.isCompleted, currentSection, router, setActiveSection]);
 
+  const handleFormUpdate = (updates: Partial<{ currency: string }>) => {
+    updateFormData("financial", updates);
+  };
+
+  const handleBack = () => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    if (currentStepIndex > 0) {
+      const newStep = currentStepIndex - 1;
+      updateSectionProgress(currentSection, newStep);
+    } else {
+      router.push("/personal-info");
+    }
+  };
+
+  const handleContinue = () => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    const isLastStep =
+      currentStepIndex === sections[currentSection].totalSteps - 1;
+
+    if (isLastStep) {
+      completeSection("financial");
+      router.push("/goals-info");
+    } else {
+      const newStep = currentStepIndex + 1;
+      updateSectionProgress(currentSection, newStep);
+    }
+  };
+
   return (
     <OnboardingLayout>
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -28,10 +66,14 @@ export default function FinancialInfo() {
           sections={sections}
           currentSection={currentSection}
         />
-        <h1 className="mt-[240px] text-center text-7xl">
-          This is the Financial information page!
-        </h1>
+        <CurrencyScreen
+          value={formData.financial.currency}
+          onChange={(value) => handleFormUpdate({ currency: value })}
+          onBack={handleBack}
+          onContinue={handleContinue}
+        />
       </div>
     </OnboardingLayout>
   );
 }
+

@@ -78,7 +78,34 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
     options: [],
   },
   financial: {
-    name: "",
+    currency: "",
+    passiveIncome: {
+      rentalIncome: 0,
+      dividends: 0,
+      interestIncome: 0,
+      otherIncome: 0,
+    },
+    annualExpenses: {
+      home: 0,
+      childcare: 0,
+      education: 0,
+      healthcare: 0,
+      travel: 0,
+      giving: 0,
+    },
+    assets: {
+      realEstate: 0,
+      cash: 0,
+      publicSecurities: 0,
+      privateSecurities: 0,
+    },
+    liabilities: {
+      mortgages: 0,
+      loans: 0,
+      creditCards: 0,
+      assetFinance: 0,
+      otherLiabilities: 0,
+    },
   },
 };
 
