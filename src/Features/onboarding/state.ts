@@ -18,7 +18,7 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   financial: {
     id: "financial",
     title: "Financial Information",
-    totalSteps: 8,
+    totalSteps: 6,
     currentStep: 0,
     isCompleted: false,
     isActive: false,

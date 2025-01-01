@@ -4,9 +4,10 @@ import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useOnboardingStore } from "@/Features/onboarding/state";
 import { SectionProgressBars } from "@/Features/onboarding/components/molecules/progressBar";
+import { FinancialInfoSchema } from "@/Features/onboarding/schema";
 import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
 import { CurrencyScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/currencyScreen";
-// import { IncomeScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/incomeScreen";
+import { IncomeScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/incomeScreen";
 // import { ExpensesScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/expensesScreen";
 // import { AssetsScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/assetsScreen";
 // import { LiabilitiesScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/liabilitiesScreen";
@@ -34,12 +35,14 @@ export default function FinancialInfo() {
     }
   }, [sections.personal.isCompleted, currentSection, router, setActiveSection]);
 
-  const handleFormUpdate = useCallback(
-    (updates: Partial<typeof formData.financial>) => {
-      updateFormData("financial", updates);
-    },
-    [formData, updateFormData]
-  );
+
+    const handleFormUpdate = useCallback(
+      (updates: Partial<FinancialInfoSchema>) => {
+        updateFormData("financial", updates);
+      },
+      [updateFormData]
+    );
+
 
   const validateCurrentStep = useCallback((): boolean => {
     const currentStepIndex = sections[currentSection].currentStep;
@@ -84,6 +87,8 @@ export default function FinancialInfo() {
     }
   }, [currentSection, sections, formData.financial]);
 
+
+  
   const handleBack = useCallback(() => {
     const currentStepIndex = sections[currentSection].currentStep;
     if (currentStepIndex > 0) {
@@ -133,15 +138,22 @@ export default function FinancialInfo() {
             onContinue={handleContinue}
           />
         );
-      // case 1:
-      //   return (
-      //     <IncomeScreen
-      //       value={financialData.income}
-      //       onChange={(value) => handleFormUpdate({ income: value })}
-      //       onBack={handleBack}
-      //       onContinue={handleContinue}
-      //     />
-      //   );
+      case 1:
+        return (
+          <IncomeScreen
+            values={financialData.passiveIncome}
+            onChange={(field, value) =>
+              handleFormUpdate({
+                passiveIncome: {
+                  ...financialData.passiveIncome,
+                  [field]: value,
+                },
+              })
+            }
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
       // case 2:
       //   return (
       //     <ExpensesScreen
