@@ -1,32 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import React from "react";
 
-interface IncomeScreenProps {
+interface AssetsScreenProps {
   values: {
-    rentalIncome: string;
-    dividends: string;
-    interestIncome: string;
-    otherIncome: string;
+    realEstate: string;
+    cash: string;
+    publicSecurities: string;
+    privateSecurities: string;
   };
-  onChange: (field: keyof IncomeScreenProps["values"], value: string) => void;
+  onChange: (field: keyof AssetsScreenProps["values"], value: string) => void;
   onBack: () => void;
   onContinue: () => void;
 }
 
-export const IncomeScreen = ({
+export const AssetsScreen = ({
   values,
   onChange,
   onBack,
   onContinue,
-}: IncomeScreenProps) => {
+}: AssetsScreenProps) => {
   const isComplete =
-    values.rentalIncome !== "" &&
-    values.dividends !== "" &&
-    values.interestIncome !== "" &&
-    values.otherIncome !== "";
+    values.realEstate !== "" &&
+    values.cash !== "" &&
+    values.publicSecurities !== "" &&
+    values.privateSecurities !== "";
 
   const handleInputChange = (
-    field: keyof IncomeScreenProps["values"],
+    field: keyof AssetsScreenProps["values"],
     value: string
   ) => {
     if (/^\d*$/.test(value)) {
@@ -37,54 +38,56 @@ export const IncomeScreen = ({
   return (
     <div className="font-helvetica max-w-xl mx-auto">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-cirka">What&apos;s your Passive Income</h1>
-        <p className="text-gray-600">Enter any annual passive income</p>
+        <h1 className="text-4xl font-cirka">What are your Assets?</h1>
+        <p className="text-gray-600">Enter your assets</p>
       </div>
       <div className="space-y-4 mb-12">
         <div className="flex border-b border-gray-300 pb-4 items-center">
-          <label className="flex-1">Rental Income</label>
+          <label className="flex-1">Real Estate</label>
           <Input
             type="text"
             inputMode="numeric"
             pattern="[0-9]*"
             className="flex-1 appearance-none"
-            value={values.rentalIncome || ""}
-            onChange={(e) => handleInputChange("rentalIncome", e.target.value)}
+            value={values.realEstate || ""}
+            onChange={(e) => handleInputChange("realEstate", e.target.value)}
           />
         </div>
         <div className="flex border-b border-gray-300 pb-4 items-center">
-          <label className="flex-1">Dividends</label>
+          <label className="flex-1">Cash</label>
           <Input
             type="text"
             inputMode="numeric"
             pattern="[0-9]*"
             className="flex-1 appearance-none"
-            value={values.dividends || ""}
-            onChange={(e) => handleInputChange("dividends", e.target.value)}
+            value={values.cash || ""}
+            onChange={(e) => handleInputChange("cash", e.target.value)}
           />
         </div>
         <div className="flex border-b border-gray-300 pb-4 items-center">
-          <label className="flex-1">Interest Income</label>
+          <label className="flex-1">Public Securities</label>
           <Input
             type="text"
             inputMode="numeric"
             pattern="[0-9]*"
             className="flex-1 appearance-none"
-            value={values.interestIncome || ""}
+            value={values.publicSecurities || ""}
             onChange={(e) =>
-              handleInputChange("interestIncome", e.target.value)
+              handleInputChange("publicSecurities", e.target.value)
             }
           />
         </div>
         <div className="flex border-b border-gray-300 pb-4 items-center">
-          <label className="flex-1">Other Income</label>
+          <label className="flex-1">Private Securities</label>
           <Input
             type="text"
             inputMode="numeric"
             pattern="[0-9]*"
             className="flex-1 appearance-none"
-            value={values.otherIncome || ""}
-            onChange={(e) => handleInputChange("otherIncome", e.target.value)}
+            value={values.privateSecurities || ""}
+            onChange={(e) =>
+              handleInputChange("privateSecurities", e.target.value)
+            }
           />
         </div>
       </div>

@@ -31,31 +31,31 @@ export interface PersonalInfoSchema {
 export interface FinancialInfoSchema {
   currency: string;
   passiveIncome: {
-    rentalIncome: number;
-    dividends: number;
-    interestIncome: number;
-    otherIncome: number;
+    rentalIncome: string;
+    dividends: string;
+    interestIncome: string;
+    otherIncome: string;
   };
   annualExpenses: {
-    home: number;
-    childcare: number;
-    education: number;
-    healthcare: number;
-    travel: number;
-    giving: number;
+    home: string;
+    childcare: string;
+    education: string;
+    healthcare: string;
+    travel: string;
+    giving: string;
   };
   assets: {
-    realEstate: number;
-    cash: number;
-    publicSecurities: number;
-    privateSecurities: number;
+    realEstate: string;
+    cash: string;
+    publicSecurities: string;
+    privateSecurities: string;
   };
   liabilities: {
-    mortgages: number;
-    loans: number;
-    creditCards: number;
-    assetFinance: number;
-    otherLiabilities: number;
+    mortgages: string;
+    loans: string;
+    creditCards: string;
+    assetFinance: string;
+    otherLiabilities: string;
   };
 }
 

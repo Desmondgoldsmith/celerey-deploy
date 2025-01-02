@@ -8,9 +8,9 @@ import { FinancialInfoSchema } from "@/Features/onboarding/schema";
 import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
 import { CurrencyScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/currencyScreen";
 import { IncomeScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/incomeScreen";
-// import { ExpensesScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/expensesScreen";
-// import { AssetsScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/assetsScreen";
-// import { LiabilitiesScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/liabilitiesScreen";
+import { ExpensesScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/expensesScreen";
+import { AssetsScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/assetsScreen";
+import { LiabilitiesScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/liabilitiesScreen";
 
 export default function FinancialInfo() {
   const router = useRouter();
@@ -53,34 +53,34 @@ export default function FinancialInfo() {
         return !!data.currency;
       case 1: // Passive income validation
         return (
-          data.passiveIncome.rentalIncome >= 0 &&
-          data.passiveIncome.dividends >= 0 &&
-          data.passiveIncome.interestIncome >= 0 &&
-          data.passiveIncome.otherIncome >= 0
+        parseFloat(data.passiveIncome.rentalIncome) >= 0 &&
+  parseFloat(data.passiveIncome.dividends) >= 0 &&
+  parseFloat(data.passiveIncome.interestIncome) >= 0 &&
+  parseFloat(data.passiveIncome.otherIncome) >= 0
         );
       case 2: // Annual expenses validation
         return (
-          data.annualExpenses.home >= 0 &&
-          data.annualExpenses.childcare >= 0 &&
-          data.annualExpenses.education >= 0 &&
-          data.annualExpenses.healthcare >= 0 &&
-          data.annualExpenses.travel >= 0 &&
-          data.annualExpenses.giving >= 0
+          parseFloat(data.annualExpenses.home) >= 0 &&
+          parseFloat(data.annualExpenses.childcare) >= 0 &&
+          parseFloat(data.annualExpenses.education) >= 0 &&
+          parseFloat(data.annualExpenses.healthcare) >= 0 &&
+          parseFloat(data.annualExpenses.travel) >= 0 &&
+          parseFloat(data.annualExpenses.giving) >= 0
         );
       case 3: // Assets validation
         return (
-          data.assets.realEstate >= 0 &&
-          data.assets.cash >= 0 &&
-          data.assets.publicSecurities >= 0 &&
-          data.assets.privateSecurities >= 0
+          parseFloat(data.assets.realEstate) >= 0 &&
+          parseFloat(data.assets.cash) >= 0 &&
+          parseFloat(data.assets.publicSecurities) >= 0 &&
+          parseFloat(data.assets.privateSecurities) >= 0
         );
       case 4: // Liabilities validation
         return (
-          data.liabilities.mortgages >= 0 &&
-          data.liabilities.loans >= 0 &&
-          data.liabilities.creditCards >= 0 &&
-          data.liabilities.assetFinance >= 0 &&
-          data.liabilities.otherLiabilities >= 0
+          parseFloat(data.liabilities.mortgages) >= 0 &&
+          parseFloat(data.liabilities.loans) >= 0 &&
+          parseFloat(data.liabilities.creditCards) >= 0 &&
+          parseFloat(data.liabilities.assetFinance) >= 0 &&
+          parseFloat(data.liabilities.otherLiabilities) >= 0
         );
       default:
         return true;
@@ -154,33 +154,33 @@ export default function FinancialInfo() {
             onContinue={handleContinue}
           />
         );
-      // case 2:
-      //   return (
-      //     <ExpensesScreen
-      //       value={financialData.expenses}
-      //       onChange={(value) => handleFormUpdate({ expenses: value })}
-      //       onBack={handleBack}
-      //       onContinue={handleContinue}
-      //     />
-      //   );
-      // case 3:
-      //   return (
-      //     <AssetsScreen
-      //       value={financialData.assets}
-      //       onChange={(value) => handleFormUpdate({ assets: value })}
-      //       onBack={handleBack}
-      //       onContinue={handleContinue}
-      //     />
-      //   );
-      // case 4:
-      //   return (
-      //     <LiabilitiesScreen
-      //       value={financialData.liabilities}
-      //       onChange={(value) => handleFormUpdate({ liabilities: value })}
-      //       onBack={handleBack}
-      //       onContinue={handleContinue}
-      //     />
-      //   );
+      case 2:
+        return (
+          <ExpensesScreen
+            values={financialData.annualExpenses}
+            onChange={(field, value) => handleFormUpdate({ annualExpenses:{...financialData.annualExpenses,[field]:value,} })}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 3:
+        return (
+          <AssetsScreen
+           values={financialData.assets}
+            onChange={(field, value) => handleFormUpdate({ assets:{...financialData.assets,[field]:value,} })}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 4:
+        return (
+          <LiabilitiesScreen
+           values={financialData.liabilities}
+            onChange={(field, value) => handleFormUpdate({ liabilities:{...financialData.liabilities,[field]:value,} })}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
       default:
         return null;
     }
