@@ -7,7 +7,7 @@ import { AssetAllocationProps } from "../../types";
 import { riskCategories } from "../../constants";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -75,12 +75,6 @@ const RiskChart: React.FC<{ value: number; color: string; label: string }> = ({
         lineCap: "round",
       },
     },
-  };
-
-  const router = useRouter();
-
-  const handleSubscription = () => {
-    router.push("/subscriptions");
   };
 
   return (
@@ -190,27 +184,28 @@ const AssetAllocationTemplate: React.FC<AssetAllocationProps> = ({
                   </div>
 
                   {/* Subscription Button */}
-                  <button
-                    className="w-full bg-navy  text-white py-3 px-6 rounded-lg 
+                  <Link href="/subscriptions" passHref>
+                    <button
+                      className="w-full bg-navy  text-white mt-3 py-3 px-6 rounded-lg 
                                    hover:bg-navyLight transition-all duration-200
                                    font-helvetica flex items-center justify-center space-x-2"
-                    onClick={handleSubscription}
-                  >
-                    <span>View Subscription Plans</span>
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </button>
+                      <span>View Subscription Plans</span>
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
