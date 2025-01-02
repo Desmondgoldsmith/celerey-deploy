@@ -1,152 +1,257 @@
-import React from "react";
+"use client";
+
+import React, { Suspense } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Ellipsis } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { AssetAllocationProps } from "../../types";
 import { riskCategories } from "../../constants";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 
-const AssetAllocationDashboard = ({
-  userName = "Micheal",
-  riskAttitude = "Somewhat Aggressive",
-  netWorth = 103650.0,
-  investmentExperience = "Advanced",
-  riskAllocation = {
-    low: 33,
-    medium: 49,
-    high: 17,
-  },
-}: AssetAllocationProps) => {
+const Chart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+  loading: () => (
+    <div className="h-20 w-20 animate-pulse bg-gray-100 rounded-full" />
+  ),
+});
+
+const RiskChart: React.FC<{ value: number; color: string; label: string }> = ({
+  value,
+  color,
+  label,
+}) => {
+  const chartState = {
+    series: [value],
+    options: {
+      chart: {
+        type: "radialBar",
+        height: 80,
+        width: 80,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -135,
+          endAngle: 135,
+          hollow: {
+            margin: 0,
+            size: "70%",
+          },
+          track: {
+            background:
+              color === "#4CAF50"
+                ? "#E8F5E9"
+                : color === "#FFA726"
+                ? "#FFF3E0"
+                : "#FFEBEE",
+            strokeWidth: "100%",
+          },
+          dataLabels: {
+            name: {
+              show: false,
+            },
+            value: {
+              show: true,
+              fontSize: "14px",
+              fontFamily: "Helvetica, Arial, sans-serif",
+              fontWeight: 400,
+              color: undefined,
+              offsetY: 5,
+              formatter: function (val: number) {
+                return val + "%";
+              },
+            },
+          },
+        },
+      },
+      fill: {
+        type: "solid",
+        colors: [color],
+      },
+      stroke: {
+        lineCap: "round",
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6 lg:p-8">
-      <div className="mx-auto max-w-7xl">
-        {/* Main Content Grid */}
+    <div className="flex-1 flex flex-col items-center">
+      <Suspense
+        fallback={
+          <div className="h-20 w-20 animate-pulse bg-gray-100 rounded-full" />
+        }
+      >
+        <div className="w-20 h-20">
+          <Chart
+            //ts-ignore
+            options={chartState.options}
+            series={chartState.series}
+            type="radialBar"
+            height={80}
+            width={80}
+          />
+        </div>
+      </Suspense>
+      <p className="mt-1 text-sm text-center font-helvetica">{label}</p>
+    </div>
+  );
+};
+
+const AssetAllocationTemplate: React.FC<AssetAllocationProps> = ({
+  userName,
+  riskAttitude,
+  netWorth,
+  investmentExperience,
+  riskAllocation,
+}) => {
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="mx-auto max-w-7xl p-4 md:p-6 lg:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Column - User Info */}
           <div className="lg:col-span-4">
-            <Card className="h-full">
-              <CardContent className="p-6 space-y-6">
-                <div className="space-y-4">
-                  <h2 className="text-xl font-medium">
-                    Hello {userName} welcome to your Celerey dashboard.
+            <Card className="h-full bg-white shadow-sm">
+              <CardContent className="p-6">
+                <div className="space-y-6">
+                  <h2 className="text-2xl font-cirka">
+                    Hello {userName} welcome to <br />
+                    your Celerey dashboard.
                   </h2>
 
-                  <div className="space-y-6">
-                    <div>
-                      <p className="text-sm text-gray-500">Risk Attitude</p>
-                      <p className="text-navyLight">{riskAttitude}</p>
-                    </div>
-
-                    <div>
-                      <p className="text-sm text-gray-500">Net Worth</p>
-                      <p className="text-NavyLight">
-                        ${netWorth.toLocaleString()}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="text-sm text-gray-500">
-                        Investment Experience
-                      </p>
-                      <p className="text-NavyLight">{investmentExperience}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="relative pt-6">
-                  <div className="absolute top-0 right-0">
-                    <button className="p-2">
-                      <Ellipsis className="h-6 w-6 text-gray-400" />
-                    </button>
+                  {/* Risk Attitude Section */}
+                  <div className="border-b border-t pb-2 pt-2">
+                    <p className="text-sm font-helvetica text-gray-600">
+                      Risk Attitude
+                    </p>
+                    <p className="text-navyLight text-xl font-helvetica">
+                      {riskAttitude}
+                    </p>
                   </div>
 
-                  <h3 className="text-sm text-gray-500 mb-4">
-                    Risk Allocation
-                  </h3>
-                  <div className="flex items-center justify-between space-x-4">
-                    {/* Risk allocation circles */}
-                    <div className="flex-1">
-                      <div className="relative h-20 w-20">
-                        <div className="absolute inset-0 rounded-full border-8 border-green-200">
-                          <div
-                            className="absolute inset-0 flex items-center justify-center"
-                            style={{
-                              clipPath: `polygon(0 0, 100% 0, 100% ${riskAllocation.low}%, 0 ${riskAllocation.low}%)`,
-                            }}
-                          >
-                            <span className="text-sm font-medium">
-                              {riskAllocation.low}%
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="mt-2 text-sm text-center">Low</p>
+                  {/* Net Worth Section */}
+                  <div className="border-b pb-2">
+                    <p className="text-sm font-helvetica text-gray-600">
+                      Net Worth
+                    </p>
+                    <p className="text-navyLight text-xl  font-helvetica">
+                      ${netWorth.toLocaleString()}
+                    </p>
+                  </div>
+
+                  {/* Investment Experience Section */}
+                  <div className="border-b pb-2">
+                    <p className="text-sm font-helvetica text-gray-600">
+                      Investment Experience
+                    </p>
+                    <p className="text-navyLight text-xl  font-helvetica">
+                      {investmentExperience}
+                    </p>
+                  </div>
+
+                  {/* Risk Allocation Section */}
+                  <div className="relative pt-4">
+                    <div className="absolute top-4 right-0">
+                      <button className="p-2">
+                        <MoreHorizontal className="h-6 w-6 text-gray-400" />
+                      </button>
                     </div>
 
-                    <div className="flex-1">
-                      <div className="relative h-20 w-20">
-                        <div className="absolute inset-0 rounded-full border-8 border-yellow-200">
-                          <div
-                            className="absolute inset-0 flex items-center justify-center"
-                            style={{
-                              clipPath: `polygon(0 0, 100% 0, 100% ${riskAllocation.medium}%, 0 ${riskAllocation.medium}%)`,
-                            }}
-                          >
-                            <span className="text-sm font-medium">
-                              {riskAllocation.medium}%
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="mt-2 text-sm text-center">Medium</p>
-                    </div>
+                    <h3 className="text-sm font-helvetica text-gray-600 mb-6">
+                      Risk Allocation
+                    </h3>
 
-                    <div className="flex-1">
-                      <div className="relative h-20 w-20">
-                        <div className="absolute inset-0 rounded-full border-8 border-red-200">
-                          <div
-                            className="absolute inset-0 flex items-center justify-center"
-                            style={{
-                              clipPath: `polygon(0 0, 100% 0, 100% ${riskAllocation.high}%, 0 ${riskAllocation.high}%)`,
-                            }}
-                          >
-                            <span className="text-sm font-medium">
-                              {riskAllocation.high}%
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="mt-2 text-sm text-center">High</p>
+                    {/* Risk Charts Container */}
+                    <div className="flex items-center justify-between space-x-4">
+                      <RiskChart
+                        value={riskAllocation.low}
+                        color="#4CAF50"
+                        label="Low"
+                      />
+                      <RiskChart
+                        value={riskAllocation.medium}
+                        color="#FFA726"
+                        label="Medium"
+                      />
+                      <RiskChart
+                        value={riskAllocation.high}
+                        color="#EF5350"
+                        label="High"
+                      />
                     </div>
                   </div>
+
+                  {/* Subscription Button */}
+                  <button
+                    className="w-full bg-navy  text-white py-3 px-6 rounded-lg 
+                                   hover:bg-navyLight transition-all duration-200
+                                   font-helvetica flex items-center justify-center space-x-2"
+                  >
+                    <span>View Subscription Plans</span>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Right Column - Risk Categories */}
-          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {Object.entries(riskCategories).map(([risk, investments]) => (
-              <Card key={risk} className="h-full">
-                <CardHeader className="p-6">
-                  <h3 className="text-lg font-medium capitalize">
-                    {risk} Risk
-                  </h3>
-                </CardHeader>
-                <CardContent className="p-6 pt-0">
-                  <div className="mb-6">
-                    <div className="h-32 w-full bg-gray-100 rounded-lg flex items-center justify-center">
-                      <div className="h-24 w-24 bg-gray-200 rounded-lg" />
+          {/* Right Column */}
+          <div className="lg:col-span-8">
+            {/* Description text */}
+            <p className="font-helvetica text-gray-600 mb-6">
+              Based on your financial knowledge and experience, risk appetite,
+              net worth, and <br />
+              age, here is the recommended asset allocation for your profile.
+            </p>
+
+            {/* Risk Categories */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {Object.entries(riskCategories).map(([risk, investments]) => (
+                <Card key={risk} className="h-full bg-white shadow-sm">
+                  <CardHeader className="p-6">
+                    <h3 className="text-lg font-cirka text-center items-center capitalize">
+                      {risk} Risk
+                    </h3>
+                  </CardHeader>
+                  <CardContent className="p-6 pt-0">
+                    <div className="mb-6">
+                      <div className="h-32 w-full rounded-lg flex items-center justify-center">
+                        <Image
+                          src={`/assets/${risk}risk.svg`}
+                          alt={`${risk} Risk`}
+                          width={160}
+                          height={160}
+                          className="object-contain"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <ul className="space-y-2">
-                    {investments.map((investment, index) => (
-                      <li key={index} className="text-sm text-gray-600">
-                        {investment}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+                    <div className="space-y-3">
+                      {investments.map((investment, index) => (
+                        <div
+                          key={index}
+                          className="pb-3 border-b last:border-b-0 font-helvetica text-xs text-gray-600"
+                        >
+                          {investment}
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -154,4 +259,4 @@ const AssetAllocationDashboard = ({
   );
 };
 
-export default AssetAllocationDashboard;
+export default AssetAllocationTemplate;
