@@ -3,8 +3,7 @@ import { PricingCard } from "../molecules/pricingCard";
 import { SubscriptionTier } from "../../types";
 
 export const SubscriptionTemplate = () => {
-  // @ts-ignore
-  const [interval, setInterval] = useState<"monthly" | "yearly">("monthly");
+  const [interval] = useState<"monthly" | "yearly">("monthly");
 
   const subscriptionTiers: SubscriptionTier[] = [
     {

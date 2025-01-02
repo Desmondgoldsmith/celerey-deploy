@@ -86,7 +86,8 @@ const RiskChart: React.FC<{ value: number; color: string; label: string }> = ({
       >
         <div className="w-20 h-20">
           <Chart
-            //@ts-ignore
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             options={chartState.options}
             series={chartState.series}
             type="radialBar"
