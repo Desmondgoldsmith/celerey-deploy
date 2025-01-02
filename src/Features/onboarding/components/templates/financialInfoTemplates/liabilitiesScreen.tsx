@@ -37,8 +37,8 @@ export const LiabilitiesScreen = ({
   return (
     <div className="font-helvetica max-w-xl mx-auto">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-cirka">What are your Liabilities?</h1>
-        <p className="text-gray-600">Enter your liabilities</p>
+        <h1 className="text-4xl font-cirka mb-4">What are your Liabilities?</h1>
+        <p className="text-gray-600 ">Enter your liabilities</p>
       </div>
       <div className="space-y-4 mb-12">
         <div className="flex border-b border-gray-300 pb-4 items-center">
@@ -93,7 +93,9 @@ export const LiabilitiesScreen = ({
             pattern="[0-9]*"
             className="flex-1 appearance-none"
             value={values.otherLiabilities || ""}
-            onChange={(e) => handleInputChange("otherLiabilities", e.target.value)}
+            onChange={(e) =>
+              handleInputChange("otherLiabilities", e.target.value)
+            }
           />
         </div>
       </div>

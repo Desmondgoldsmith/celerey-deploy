@@ -37,7 +37,7 @@ export const IncomeScreen = ({
   return (
     <div className="font-helvetica max-w-xl mx-auto">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-cirka">What&apos;s your Passive Income</h1>
+        <h1 className="text-4xl font-cirka mb-4">What&apos;s your annual passive income</h1>
         <p className="text-gray-600">Enter any annual passive income</p>
       </div>
       <div className="space-y-4 mb-12">

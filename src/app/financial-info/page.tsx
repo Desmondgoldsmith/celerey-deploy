@@ -11,6 +11,7 @@ import { IncomeScreen } from "@/Features/onboarding/components/templates/financi
 import { ExpensesScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/expensesScreen";
 import { AssetsScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/assetsScreen";
 import { LiabilitiesScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/liabilitiesScreen";
+import { NetWorthScreen } from "@/Features/onboarding/components/templates/financialInfoTemplates/networthScreen";
 
 export default function FinancialInfo() {
   const router = useRouter();
@@ -82,6 +83,8 @@ export default function FinancialInfo() {
           parseFloat(data.liabilities.assetFinance) >= 0 &&
           parseFloat(data.liabilities.otherLiabilities) >= 0
         );
+        case 5: // Net worth
+        return true;
       default:
         return true;
     }
@@ -89,15 +92,17 @@ export default function FinancialInfo() {
 
 
   
-  const handleBack = useCallback(() => {
-    const currentStepIndex = sections[currentSection].currentStep;
-    if (currentStepIndex > 0) {
-      const newStep = currentStepIndex - 1;
-      updateSectionProgress(currentSection, newStep);
-    } else {
-      router.push("/personal-info");
-    }
-  }, [currentSection, sections, router, updateSectionProgress]);
+const handleBack = useCallback(() => {
+  const currentStepIndex = sections[currentSection].currentStep;
+  console.log("Current Step Index:", currentStepIndex); // Debugging line
+  if (currentStepIndex > 0) {
+    const newStep = currentStepIndex - 1;
+    console.log("New Step:", newStep); // Debugging line
+    updateSectionProgress(currentSection, newStep);
+  } else {
+    router.push("/personal-info");
+  }
+}, [currentSection, sections, router, updateSectionProgress]);
 
   const handleContinue = useCallback(() => {
     const currentStepIndex = sections[currentSection].currentStep;
@@ -181,6 +186,11 @@ export default function FinancialInfo() {
             onContinue={handleContinue}
           />
         );
+        case 5:
+          return (
+            <NetWorthScreen onBack={handleBack} onContinue={handleContinue} />
+          );
+        
       default:
         return null;
     }

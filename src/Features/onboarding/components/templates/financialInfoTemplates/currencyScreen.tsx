@@ -39,14 +39,15 @@ export const CurrencyScreen = ({
 }:CurrencyScreenProps) => {
   return (
     <div className="text-center max-w-xl mx-auto">
-      <h1 className="text-4xl font-cirka mb-12">
-        Let&apos;s talk about your finances, income, expenses, assets and
-        liabilities
-      </h1>
-      <p className="text-gray-600 mb-8">
-        Choose your currency to submit your financial details
-      </p>
-
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-cirka mb-4">
+          Let&apos;s talk about your finances, income, expenses, assets and
+          liabilities
+        </h1>
+        <p className="text-gray-600">
+          Choose your currency to submit your financial details
+        </p>
+      </div>
       <div className="space-y-4 mb-12">
         {/* Primary Currency Dropdown */}
         <Select value={value} onValueChange={(val) => onChange(val)}>

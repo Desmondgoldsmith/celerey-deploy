@@ -38,7 +38,7 @@ export const AssetsScreen = ({
   return (
     <div className="font-helvetica max-w-xl mx-auto">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-cirka">What are your Assets?</h1>
+        <h1 className="text-4xl font-cirka mb-4">What assets do you have?</h1>
         <p className="text-gray-600">Enter your assets</p>
       </div>
       <div className="space-y-4 mb-12">
