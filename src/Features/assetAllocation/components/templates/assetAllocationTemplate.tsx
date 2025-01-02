@@ -7,6 +7,7 @@ import { AssetAllocationProps } from "../../types";
 import { riskCategories } from "../../constants";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -74,6 +75,12 @@ const RiskChart: React.FC<{ value: number; color: string; label: string }> = ({
         lineCap: "round",
       },
     },
+  };
+
+  const router = useRouter();
+
+  const handleSubscription = () => {
+    router.push("/subscriptions");
   };
 
   return (
@@ -187,6 +194,7 @@ const AssetAllocationTemplate: React.FC<AssetAllocationProps> = ({
                     className="w-full bg-navy  text-white py-3 px-6 rounded-lg 
                                    hover:bg-navyLight transition-all duration-200
                                    font-helvetica flex items-center justify-center space-x-2"
+                    onClick={handleSubscription}
                   >
                     <span>View Subscription Plans</span>
                     <svg
