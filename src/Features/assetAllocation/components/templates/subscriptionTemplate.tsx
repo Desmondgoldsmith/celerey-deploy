@@ -1,57 +1,9 @@
 import { useState } from "react";
 import { PricingCard } from "../molecules/pricingCard";
-import { SubscriptionTier } from "../../types";
+import { subscriptionTiers } from "../../constants";
 
 export const SubscriptionTemplate = () => {
   const [interval] = useState<"monthly" | "yearly">("monthly");
-
-  const subscriptionTiers: SubscriptionTier[] = [
-    {
-      name: "Standard",
-      price: 25,
-      interval: "monthly",
-      description:
-        "Ideal for emerging professionals focused on setting goals and financial literacy.",
-      intro:
-        "All of Celerey Lite's features. Omnichannel – mobile app & web app",
-      features: [
-        "WhatsApp only channel - Seamless WhatsApp Channel",
-        "Conversational flow customization - Tailored Conversational Flows",
-        "Risk profile categorization",
-        "Basic Robo-advisory on financial health (no visualization) - Foundational Financial Health",
-        "Robo-Advisory",
-        "Basic recommended asset allocation (no visualization) - Foundational Asset Allocation Recommendation",
-      ],
-    },
-    {
-      name: "Pro",
-      price: 125,
-      interval: "monthly",
-      description:
-        "Ideal for emerging professionals focused on setting goals and financial literacy.",
-      intro: "All of Celerey Standard Features Premium Access includes:",
-      features: [
-        "Advanced AI features such as social benchmarking",
-        "45-min professional advisor reviews (virtual) -2x per year",
-        "Tax optimization session with tax advisor - 1x per year",
-      ],
-    },
-    {
-      name: "Elite",
-      price: 420,
-      interval: "monthly",
-      description:
-        "Ideal for emerging professionals focused on setting goals and financial literacy.",
-      intro: "All of Celerey Pro's features Exclusive access includes:",
-      features: [
-        "Advanced interactive asset allocation visualization",
-        "Robo-assisted guidance on the portfolio (such as swap in/swap out)",
-        "Budgeting tools and other financial tools (nft vs buy, etc)",
-        "15-min professional advisor consultation (Virtual) 4x a year inclusive",
-        "Educational resources on personal finance",
-      ],
-    },
-  ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
