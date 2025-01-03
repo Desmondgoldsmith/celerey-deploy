@@ -6,6 +6,9 @@ import { Card } from "@/components/ui/card";
 import { DashboardProps } from "../../types";
 import { PortfolioChart } from "../molecules/portfolioChart";
 import { GeographicSpread } from "../molecules/geographicSpread";
+import { RiskAllocation } from "./riskAllocationCharts";
+import { AssetAllocation } from "../molecules/assetAllocationChart";
+import { Goals } from "../molecules/goalsChart";
 
 // Dynamically import ApexCharts to avoid SSR issues
 const Chart = dynamic(() => import("react-apexcharts"), {

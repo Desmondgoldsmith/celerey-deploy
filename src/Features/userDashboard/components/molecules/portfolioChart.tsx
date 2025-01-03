@@ -1,6 +1,6 @@
 import React from "react";
 import { ApexOptions } from "apexcharts";
-import { PortfolioChartProps } from "../../types";
+import { ChartData, PortfolioChartProps, TimeframeKey } from "../../types";
 
 export const PortfolioChart: React.FC<PortfolioChartProps> = ({
   data,
@@ -69,9 +69,33 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
     },
   ];
 
+  const getTimeframeData = (timeframe: string): ChartData[] => {
+    const key = `${timeframe.toLowerCase()}Data` as TimeframeKey;
+    return data[key] || [];
+  };
+
   return (
     <div className="h-[300px] mt-4">
-      <Chart options={chartOptions} series={series} type="area" height="100%" />
+      <React.Suspense
+        fallback={
+          <div className="h-full w-full animate-pulse bg-gray-100 rounded-lg" />
+        }
+      >
+        <Chart
+          options={chartOptions}
+          series={[
+            {
+              name: "Portfolio Value",
+              data: getTimeframeData(timeframe).map((item) => [
+                new Date(item.timestamp).getTime(),
+                item.value,
+              ]),
+            },
+          ]}
+          type="area"
+          height="100%"
+        />
+      </React.Suspense>
     </div>
   );
 };

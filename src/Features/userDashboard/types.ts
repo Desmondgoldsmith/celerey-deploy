@@ -25,3 +25,28 @@ export interface DashboardProps {
   portfolioData: PortfolioData;
   goals: Goal[];
 }
+
+export interface PortfolioChartProps {
+  data: ChartData[];
+  Chart: any;
+}
+
+export interface ChartData {
+  timestamp: string;
+  value: number;
+}
+
+export interface PortfolioData {
+  dailyData: ChartData[];
+  weeklyData: ChartData[];
+  monthlyData: ChartData[];
+  quarterlyData: ChartData[];
+  yearlyData: ChartData[];
+}
+
+export type TimeframeKey =
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "quarterly"
+  | "yearly";
