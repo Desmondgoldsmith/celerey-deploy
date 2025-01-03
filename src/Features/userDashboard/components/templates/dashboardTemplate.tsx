@@ -9,6 +9,7 @@ import { GeographicSpread } from "../molecules/geographicSpread";
 import { RiskAllocation } from "./riskAllocationCharts";
 import { AssetAllocation } from "../molecules/assetAllocationChart";
 import { Goals } from "../molecules/goalsChart";
+import { UserProfile } from "../molecules/userProfile";
 
 // Dynamically import ApexCharts to avoid SSR issues
 const Chart = dynamic(() => import("react-apexcharts"), {
@@ -68,8 +69,9 @@ const Dashboard: React.FC<DashboardProps> = ({
                 </div>
               </div>
               <PortfolioChart
-                data={portfolioData[`${timeframe.toLowerCase()}Data`]}
+                data={portfolioData}
                 Chart={Chart}
+                timeframe={timeframe}
               />
             </Card>
 

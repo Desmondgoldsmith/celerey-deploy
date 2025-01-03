@@ -26,22 +26,9 @@ export interface DashboardProps {
   goals: Goal[];
 }
 
-export interface PortfolioChartProps {
-  data: ChartData[];
-  Chart: any;
-}
-
 export interface ChartData {
   timestamp: string;
   value: number;
-}
-
-export interface PortfolioData {
-  dailyData: ChartData[];
-  weeklyData: ChartData[];
-  monthlyData: ChartData[];
-  quarterlyData: ChartData[];
-  yearlyData: ChartData[];
 }
 
 export type TimeframeKey =
@@ -50,3 +37,11 @@ export type TimeframeKey =
   | "monthly"
   | "quarterly"
   | "yearly";
+
+export interface PortfolioData {
+  daily: ChartData[];
+  weekly: ChartData[];
+  monthly: ChartData[];
+  quarterly: ChartData[];
+  yearly: ChartData[];
+}
