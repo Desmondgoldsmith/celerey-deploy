@@ -34,10 +34,10 @@ export const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({
           </div>
         </div>
       </nav>
-      <div className="flex-grow bg-white">
+      <div className="flex-grow bg-offWhite h-full">
         <main className="max-w-7xl mx-auto px-6 py-8">{children}</main>
       </div>
-      <footer className="border-t bg-white">
+      <footer className="mx-10 border-t bg-offWhite">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <span className="text-sm font-helvetica text-gray-500">
             © Celerey 2024

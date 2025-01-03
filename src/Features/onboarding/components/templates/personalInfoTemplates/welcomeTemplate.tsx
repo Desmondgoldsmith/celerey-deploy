@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 
 export const WelcomeTemplate = ({ onStart }: { onStart: () => void }) => (
-  <div className="text-center max-w-xl mx-auto">
+  <div className="text-center max-w-xl mx-auto my-auto">
     <h1 className="text-4xl font-cirka mb-6">Welcome to Celerey</h1>
     <p className="text-gray-600 mb-12 font-helvetica text-sm">
       To be able to assist you in making informed decisions about your wealth,

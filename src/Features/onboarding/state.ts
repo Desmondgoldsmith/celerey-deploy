@@ -18,7 +18,7 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   financial: {
     id: "financial",
     title: "Financial Information",
-    totalSteps: 8,
+    totalSteps: 6,
     currentStep: 0,
     isCompleted: false,
     isActive: false,
@@ -78,7 +78,34 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
     options: [],
   },
   financial: {
-    name: "",
+    currency: "",
+    passiveIncome: {
+      rentalIncome: "",
+      dividends: "",
+      interestIncome: "",
+      otherIncome: "",
+    },
+    annualExpenses: {
+      home: "",
+      childcare: "",
+      education: "",
+      healthcare: "",
+      travel: "",
+      giving: "",
+    },
+    assets: {
+      realEstate: "",
+      cash: "",
+      publicSecurities: "",
+      privateSecurities: "",
+    },
+    liabilities: {
+      mortgages: "",
+      loans: "",
+      creditCards: "",
+      assetFinance: "",
+      otherLiabilities: "",
+    },
   },
 };
 

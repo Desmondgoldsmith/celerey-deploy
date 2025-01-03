@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { FormInput } from "../../molecules/formInput";
-import BottomSection from "../../molecules/bottomSection";
 import { FirstNameScreenProps } from "@/Features/onboarding/types";
 
 export const FirstNameScreen = ({
@@ -51,7 +50,6 @@ export const FirstNameScreen = ({
           Continue
         </Button>
       </div>
-      <BottomSection />
     </form>
   );
 };
