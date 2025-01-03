@@ -1,6 +1,6 @@
 import React from "react";
 import { ApexOptions } from "apexcharts";
-import { ChartData, TimeframeKey } from "../../types";
+import { ChartData, PortfolioChartProps, TimeframeKey } from "../../types";
 
 export const PortfolioChart: React.FC<PortfolioChartProps> = ({
   data,

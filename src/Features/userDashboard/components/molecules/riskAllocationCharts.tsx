@@ -3,6 +3,8 @@ import { Card } from "@/components/ui/card";
 import { MoreHorizontal } from "lucide-react";
 
 interface RiskAllocationProps {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   Chart: any;
 }
 

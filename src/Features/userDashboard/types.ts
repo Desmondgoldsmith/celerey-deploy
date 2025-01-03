@@ -45,3 +45,9 @@ export interface PortfolioData {
   quarterly: ChartData[];
   yearly: ChartData[];
 }
+
+export interface PortfolioChartProps {
+  data: PortfolioData;
+  Chart: any;
+  timeframe: "1D" | "1W" | "1M" | "3M" | "1Y";
+}

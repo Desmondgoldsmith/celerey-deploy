@@ -3,6 +3,8 @@ import { Card } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 
 interface GoalProps {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   Chart: any;
   goals: {
     name: string;

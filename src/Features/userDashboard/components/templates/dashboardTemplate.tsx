@@ -17,7 +17,7 @@ const Chart = dynamic(() => import("react-apexcharts"), {
   loading: () => <div className="h-64 animate-pulse bg-gray-100 rounded-lg" />,
 });
 
-const Dashboard: React.FC<DashboardProps> = ({
+const DashboardTemplate: React.FC<DashboardProps> = ({
   userName,
   netWorth,
   riskAttitude,
@@ -55,6 +55,8 @@ const Dashboard: React.FC<DashboardProps> = ({
                   {["1D", "1W", "1M", "3M", "1Y"].map((period) => (
                     <button
                       key={period}
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                      // @ts-ignore
                       onClick={() => setTimeframe(period as any)}
                       className={`px-4 py-2 rounded-full text-sm font-helvetica
                         ${
@@ -93,4 +95,4 @@ const Dashboard: React.FC<DashboardProps> = ({
   );
 };
 
-export default Dashboard;
+export default DashboardTemplate;
