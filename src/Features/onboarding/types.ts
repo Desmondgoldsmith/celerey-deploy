@@ -131,6 +131,10 @@ export interface OptionsScreenProps extends BaseScreenProps {
   value: string[];
   onChange: (value: string[]) => void;
 }
+export interface RiskOptionsScreenProps extends BaseScreenProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
 
 // FinancialInfo Screen Props
@@ -219,5 +223,15 @@ export interface GoalsInfoFormData {
     retirementAge: string;
     retirementIncome: string;
     goalsCurrency: string;
+}
+export interface RiskInfoFormData {
+  riskAttitude: string;
+  riskTolerance: string;
+  riskTolerancePercentage: string;
+  riskReaction: string;
+  riskApproach: string;
+  investmentObjective: string;
+  investmentHorizon: string;
+  illiquidInvestmentPercentage: string;
 }
 

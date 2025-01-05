@@ -1,30 +1,191 @@
 "use client";
 
-import { SectionProgressBars } from "@/Features/onboarding/components/molecules/progressBar";
-import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
-import { useOnboardingStore } from "@/Features/onboarding/state";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { SectionId, useOnboardingStore } from "@/Features/onboarding/state";
+import { RiskInfoSchema } from "@/Features/onboarding/schema";
+import { WelcomeScreen } from "@/Features/onboarding/components/templates/riskInfoTemplates/welcomeScreen";
+import { RiskAttitudeScreen } from "@/Features/onboarding/components/templates/riskInfoTemplates/riskAttitudeScreen";
+import { RiskToleranceScreen } from "@/Features/onboarding/components/templates/riskInfoTemplates/riskToleranceScreen";
+// import { RiskReactionScreen } from "@/Features/onboarding/components/templates/riskInfoTemplates/riskReactionScreen";
+// import { InvestmentObjectiveScreen } from "@/Features/onboarding/components/templates/riskInfoTemplates/investmentObjectiveScreen";
+// import { InvestmentHorizonScreen } from "@/Features/onboarding/components/templates/riskInfoTemplates/investmentHorizonScreen";
+// import { IlliquidInvestmentScreen } from "@/Features/onboarding/components/templates/riskInfoTemplates/illiquidInvestmentScreen";
+import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
+import { SectionProgressBars } from "@/Features/onboarding/components/molecules/progressBar";
 
 export default function RiskInfo() {
   const router = useRouter();
-  const { sections, currentSection, setActiveSection } = useOnboardingStore();
+  const {
+    sections,
+    currentSection,
+    formData,
+    updateFormData,
+    updateSectionProgress,
+    completeSection,
+    setActiveSection,
+  } = useOnboardingStore();
+
   useEffect(() => {
-    // Check if personal section is completed
     if (!sections.goals.isCompleted) {
-      router.push("/financial-info");
+      router.push("/goals-info");
       return;
     }
 
     if (currentSection !== "risk") {
       setActiveSection("risk");
     }
+  }, [sections.goals.isCompleted, currentSection, router, setActiveSection]);
+
+  const handleFormUpdate = useCallback(
+    (updates: Partial<RiskInfoSchema>) => {
+      updateFormData("risk", updates);
+    },
+    [updateFormData]
+  );
+
+  const validateCurrentStep = useCallback((): boolean => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    const data = formData.risk;
+
+    switch (currentStepIndex) {
+      case 1:
+        return !!data.riskAttitude.trim();
+      case 2:
+        return !!data.riskTolerance.trim();
+      case 3:
+        return !!data.riskReaction.trim();
+      case 4:
+        return !!data.investmentObjective.trim();
+      case 5:
+        return !!data.investmentHorizon.trim();
+      case 6:
+        return !!data.illiquidInvestmentPercentage.trim();
+      default:
+        return true;
+    }
+  }, [currentSection, sections, formData.risk]);
+
+  const handleBack = useCallback(() => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    if (currentStepIndex > 0) {
+      const newStep = currentStepIndex - 1;
+      updateSectionProgress(currentSection, newStep);
+    }
+  }, [currentSection, sections, updateSectionProgress]);
+
+  const getNextSection = useCallback(
+    (currentSectionId: SectionId): SectionId | null => {
+      const sectionOrder: SectionId[] = [
+        "personal",
+        "financial",
+        "goals",
+        "risk",
+      ];
+      const currentIndex = sectionOrder.indexOf(currentSectionId);
+      return currentIndex < sectionOrder.length - 1
+        ? sectionOrder[currentIndex + 1]
+        : null;
+    },
+    []
+  );
+
+  const handleContinue = useCallback(() => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    const isLastStep =
+      currentStepIndex === sections[currentSection].totalSteps - 1;
+
+    if (!validateCurrentStep()) {
+      return;
+    }
+
+    if (isLastStep) {
+      completeSection(currentSection);
+      const nextSection = getNextSection(currentSection);
+      if (nextSection) {
+        setActiveSection(nextSection);
+        router.push(`/${nextSection}-info`);
+      }
+    } else {
+      const newStep = currentStepIndex + 1;
+      updateSectionProgress(currentSection, newStep);
+    }
   }, [
-    sections.goals.isCompleted,
     currentSection,
-    router,
+    sections,
+    validateCurrentStep,
+    completeSection,
+    getNextSection,
     setActiveSection,
+    router,
+    updateSectionProgress,
   ]);
+
+  const renderStep = () => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    const riskData = formData.risk;
+
+    switch (currentStepIndex) {
+      case 0:
+        return <WelcomeScreen onContinue={handleContinue} onBack={handleBack} />;
+      case 1:
+        return (
+          <RiskAttitudeScreen
+            value={riskData.riskAttitude}
+            onChange={(value) => handleFormUpdate({ riskAttitude: value })}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 2:
+        return (
+          <RiskToleranceScreen
+            value={riskData.riskTolerance}
+            onChange={(value: string) => handleFormUpdate({ riskTolerance: value })}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+    //   case 3:
+    //     return (
+    //       <RiskReactionScreen
+    //         value={riskData.riskReaction}
+    //         onChange={(value) => handleFormUpdate({ riskReaction: value })}
+    //         onBack={handleBack}
+    //         onContinue={handleContinue}
+    //       />
+    //     );
+    //   case 4:
+    //     return (
+    //       <InvestmentObjectiveScreen
+    //         value={riskData.investmentObjective}
+    //         onChange={(value) => handleFormUpdate({ investmentObjective: value })}
+    //         onBack={handleBack}
+    //         onContinue={handleContinue}
+    //       />
+    //     );
+    //   case 5:
+    //     return (
+    //       <InvestmentHorizonScreen
+    //         value={riskData.investmentHorizon}
+    //         onChange={(value) => handleFormUpdate({ investmentHorizon: value })}
+    //         onBack={handleBack}
+    //         onContinue={handleContinue}
+    //       />
+    //     );
+    //   case 6:
+    //     return (
+    //       <IlliquidInvestmentScreen
+    //         value={riskData.illiquidInvestmentPercentage}
+    //         onChange={(value) => handleFormUpdate({ illiquidInvestmentPercentage: value })}
+    //         onBack={handleBack}
+    //         onContinue={handleContinue}
+    //       />
+    //     );
+      default:
+        return null;
+    }
+  };
 
   return (
     <OnboardingLayout>
@@ -33,9 +194,7 @@ export default function RiskInfo() {
           sections={sections}
           currentSection={currentSection}
         />
-        <h1 className="mt-[240px] text-center text-7xl">
-          This is the risk information page!
-        </h1>
+        <div className="mt-12">{renderStep()}</div>
       </div>
     </OnboardingLayout>
   );

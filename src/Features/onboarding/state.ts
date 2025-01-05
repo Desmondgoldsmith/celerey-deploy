@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { PersonalInfoSchema, FinancialInfoSchema, GoalsInfoSchema } from "./schema";
+import { PersonalInfoSchema, FinancialInfoSchema, GoalsInfoSchema, RiskInfoSchema } from "./schema";
 import { Section } from "./types";
 
 export type SectionId = "personal" | "financial" | "goals" | "risk"  // Financial Knowledge section to be added here
@@ -34,7 +34,7 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   risk: {
     id: "risk",
     title: "Risk Profile",
-    totalSteps: 7,
+    totalSteps: 10,
     currentStep: 0,
     isCompleted: false,
     isActive: false,
@@ -53,6 +53,7 @@ interface OnboardingFormData {
   personal: PersonalInfoSchema;
   financial: FinancialInfoSchema;
   goals: GoalsInfoSchema;
+  risk: RiskInfoSchema;
 }
 
 // setting the shape of the onboarding data
@@ -120,6 +121,16 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
     retirementAge: "",
     retirementIncome: "",
     goalsCurrency: "",
+  },
+  risk: {
+  riskAttitude: "",
+  riskTolerance: "",
+  riskTolerancePercentage: "",
+  riskReaction: "",
+  riskApproach: "",
+  investmentObjective: "",
+  investmentHorizon: "",
+  illiquidInvestmentPercentage: "",
   },
 };
 
