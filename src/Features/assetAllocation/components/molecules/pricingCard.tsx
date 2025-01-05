@@ -49,7 +49,7 @@ export const PricingCard = ({
         </div>
       </div>
       <Link href="/dashboard" passHref>
-        <button className="bg-[#F4F5F6] border border-navy text-navy rounded-md py-2 px-4 hover:bg-navy hover:text-white transition-colors mb-6">
+        <button className="bg-[#F4F5F6] border w-full border-navy text-navy rounded-md py-2 px-4 hover:bg-navy hover:text-white transition-colors mb-6">
           Subscribe
         </button>
       </Link>
