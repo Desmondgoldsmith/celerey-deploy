@@ -116,12 +116,12 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
 
   return (
     <Card className="p-6 bg-white">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center border-b border-gray-100 pb-2 mb-6">
         <h2 className="text-xl font-normal text-[#1C1F33]">Saving Goals</h2>
         <MoreHorizontal className="h-6 w-6 text-gray-400" />
       </div>
 
-      <div className="flex space-x-4 mb-6">
+      <div className="flex space-x-4 mb-6 border-b border-gray-100 pb-2">
         {allCards
           .slice(activeSlide * 2, activeSlide * 2 + 2)
           .map((goal, index) => (
