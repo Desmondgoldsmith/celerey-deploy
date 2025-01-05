@@ -117,7 +117,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
   return (
     <Card className="p-6 bg-white">
       <div className="flex justify-between items-center border-b border-gray-100 pb-2 mb-6">
-        <h2 className="text-xl font-normal text-[#1C1F33]">Saving Goals</h2>
+        <h2 className="text-xl font-cirka text-[#1C1F33]">Saving Goals</h2>
         <MoreHorizontal className="h-6 w-6 text-gray-400" />
       </div>
 

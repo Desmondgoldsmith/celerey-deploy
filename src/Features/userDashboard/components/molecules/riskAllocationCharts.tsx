@@ -17,7 +17,7 @@ export const RiskAllocation: React.FC<RiskAllocationProps> = ({ Chart }) => {
 
   return (
     <Card className="p-6">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-2">
         <h2 className="text-xl font-cirka text-navy">Risk Allocation</h2>
         <MoreHorizontal className="h-6 w-6 text-gray-400 cursor-pointer" />
       </div>
@@ -64,7 +64,7 @@ export const RiskAllocation: React.FC<RiskAllocationProps> = ({ Chart }) => {
           </div>
         ))}
       </div>
-      <div className="border-t border-gray-200 pt-4">
+      <div className="border-t border-gray-200 pt-4 pb-2">
         <div className="flex items-center py-3 border-b border-gray-200">
           <Home className="h-5 w-5 text-gray-400 mr-3" />
           <span className="text-gray-700">Real Estate</span>

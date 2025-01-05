@@ -20,9 +20,7 @@ export const GeographicSpread: React.FC = () => {
   return (
     <Card className="p-6 bg-white">
       <div className="flex justify-between items-center mb-4 border-b border-gray-100 pb-2">
-        <h2 className="text-xl font-normal text-[#1C1F33]">
-          Geographic Spread
-        </h2>
+        <h2 className="text-xl font-cirka text-[#1C1F33]">Geographic Spread</h2>
         <button>
           <MoreHorizontal className="h-6 w-6 text-gray-400" />
         </button>
@@ -53,6 +51,8 @@ export const GeographicSpread: React.FC = () => {
               {
                 scale: colorScale.scale,
                 values: colorScale.values,
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 min: colorScale.min,
                 max: colorScale.max,
                 normalizeFunction: "polynomial",
