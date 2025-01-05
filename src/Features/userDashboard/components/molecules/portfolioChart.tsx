@@ -6,6 +6,8 @@ import { MoreHorizontal } from "lucide-react";
 export type TimeframeKey = "1D" | "1W" | "1M" | "3M" | "1Y";
 
 interface PortfolioChartProps {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   Chart: any;
   timeframe: TimeframeKey;
   onTimeframeChange: (timeframe: TimeframeKey) => void;
@@ -97,7 +99,7 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
                 ${
                   timeframe === period
                     ? "bg-navy text-white"
-                    : "text-gray-500 hover:bg-gray-50"
+                    : "text-gray-500 bg-gray-50 hover:bg-gray-80"
                 }`}
             >
               {period}
