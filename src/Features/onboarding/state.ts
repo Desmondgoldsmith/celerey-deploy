@@ -34,7 +34,7 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   risk: {
     id: "risk",
     title: "Risk Profile",
-    totalSteps: 10,
+    totalSteps: 9,
     currentStep: 0,
     isCompleted: false,
     isActive: false,

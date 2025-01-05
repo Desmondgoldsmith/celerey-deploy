@@ -6,28 +6,28 @@ import { OptionCard } from "../../molecules/riskOptionCard";
 
 const OPTIONS: Option[] = [
   {
-    id: "very-strong",
-    title: "Very Strong growth",
-    description: "Seeking high returns, willing to endure significant losses for potential strong growth",
+    id: "high",
+    title: "High risk",
+    description: "I take high risks",
   },
   {
-    id: "reasonably-strong",
-    title: "Reasonably strong growth",
-    description: "Seeking steady growth, willing to endure losses for long-term capital preservation.",
+    id: "open-to-high",
+    title: "Open to high risk",
+    description: "I am willing to take high risks to earn more",
   },
   {
-    id: "moderate",
-    title: "Moderate growth",
-    description: "Seeking moderate growth, accepting some risk for potential capital fluctuations.",
+    id: "limited",
+    title: "Limited risk",
+    description: "A limited amount of risk is acceptable",
   },
   {
-    id: "slow-and-steady",
-    title: "Slow and steady growth",
-    description: "Prioritizing capital preservation over growth, minimizing risk to avoid negative changes",
+    id: "little",
+    title: "Little risk",
+    description: "I want as little risk as possible",
   },
 ];
 
-export const RiskToleranceScreen: React.FC<RiskOptionsScreenProps> = ({
+export const RiskApproachScreen: React.FC<RiskOptionsScreenProps> = ({
   value,
   onChange,
   onBack,
@@ -40,8 +40,7 @@ export const RiskToleranceScreen: React.FC<RiskOptionsScreenProps> = ({
   return (
     <div className="text-center max-w-xl mx-auto">
       <h1 className="text-4xl font-cirka mb-4">
-        Let&apos;s test that theory, shall we? <br /> Which of the following statement best
-        describes your risk tolerance?
+        How do you approach investment risks?
       </h1>
       <div className="space-y-4 mb-8">
         {OPTIONS.map((option) => (

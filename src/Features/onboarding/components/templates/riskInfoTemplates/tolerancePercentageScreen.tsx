@@ -6,28 +6,28 @@ import { OptionCard } from "../../molecules/riskOptionCard";
 
 const OPTIONS: Option[] = [
   {
-    id: "very-strong",
-    title: "Very Strong growth",
-    description: "Seeking high returns, willing to endure significant losses for potential strong growth",
+    id: "20-up",
+    title: "",
+    description: "-20% or more",
   },
   {
-    id: "reasonably-strong",
-    title: "Reasonably strong growth",
-    description: "Seeking steady growth, willing to endure losses for long-term capital preservation.",
+    id: "10-20",
+    title: "",
+    description: "-10% to -20%",
   },
   {
-    id: "moderate",
-    title: "Moderate growth",
-    description: "Seeking moderate growth, accepting some risk for potential capital fluctuations.",
+    id: "5-10",
+    title: "",
+    description: "-5% to -10%",
   },
   {
-    id: "slow-and-steady",
-    title: "Slow and steady growth",
-    description: "Prioritizing capital preservation over growth, minimizing risk to avoid negative changes",
+    id: "0-5",
+    title: "",
+    description: "0% to -5%",
   },
 ];
 
-export const RiskToleranceScreen: React.FC<RiskOptionsScreenProps> = ({
+export const TolerancePercentageScreen: React.FC<RiskOptionsScreenProps> = ({
   value,
   onChange,
   onBack,
@@ -40,8 +40,8 @@ export const RiskToleranceScreen: React.FC<RiskOptionsScreenProps> = ({
   return (
     <div className="text-center max-w-xl mx-auto">
       <h1 className="text-4xl font-cirka mb-4">
-        Let&apos;s test that theory, shall we? <br /> Which of the following statement best
-        describes your risk tolerance?
+        What decrease, as a percentage of the invested amounts, can you
+        tolerate?
       </h1>
       <div className="space-y-4 mb-8">
         {OPTIONS.map((option) => (

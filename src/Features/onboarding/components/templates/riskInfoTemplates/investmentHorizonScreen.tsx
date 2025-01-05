@@ -6,28 +6,28 @@ import { OptionCard } from "../../molecules/riskOptionCard";
 
 const OPTIONS: Option[] = [
   {
-    id: "very-strong",
-    title: "Very Strong growth",
-    description: "Seeking high returns, willing to endure significant losses for potential strong growth",
+    id: "10years-upwards",
+    title: "",
+    description: "More than 10 years",
   },
   {
-    id: "reasonably-strong",
-    title: "Reasonably strong growth",
-    description: "Seeking steady growth, willing to endure losses for long-term capital preservation.",
+    id: "5-10years",
+    title: "",
+    description: "5 to 10 years",
   },
   {
-    id: "moderate",
-    title: "Moderate growth",
-    description: "Seeking moderate growth, accepting some risk for potential capital fluctuations.",
+    id: "3-5years",
+    title: "",
+    description: "3 to 5 years",
   },
   {
-    id: "slow-and-steady",
-    title: "Slow and steady growth",
-    description: "Prioritizing capital preservation over growth, minimizing risk to avoid negative changes",
+    id: "less-than-3years",
+    title: "",
+    description: "Less than 3 years",
   },
 ];
 
-export const RiskToleranceScreen: React.FC<RiskOptionsScreenProps> = ({
+export const InvestmentHorizonScreen: React.FC<RiskOptionsScreenProps> = ({
   value,
   onChange,
   onBack,
@@ -40,8 +40,7 @@ export const RiskToleranceScreen: React.FC<RiskOptionsScreenProps> = ({
   return (
     <div className="text-center max-w-xl mx-auto">
       <h1 className="text-4xl font-cirka mb-4">
-        Let&apos;s test that theory, shall we? <br /> Which of the following statement best
-        describes your risk tolerance?
+        What is your time horizon to achieve your investment objectives?
       </h1>
       <div className="space-y-4 mb-8">
         {OPTIONS.map((option) => (
