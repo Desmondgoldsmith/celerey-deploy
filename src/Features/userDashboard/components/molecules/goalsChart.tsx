@@ -9,6 +9,8 @@ interface Goal {
   lastUpdated: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -60,10 +62,11 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
     return (
       <div className="bg-gray-50 rounded-lg p-4 w-full h-[272px]">
         <div className="flex justify-between items-center mb-4">
-          <span className="text-sm font-medium text-[#1C1F33]">
-            {goal.name}
-          </span>
+          <div></div>
           <MoreHorizontal className="h-4 w-4 text-gray-400" />
+        </div>
+        <div className="text-sm mt-1 text-center items-center font-medium text-[#1C1F33]">
+          {goal.name}
         </div>
 
         <div className="w-full flex justify-center mb-4">
@@ -74,7 +77,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
                   type: "radialBar",
                   sparkline: { enabled: true },
                 },
-                colors: ["#6B4EFF"],
+                colors: ["#0b026aFF"],
                 plotOptions: {
                   radialBar: {
                     hollow: { size: "70%" },
