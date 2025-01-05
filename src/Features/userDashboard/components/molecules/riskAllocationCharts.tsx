@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "@/components/ui/card";
-import { MoreHorizontal } from "lucide-react";
+import { Home, MoreHorizontal, TrendingUp } from "lucide-react";
 
 interface RiskAllocationProps {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -63,6 +63,18 @@ export const RiskAllocation: React.FC<RiskAllocationProps> = ({ Chart }) => {
             </span>
           </div>
         ))}
+      </div>
+      <div className="border-t border-gray-200 pt-4">
+        <div className="flex items-center py-3 border-b border-gray-200">
+          <Home className="h-5 w-5 text-gray-400 mr-3" />
+          <span className="text-gray-700">Real Estate</span>
+          <span className="ml-auto font-medium">$980,000</span>
+        </div>
+        <div className="flex items-center py-3">
+          <TrendingUp className="h-5 w-5 text-gray-400 mr-3" />
+          <span className="text-gray-700">Fixed Income</span>
+          <span className="ml-auto font-medium">$200,000</span>
+        </div>
       </div>
     </Card>
   );

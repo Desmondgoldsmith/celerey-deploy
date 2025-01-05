@@ -3,8 +3,6 @@ import { Card } from "@/components/ui/card";
 import { MoreHorizontal } from "lucide-react";
 
 interface AssetAllocationProps {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   Chart: any;
 }
 
@@ -24,31 +22,36 @@ export const AssetAllocation: React.FC<AssetAllocationProps> = ({ Chart }) => {
     },
     plotOptions: {
       bar: {
-        horizontal: true,
-        borderRadius: 6,
+        horizontal: false,
+        columnWidth: "40%",
+        borderRadius: 4,
       },
     },
     colors: assets.map((asset) => asset.color),
     dataLabels: { enabled: false },
     xaxis: {
-      categories: ["Total Assets"],
+      categories: ["Total Assets", "Total Liabilities"],
+      labels: { show: false },
+      axisBorder: { show: false },
+      axisTicks: { show: false },
+    },
+    yaxis: {
       labels: {
         formatter: (value: number) => `$${(value / 1000000).toFixed(1)}M`,
         style: { fontFamily: "Helvetica" },
       },
     },
-    yaxis: { show: false },
     legend: {
-      position: "right",
+      position: "bottom",
       fontFamily: "Helvetica",
       markers: { radius: 12 },
     },
+    grid: {
+      show: true,
+      borderColor: "#f3f4f6",
+      strokeDashArray: 4,
+    },
   };
-
-  const series = assets.map((asset) => ({
-    name: asset.name,
-    data: [asset.value],
-  }));
 
   return (
     <Card className="p-6">
@@ -56,7 +59,8 @@ export const AssetAllocation: React.FC<AssetAllocationProps> = ({ Chart }) => {
         <h2 className="text-xl font-cirka text-navy">Asset Allocation</h2>
         <MoreHorizontal className="h-6 w-6 text-gray-400 cursor-pointer" />
       </div>
-      <div className="h-[200px]">
+
+      <div className="h-[300px]">
         <React.Suspense
           fallback={
             <div className="h-full w-full animate-pulse bg-gray-100 rounded-lg" />
@@ -64,7 +68,10 @@ export const AssetAllocation: React.FC<AssetAllocationProps> = ({ Chart }) => {
         >
           <Chart
             options={chartOptions}
-            series={series}
+            series={assets.map((asset) => ({
+              name: asset.name,
+              data: [asset.value, asset.value * 0.7], // Adding comparison data
+            }))}
             type="bar"
             height="100%"
           />
