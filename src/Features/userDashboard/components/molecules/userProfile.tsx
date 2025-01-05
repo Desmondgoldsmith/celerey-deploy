@@ -1,112 +1,118 @@
-// components/molecules/userProfile.tsx
 import React from "react";
-import { Card } from "@/components/ui/card";
-import { MessageCircle, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { Card } from "@/components/ui/card";
+import { Mail, ChevronRight } from "lucide-react";
 
 interface UserProfileProps {
-  userName?: string;
-  netWorth?: number;
-  riskAttitude?: string;
-  investmentExperience?: string;
+  userName: string;
+  netWorth: number;
+  riskAttitude: string;
+  investmentExperience: string;
 }
 
 export const UserProfile: React.FC<UserProfileProps> = ({
-  userName = "Jude",
-  netWorth = 103550.0,
-  riskAttitude = "Somewhat Aggressive",
-  investmentExperience = "Advanced",
+  userName,
+  netWorth,
+  riskAttitude,
+  investmentExperience,
 }) => {
-  const actions = [
-    {
-      title: "Book a Virtual Consultation",
-      subtitle: "with an adviser",
-      icon: "/assets/consultation.svg",
-      link: "/consultation",
-    },
-    {
-      title: "View advisors",
-      subtitle: "recommendation",
-      icon: "/assets/recommendation.svg",
-      link: "/advisors",
-    },
-    {
-      title: "Upload financial",
-      subtitle: "documents",
-      icon: "/assets/financialDoc.svg",
-      link: "/documents",
-    },
-  ];
-
   return (
-    <Card className="p-6">
-      {/* Header with Message Icon */}
-      <div className="flex justify-between items-start mb-8">
-        <h2 className="text-2xl font-cirka">
+    <Card className="p-6 bg-white">
+      <div className="flex justify-between items-center mb-8">
+        <h2 className="text-xl text-[#1C1F33] leading-relaxed">
           Hello {userName} welcome to
           <br />
           your Celerey dashboard.
         </h2>
-        <div className="relative">
-          <MessageCircle className="h-6 w-6 text-gray-400" />
-          <div className="absolute top-0 right-0 w-2 h-2 bg-green-500 rounded-full" />
-        </div>
+        <Mail className="h-6 w-6 text-[#6B4EFF]" />
       </div>
 
-      {/* User Stats with Proper Borders */}
-      <div className="space-y-6 border-y border-gray-200 py-6">
-        <div>
-          <p className="text-sm font-helvetica text-gray-600">Risk Attitude</p>
-          <p className="text-xl font-helvetica text-purple-600">
+      <div className="space-y-6">
+        <div className="border-b border-gray-100 pb-4">
+          <div className="text-sm text-gray-600 mb-2">Your Risk Attitude</div>
+          <div className="text-lg text-[#6B4EFF] font-medium">
             {riskAttitude}
-          </p>
+          </div>
         </div>
-        <div>
-          <p className="text-sm font-helvetica text-gray-600">Net Worth</p>
-          <p className="text-xl font-helvetica text-purple-600">
-            ${netWorth.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-          </p>
-        </div>
-        <div>
-          <p className="text-sm font-helvetica text-gray-600">
-            Investment Experience
-          </p>
-          <p className="text-xl font-helvetica text-purple-600">
-            {investmentExperience}
-          </p>
-        </div>
-      </div>
 
-      {/* Action Items with Chevron */}
-      <div className="space-y-4 mt-6">
-        {actions.map((action) => (
-          <div
-            key={action.title}
-            className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
-          >
-            <div className="flex items-full gap-4">
-              <div className="w-12 h-12 relative">
-                <Image
-                  src={action.icon}
-                  alt={action.title}
-                  layout="fill"
-                  objectFit="contain"
-                />
+        <div className="border-b border-gray-100 pb-4">
+          <div className="text-sm text-gray-600 mb-2">
+            Your Current Net Worth
+          </div>
+          <div className="text-lg text-[#6B4EFF] font-medium">
+            ${netWorth.toLocaleString()}
+          </div>
+        </div>
+
+        <div className="border-b border-gray-100 pb-4">
+          <div className="text-sm text-gray-600 mb-2">
+            Your Investment Experience
+          </div>
+          <div className="text-lg text-[#6B4EFF] font-medium">
+            {investmentExperience}
+          </div>
+        </div>
+
+        <div className="border-t border-gray-100 pt-4">
+          <div className="space-y-3 -mx-6 px-6">
+            <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center">
+                  <Image
+                    src="/assets/icons/consultation.svg"
+                    alt="Consultation"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                <span className="text-[#1C1F33] font-medium">
+                  Book a Virtual Consultation
+                </span>
               </div>
-              <div>
-                <p className="font-helvetica text-sm text-gray-900">
-                  {action.title}
-                </p>
-                <p className="font-helvetica text-sm text-gray-500">
-                  {action.subtitle}
-                </p>
-              </div>
+              <button className="w-8 h-8 rounded-full bg-[#1C1F33] flex items-center justify-center">
+                <ChevronRight className="h-5 w-5 text-white" />
+              </button>
             </div>
-            <div className="rounded-full bg-navy text-white p-2">
-              <ChevronRight className="h-5 w-5 text-white" />
+
+            <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center">
+                  <Image
+                    src="/assets/icons/advisor.svg"
+                    alt="Advisor"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                <span className="text-[#1C1F33] font-medium">
+                  View advisors recommendation
+                </span>
+              </div>
+              <button className="w-8 h-8 rounded-full bg-[#1C1F33] flex items-center justify-center">
+                <ChevronRight className="h-5 w-5 text-white" />
+              </button>
+            </div>
+
+            <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center">
+                  <Image
+                    src="/assets/icons/upload.svg"
+                    alt="Upload"
+                    width={24}
+                    height={24}
+                  />
+                </div>
+                <span className="text-[#1C1F33] font-medium">
+                  Upload financial documents
+                </span>
+              </div>
+              <button className="w-8 h-8 rounded-full bg-[#1C1F33] flex items-center justify-center">
+                <ChevronRight className="h-5 w-5 text-white" />
+              </button>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </Card>
   );
