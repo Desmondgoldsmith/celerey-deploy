@@ -29,7 +29,7 @@ export const subscriptionTiers: SubscriptionTier[] = [
   {
     name: "Standard",
     price: 25,
-    interval: "monthly",
+    interval: "yearly",
     description:
       "Ideal for emerging professionals focused on setting goals and financial literacy.",
     intro: "All of Celerey Lite's features. Omnichannel – mobile app & web app",
@@ -45,7 +45,7 @@ export const subscriptionTiers: SubscriptionTier[] = [
   {
     name: "Pro",
     price: 125,
-    interval: "monthly",
+    interval: "yearly",
     description:
       "Ideal for emerging professionals focused on setting goals and financial literacy.",
     intro: "All of Celerey Standard Features Premium Access includes:",
@@ -58,7 +58,7 @@ export const subscriptionTiers: SubscriptionTier[] = [
   {
     name: "Elite",
     price: 420,
-    interval: "monthly",
+    interval: "yearly",
     description:
       "Ideal for emerging professionals focused on setting goals and financial literacy.",
     intro: "All of Celerey Pro's features Exclusive access includes:",

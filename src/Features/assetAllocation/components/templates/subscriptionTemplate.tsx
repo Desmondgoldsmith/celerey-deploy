@@ -3,7 +3,7 @@ import { PricingCard } from "../molecules/pricingCard";
 import { subscriptionTiers } from "../../constants";
 
 export const SubscriptionTemplate = () => {
-  const [interval] = useState<"monthly" | "yearly">("monthly");
+  const [interval, setInterval] = useState<"yearly" | "biennial">("yearly");
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -23,7 +23,12 @@ export const SubscriptionTemplate = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {subscriptionTiers.map((tier) => (
-          <PricingCard key={tier.name} tier={tier} interval={interval} />
+          <PricingCard
+            key={tier.name}
+            tier={tier}
+            interval={interval}
+            onIntervalChange={setInterval}
+          />
         ))}
       </div>
     </div>

@@ -13,7 +13,7 @@ export interface AssetAllocationProps {
 export type SubscriptionTier = {
   name: string;
   price: number;
-  interval: "monthly" | "yearly";
+  interval: "yearly" | "biennial";
   description: string;
   features: string[];
   intro: string;
