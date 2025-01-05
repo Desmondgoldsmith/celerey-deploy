@@ -21,7 +21,7 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
       type: "area",
       toolbar: { show: false },
       zoom: { enabled: false },
-      height: 400,
+      height: 600,
     },
     colors: ["#6B4EFF"],
     fill: {
@@ -68,7 +68,7 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
   };
 
   return (
-    <Card className="bg-white h-[600px]">
+    <Card className="bg-white pt-5 pb-10">
       <div className="p-6 border-b border-gray-200">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-cirka text-navy">
@@ -106,7 +106,7 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
         </div>
       </div>
 
-      <div className="border-t border-gray-200 p-4">
+      <div className="border-t border-gray-200 p-4 pt-10">
         <div className="text-sm text-gray-600">
           <span className="text-green-500 font-medium">↑ 12%</span>
           <span className="ml-2">Last 30 Days</span>
