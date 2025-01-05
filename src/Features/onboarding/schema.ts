@@ -59,7 +59,14 @@ export interface FinancialInfoSchema {
   };
 }
 
+export interface GoalsInfoSchema {
+  retirementAge: string;
+  retirementIncome: string;
+  goalsCurrency: string;
+}
+
 export interface OnboardingFormData {
   personal: PersonalInfoSchema;
   financial: FinancialInfoSchema;
+  goals: GoalsInfoSchema;
 }

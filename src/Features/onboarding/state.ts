@@ -1,9 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { PersonalInfoSchema, FinancialInfoSchema } from "./schema";
+import { PersonalInfoSchema, FinancialInfoSchema, GoalsInfoSchema } from "./schema";
 import { Section } from "./types";
 
-export type SectionId = "personal" | "financial" | "goals" | "risk";
+export type SectionId = "personal" | "financial" | "goals" | "risk"  // Financial Knowledge section to be added here
 
 // the various section structures
 const DEFAULT_SECTIONS: Record<SectionId, Section> = {
@@ -26,7 +26,7 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   goals: {
     id: "goals",
     title: "Goals & Aspirations",
-    totalSteps: 6,
+    totalSteps: 2,
     currentStep: 0,
     isCompleted: false,
     isActive: false,
@@ -39,11 +39,20 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
     isCompleted: false,
     isActive: false,
   },
+  // knowledge: {
+  //   id: "knowledge",
+  //   title: "Financial Knowledge",
+  //   totalSteps: 6,
+  //   currentStep: 0,
+  //   isCompleted: false,
+  //   isActive: false,
+  // },
 };
 
 interface OnboardingFormData {
   personal: PersonalInfoSchema;
   financial: FinancialInfoSchema;
+  goals: GoalsInfoSchema;
 }
 
 // setting the shape of the onboarding data
@@ -106,6 +115,11 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
       assetFinance: "",
       otherLiabilities: "",
     },
+  },
+  goals: {
+    retirementAge: "",
+    retirementIncome: "",
+    goalsCurrency: "",
   },
 };
 
