@@ -27,13 +27,13 @@ export const UserProfile: React.FC<UserProfileProps> = ({
     {
       title: "View advisors",
       subtitle: "recommendation",
-      icon: "/assets/advisors.svg",
+      icon: "/assets/recommendation.svg",
       link: "/advisors",
     },
     {
       title: "Upload financial",
       subtitle: "documents",
-      icon: "/assets/upload.svg",
+      icon: "/assets/financialDoc.svg",
       link: "/documents",
     },
   ];
@@ -82,9 +82,9 @@ export const UserProfile: React.FC<UserProfileProps> = ({
         {actions.map((action) => (
           <div
             key={action.title}
-            className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+            className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-full gap-4">
               <div className="w-12 h-12 relative">
                 <Image
                   src={action.icon}
@@ -102,7 +102,9 @@ export const UserProfile: React.FC<UserProfileProps> = ({
                 </p>
               </div>
             </div>
-            <ChevronRight className="h-5 w-5 text-navy" />
+            <div className="rounded-full bg-navy text-white p-2">
+              <ChevronRight className="h-5 w-5 text-white" />
+            </div>
           </div>
         ))}
       </div>
