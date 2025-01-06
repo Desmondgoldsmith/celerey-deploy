@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 
-interface NetWorthScreenProps {
+interface WelcomeScreenProps {
   onContinue: () => void;
   onBack: () => void;
 }
 
-export const NetWorthScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
+export const WelcomeScreen = ({ onContinue, onBack }: WelcomeScreenProps) => {
   const [firstName, setFirstName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,13 +27,9 @@ export const NetWorthScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
     <form onSubmit={handleSubmit} className="text-center max-w-xl mx-auto">
       <h1 className="text-4xl font-cirka mb-6">
         Thank You
-        <span className="text-navyLight"> {firstName || "User"}</span>, based on
-        the information submitted we estimate your net worth to be{" "}
-        <span className="text-navyLight">$103,550,43</span>
+        <span className="text-navyLight"> {firstName || "User"}</span>, to identify the best way for you to reach your goals, we
+        need to understand your attitude to risk shall we begin?
       </h1>
-      <p className=" mb-12 font-helvetica text-sm">
-        Does this look right? If not, please go back and make some adjustments.
-      </p>
       <div className="flex gap-4 max-w-md mx-auto">
         <Button variant="outline" onClick={onBack} className="flex-1">
           Back

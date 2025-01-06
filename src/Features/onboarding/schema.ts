@@ -59,7 +59,26 @@ export interface FinancialInfoSchema {
   };
 }
 
+export interface GoalsInfoSchema {
+  retirementAge: string;
+  retirementIncome: string;
+  goalsCurrency: string;
+}
+
+export interface RiskInfoSchema {
+  riskAttitude: string;
+  riskTolerance: string;
+  riskTolerancePercentage: string;
+  riskReaction: string;
+  riskApproach: string;
+  investmentObjective: string;
+  investmentHorizon: string;
+  illiquidInvestmentPercentage: string;
+}
+
 export interface OnboardingFormData {
   personal: PersonalInfoSchema;
   financial: FinancialInfoSchema;
+  goals: GoalsInfoSchema;
+  risk: RiskInfoSchema;
 }

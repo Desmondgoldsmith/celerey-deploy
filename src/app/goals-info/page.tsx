@@ -1,25 +1,123 @@
 "use client";
 
+import { useCallback, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { GoalsInfoSchema } from "@/Features/onboarding/schema";
+import { useOnboardingStore } from "@/Features/onboarding/state";
 import { SectionProgressBars } from "@/Features/onboarding/components/molecules/progressBar";
 import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
-import { useOnboardingStore } from "@/Features/onboarding/state";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { WelcomeScreen } from "@/Features/onboarding/components/templates/goalsInfoTemplates/welcomeScreen";
+import { GoalsScreen } from "@/Features/onboarding/components/templates/goalsInfoTemplates/goalsScreen";
 
 export default function GoalsInfo() {
   const router = useRouter();
-  const { sections, currentSection, setActiveSection } = useOnboardingStore();
+  const {
+    sections,
+    currentSection,
+    formData,
+    updateFormData,
+    updateSectionProgress,
+    completeSection,
+    setActiveSection,
+  } = useOnboardingStore();
+
   useEffect(() => {
-    // Check if personal section is completed
     if (!sections.financial.isCompleted) {
       router.push("/financial-info");
       return;
     }
 
-    if (currentSection !== "financial") {
-      setActiveSection("financial");
+    if (currentSection !== "goals") {
+      setActiveSection("goals");
     }
   }, [sections.financial.isCompleted, currentSection, router, setActiveSection]);
+
+  const handleFormUpdate = useCallback(
+    (updates: Partial<GoalsInfoSchema>) => {
+      updateFormData("goals", updates);
+    },
+    [updateFormData]
+  );
+
+  const validateCurrentStep = useCallback((): boolean => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    const data = formData.goals;
+
+    switch (currentStepIndex) {
+      case 0: // Welcome screen, no validation needed
+        return true;
+      case 1: // Goals information validation
+        return (
+          !!data.retirementAge &&
+          !!data.retirementIncome &&
+          !!data.goalsCurrency
+        );
+      default:
+        return true;
+    }
+  }, [currentSection, sections, formData.goals]);
+
+  const handleBack = useCallback(() => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    if (currentStepIndex > 0) {
+      const newStep = currentStepIndex - 1;
+      updateSectionProgress(currentSection, newStep);
+    } else {
+      router.push("/financial-info");
+    }
+  }, [currentSection, sections, router, updateSectionProgress]);
+
+  const handleContinue = useCallback(() => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    const isLastStep =
+      currentStepIndex === sections[currentSection].totalSteps - 1;
+
+    if (!validateCurrentStep()) {
+      return;
+    }
+
+    if (isLastStep) {
+      completeSection("goals");
+      router.push("/risk-info");
+    } else {
+      const newStep = currentStepIndex + 1;
+      updateSectionProgress(currentSection, newStep);
+    }
+  }, [
+    currentSection,
+    sections,
+    validateCurrentStep,
+    completeSection,
+    router,
+    updateSectionProgress,
+  ]);
+
+  const renderStep = () => {
+    const currentStepIndex = sections[currentSection].currentStep;
+    const goalsData = formData.goals;
+
+    switch (currentStepIndex) {
+      case 0:
+        return (
+          <WelcomeScreen
+            onContinue={handleContinue}
+          />
+        );
+      case 1:
+        return (
+          <GoalsScreen
+            retirementAge={goalsData.retirementAge}
+            retirementIncome={goalsData.retirementIncome}
+            goalsCurrency={goalsData.goalsCurrency}
+            onChange={(field, value) => handleFormUpdate({ [field]: value })}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <OnboardingLayout>
@@ -28,9 +126,7 @@ export default function GoalsInfo() {
           sections={sections}
           currentSection={currentSection}
         />
-        <h1 className="mt-[240px] text-center text-7xl">
-          This is the Goals information page!
-        </h1>
+        <div className="mt-12">{renderStep()}</div>
       </div>
     </OnboardingLayout>
   );

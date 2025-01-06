@@ -36,4 +36,10 @@ export const SECTIONS: Section[] = [
     steps: [],
     isActive: false,
   },
+  {
+    id: "knowledge",
+    title: "Financial Knowledge",
+    steps: [],
+    isActive: false,
+  },
 ];

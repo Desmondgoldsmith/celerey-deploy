@@ -6,7 +6,7 @@ interface NetWorthScreenProps {
   onBack: () => void;
 }
 
-export const NetWorthScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
+export const SubmitScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
   const [firstName, setFirstName] = useState<string | null>(null);
 
   useEffect(() => {
@@ -27,12 +27,17 @@ export const NetWorthScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
     <form onSubmit={handleSubmit} className="text-center max-w-xl mx-auto">
       <h1 className="text-4xl font-cirka mb-6">
         Thank You
-        <span className="text-navyLight"> {firstName || "User"}</span>, based on
-        the information submitted we estimate your net worth to be{" "}
-        <span className="text-navyLight">$103,550,43</span>
+        <span className="text-navyLight"> {firstName || "User"}</span>, although
+        the risk tolerance is selected at the beginning, was moderate, based on
+        your answers,{" "}
+        <span className="text-navyLight">
+          your attitude to risk is: Somewhat Aggressive
+        </span>
       </h1>
       <p className=" mb-12 font-helvetica text-sm">
-        Does this look right? If not, please go back and make some adjustments.
+        You seek to take on moderate risk for the opportunity of higher returns.
+        You are willing to explore investment options with slightly higher risk
+        levels. This is our assessment based on your responses.
       </p>
       <div className="flex gap-4 max-w-md mx-auto">
         <Button variant="outline" onClick={onBack} className="flex-1">
@@ -42,7 +47,7 @@ export const NetWorthScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
           type="submit"
           className="flex-1 bg-navy hover:bg-navyLight text-white"
         >
-          Continue
+          Submit
         </Button>
       </div>
     </form>

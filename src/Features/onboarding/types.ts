@@ -1,7 +1,7 @@
 export interface BaseScreenProps {
   onBack: () => void;
-  onContinue: () => void;
-}
+    onContinue: () => void;
+  }
 
 export interface FileUploadProps {
   label: string;
@@ -131,6 +131,10 @@ export interface OptionsScreenProps extends BaseScreenProps {
   value: string[];
   onChange: (value: string[]) => void;
 }
+export interface RiskOptionsScreenProps extends BaseScreenProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
 
 // FinancialInfo Screen Props
@@ -140,9 +144,17 @@ export interface CurrencyScreenProps {
   onBack: () => void;
   onContinue: () => void;
 }
+export interface GoalsScreenProps {
+  retirementAge: string;
+  retirementIncome: string;
+  goalsCurrency: string;
+  onChange: (field: string, value: string) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
 
 export interface Section {
-  id: "personal" | "financial" | "goals" | "risk";
+  id: "personal" | "financial" | "goals" | "risk" ; // Financial Knowledge section to be added here
   title: string;
   totalSteps: number;
   currentStep: number;
@@ -207,3 +219,19 @@ export interface FinancialInfoFormData {
     otherLiabilities: string;
   };
 }
+export interface GoalsInfoFormData {
+    retirementAge: string;
+    retirementIncome: string;
+    goalsCurrency: string;
+}
+export interface RiskInfoFormData {
+  riskAttitude: string;
+  riskTolerance: string;
+  riskTolerancePercentage: string;
+  riskReaction: string;
+  riskApproach: string;
+  investmentObjective: string;
+  investmentHorizon: string;
+  illiquidInvestmentPercentage: string;
+}
+
