@@ -1,10 +1,8 @@
-import { useState } from "react";
-import { PricingCard } from "../molecules/pricingCard";
+import React from "react";
 import { subscriptionTiers } from "../../constants";
+import { PricingCard } from "../molecules/pricingCard";
 
-export const SubscriptionTemplate = () => {
-  const [interval, setInterval] = useState<"yearly" | "biennial">("yearly");
-
+export const SubscriptionTemplate: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
@@ -23,12 +21,7 @@ export const SubscriptionTemplate = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {subscriptionTiers.map((tier) => (
-          <PricingCard
-            key={tier.name}
-            tier={tier}
-            interval={interval}
-            onIntervalChange={setInterval}
-          />
+          <PricingCard key={tier.name} tier={tier} />
         ))}
       </div>
     </div>

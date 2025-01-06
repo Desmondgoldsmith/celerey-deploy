@@ -1,34 +1,37 @@
-import { useState } from "react";
+import React from "react";
+import { SubscriptionInterval } from "../../types";
 
 interface ToggleButtonProps {
-  options: { label: string; value: string }[];
-  defaultValue: string;
-  onChange: (value: string) => void;
+  options: Array<{
+    label: string;
+    value: SubscriptionInterval;
+  }>;
+  value: SubscriptionInterval;
+  onChange: (value: SubscriptionInterval) => void;
 }
 
-export const ToggleButton = ({
+export const ToggleButton: React.FC<ToggleButtonProps> = ({
   options,
-  defaultValue,
+  value,
   onChange,
-}: ToggleButtonProps) => {
-  const [selected, setSelected] = useState(defaultValue);
-
-  const handleChange = (value: string) => {
-    setSelected(value);
-    onChange(value);
-  };
-
+}) => {
   return (
-    <div className="inline-flex rounded-md border border-navy bg-gray-100 ">
-      {options.map((option) => (
+    <div className="inline-flex rounded-md shadow-sm">
+      {options.map((option, index) => (
         <button
           key={option.value}
-          onClick={() => handleChange(option.value)}
-          className={`px-4 py-1 rounded-md   text-sm transition-colors ${
-            selected === option.value
-              ? "bg-navy text-white"
-              : "text-gray-700 hover:bg-gray-200"
-          }`}
+          onClick={() => onChange(option.value)}
+          className={`
+            px-4 py-2 text-sm font-medium
+            ${index === 0 ? "rounded-l-md" : ""}
+            ${index === options.length - 1 ? "rounded-r-md" : ""}
+            ${
+              value === option.value
+                ? "bg-navy text-white"
+                : "bg-white text-navy hover:bg-gray-50"
+            }
+            border border-navy
+          `}
         >
           {option.label}
         </button>

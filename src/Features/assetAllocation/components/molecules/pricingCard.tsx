@@ -1,20 +1,16 @@
-import Link from "next/link";
-import { SubscriptionTier } from "../../types";
-import { FeaturesList } from "./featureList";
+import React, { useState } from "react";
+import { SubscriptionTier, SubscriptionInterval } from "../../types";
 import { ToggleButton } from "./toggleButton";
+import { FeaturesList } from "./featureList";
 
 interface PricingCardProps {
   tier: SubscriptionTier;
-  interval: "yearly" | "biennial";
-  onIntervalChange: (interval: "yearly" | "biennial") => void;
 }
 
-export const PricingCard = ({
-  tier,
-  interval,
-  onIntervalChange,
-}: PricingCardProps) => {
-  // Calculate price based on interval
+export const PricingCard: React.FC<PricingCardProps> = ({ tier }) => {
+  // Each PricingCard now manages its own interval state
+  const [interval, setInterval] = useState<SubscriptionInterval>("yearly");
+
   const calculatePrice = () => {
     const yearlyPrice = tier.price * 12;
     return interval === "yearly" ? yearlyPrice : yearlyPrice * 2;
@@ -35,8 +31,8 @@ export const PricingCard = ({
             { label: "Yearly", value: "yearly" },
             { label: "Biennial", value: "biennial" },
           ]}
-          defaultValue={interval}
-          onChange={onIntervalChange}
+          value={interval} // Using value instead of defaultValue
+          onChange={(value) => setInterval(value)}
         />
       </div>
 
@@ -48,11 +44,11 @@ export const PricingCard = ({
           {interval === "yearly" ? "Per year" : "Every two years"}
         </div>
       </div>
-      <Link href="/dashboard" passHref>
-        <button className="bg-[#F4F5F6] border w-full border-navy text-navy rounded-md py-2 px-4 hover:bg-navy hover:text-white transition-colors mb-6">
-          Subscribe
-        </button>
-      </Link>
+
+      <button className="bg-[#F4F5F6] border border-navy text-navy rounded-md py-2 px-4 hover:bg-navy hover:text-white transition-colors mb-6">
+        Subscribe
+      </button>
+
       <div className="border-t">
         <h4 className="font-semibold mt-5 text-[#242424] mb-4">Features</h4>
         <p className="font-helvatica text-[#242424] mt-2 font-small mb-4">
