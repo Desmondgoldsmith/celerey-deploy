@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { SubscriptionTier, SubscriptionInterval } from "../../types";
 import { ToggleButton } from "./toggleButton";
 import { FeaturesList } from "./featureList";
+import Link from "next/link";
 
 interface PricingCardProps {
   tier: SubscriptionTier;
 }
 
 export const PricingCard: React.FC<PricingCardProps> = ({ tier }) => {
-  // Each PricingCard now manages its own interval state
   const [interval, setInterval] = useState<SubscriptionInterval>("yearly");
 
   const calculatePrice = () => {
@@ -44,10 +44,11 @@ export const PricingCard: React.FC<PricingCardProps> = ({ tier }) => {
           {interval === "yearly" ? "Per year" : "Every two years"}
         </div>
       </div>
-
-      <button className="bg-[#F4F5F6] border border-navy text-navy rounded-md py-2 px-4 hover:bg-navy hover:text-white transition-colors mb-6">
-        Subscribe
-      </button>
+      <Link href="/dashboard" passHref>
+        <button className="bg-[#F4F5F6] w-full border border-navy text-navy rounded-md py-2 px-4 hover:bg-navy hover:text-white transition-colors mb-6">
+          Subscribe
+        </button>
+      </Link>
 
       <div className="border-t">
         <h4 className="font-semibold mt-5 text-[#242424] mb-4">Features</h4>
