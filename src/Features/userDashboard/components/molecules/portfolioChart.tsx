@@ -1,4 +1,3 @@
-// components/molecules/portfolioChart.tsx
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { MoreHorizontal } from "lucide-react";
@@ -71,7 +70,7 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
 
   return (
     <Card className="bg-white pt-5 pb-10">
-      <div className="p-6 border-b border-gray-200">
+      <div className="p-6 border-b border-[#AAAAAA]">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-cirka text-navy">
             Portfolio Performance
@@ -89,7 +88,7 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
         />
       </div>
 
-      <div className="border-t border-gray-200">
+      <div className="border-t border-[#AAAAAA]">
         <div className="flex justify-between px-6 py-4">
           {["1D", "1W", "1M", "3M", "1Y"].map((period) => (
             <button
@@ -108,7 +107,7 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
         </div>
       </div>
 
-      <div className="border-t border-gray-200 p-4 pt-10">
+      <div className="border-t border-[#AAAAAA] p-4 pt-10">
         <div className="text-sm text-gray-600">
           <span className="text-green-500 font-medium">↑ 12%</span>
           <span className="ml-2">Last 30 Days</span>

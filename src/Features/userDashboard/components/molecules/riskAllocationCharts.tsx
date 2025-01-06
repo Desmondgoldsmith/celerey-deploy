@@ -17,7 +17,7 @@ export const RiskAllocation: React.FC<RiskAllocationProps> = ({ Chart }) => {
 
   return (
     <Card className="p-6">
-      <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-2">
+      <div className="flex justify-between items-center mb-6 border-b border-[#AAAAAA] pb-2">
         <h2 className="text-xl font-cirka text-navy">Risk Allocation</h2>
         <MoreHorizontal className="h-6 w-6 text-gray-400 cursor-pointer" />
       </div>
@@ -38,7 +38,7 @@ export const RiskAllocation: React.FC<RiskAllocationProps> = ({ Chart }) => {
                   colors: [item.color],
                   plotOptions: {
                     radialBar: {
-                      hollow: { size: "60%" },
+                      hollow: { size: "55%" },
                       track: { background: "#f5f5f5" },
                       dataLabels: {
                         name: { show: false },
@@ -64,8 +64,8 @@ export const RiskAllocation: React.FC<RiskAllocationProps> = ({ Chart }) => {
           </div>
         ))}
       </div>
-      <div className="border-t border-gray-200 pt-4 pb-2">
-        <div className="flex items-center py-3 border-b border-gray-200">
+      <div className="border-t border-[#AAAAAA]  pb-2">
+        <div className="flex items-center py-3 border-b pt-4 border-[#AAAAAA]">
           <Home className="h-5 w-5 text-gray-400 mr-3" />
           <span className="text-gray-700">Real Estate</span>
           <span className="ml-auto font-medium">$980,000</span>

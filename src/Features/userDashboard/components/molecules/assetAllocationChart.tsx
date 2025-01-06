@@ -19,7 +19,7 @@ export const AssetAllocation: React.FC<{ Chart: any }> = ({ Chart }) => {
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: "30%",
+        columnWidth: "55%",
         borderRadius: 2,
       },
     },
@@ -62,8 +62,10 @@ export const AssetAllocation: React.FC<{ Chart: any }> = ({ Chart }) => {
       },
     },
     legend: {
-      position: "top",
-      horizontalAlign: "right",
+      position: "right",
+      horizontalAlign: "left",
+      verticalAlign: "middle",
+      floating: false,
       fontSize: "14px",
       markers: {
         width: 8,
@@ -71,6 +73,7 @@ export const AssetAllocation: React.FC<{ Chart: any }> = ({ Chart }) => {
         radius: 4,
       },
       itemMargin: {
+        vertical: 8, // Added vertical margin between legend items
         horizontal: 12,
       },
     },

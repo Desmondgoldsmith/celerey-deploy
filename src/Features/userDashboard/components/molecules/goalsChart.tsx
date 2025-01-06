@@ -8,7 +8,6 @@ interface Goal {
   amount: number;
   lastUpdated: string;
 }
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
@@ -50,7 +49,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
   const renderGoalCard = (goal: Goal) => {
     if (goal.name === "add-goal") {
       return (
-        <div className="bg-[#F5F5F5] rounded-lg p-4 w-full h-[272px] flex flex-col items-center justify-center">
+        <div className="bg-[#F5F5F5] rounded-lg p-4 w-full h-[220px] flex flex-col items-center justify-center">
           <button className="w-12 h-12 rounded-full bg-[#1C1F33] flex items-center justify-center mb-3">
             <Plus className="h-6 w-6 text-white" />
           </button>
@@ -60,17 +59,17 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
     }
 
     return (
-      <div className="bg-[#F5F5F5] rounded-lg p-4 w-full h-[272px]">
-        <div className="flex justify-between items-center mb-4">
+      <div className="bg-[#F5F5F5] rounded-lg p-4 w-full h-[220px]">
+        <div className="flex justify-between items-center mb-2">
           <div></div>
           <MoreHorizontal className="h-4 w-4 text-gray-400" />
         </div>
-        <div className="text-sm mt-1 text-center items-center font-medium text-[#1C1F33]">
+        <div className="text-sm mt-1 text-center items-center font-helvatica text-[#1C1F33]">
           {goal.name}
         </div>
 
         <div className="w-full flex justify-center items-center">
-          <div className="w-32 h-32">
+          <div className="w-32 h-24 justify-center items-center pl-3 ">
             <Chart
               options={{
                 chart: {
@@ -85,7 +84,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
                     dataLabels: {
                       name: { show: false },
                       value: {
-                        fontSize: "20px",
+                        fontSize: "18px",
                         fontWeight: "500",
                         formatter: (val: number) => `${val}%`,
                         color: "#1C1F33",
@@ -116,7 +115,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
 
   return (
     <Card className="p-6 bg-white">
-      <div className="flex justify-between items-center border-b border-gray-100 pb-2 mb-3">
+      <div className="flex justify-between items-center border-b border-[#AAAAAA] pb-2 mb-3">
         <h2 className="text-xl font-cirka text-[#1C1F33]">Saving Goals</h2>
         <MoreHorizontal className="h-6 w-6 text-gray-400" />
       </div>
