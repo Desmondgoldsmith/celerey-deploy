@@ -50,7 +50,7 @@ export const IncomeVsExpenditure: React.FC<IncomeVsExpenditureProps> = ({
 
   return (
     <Card className="p-6">
-      <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-2">
+      <div className="flex justify-between items-center mb-6 border-b border-[#AAAAAA] pb-2">
         <h2 className="text-xl font-cirka text-navy">Income vs Expenditure</h2>
         <MoreHorizontal className="h-6 w-6 text-gray-400 cursor-pointer" />
       </div>

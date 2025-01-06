@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
+// Dynamically import Chart component
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
   loading: () => (
@@ -38,7 +39,7 @@ const RiskChart: React.FC<{ value: number; color: string; label: string }> = ({
           endAngle: 135,
           hollow: {
             margin: 0,
-            size: "70%",
+            size: "55%",
           },
           track: {
             background:
@@ -86,8 +87,7 @@ const RiskChart: React.FC<{ value: number; color: string; label: string }> = ({
       >
         <div className="w-20 h-20">
           <Chart
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+            // @ts-expect-error - ApexCharts types conflict
             options={chartState.options}
             series={chartState.series}
             type="radialBar"
@@ -114,114 +114,115 @@ const AssetAllocationTemplate: React.FC<AssetAllocationProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left Column - User Info */}
           <div className="lg:col-span-4">
-            <Card className="h-full bg-white shadow-sm">
-              <CardContent className="p-6">
-                <div className="space-y-6">
-                  <h2 className="text-2xl font-cirka">
-                    Hello {userName} welcome to <br />
+            <Card className="bg-white rounded-3xl">
+              {/* User Header Section */}
+              <div className="p-4">
+                <div className="flex justify-between items-start mb-2">
+                  <h2 className="text-2xl font-cirka text-navy leading-relaxed">
+                    Hello {userName} welcome to
+                    <br />
                     your Celerey dashboard.
                   </h2>
-
-                  {/* Risk Attitude Section */}
-                  <div className="border-b border-t pb-2 pt-2">
-                    <p className="text-sm font-helvetica text-gray-600">
-                      Risk Attitude
-                    </p>
-                    <p className="text-navyLight text-xl font-helvetica">
-                      {riskAttitude}
-                    </p>
-                  </div>
-
-                  {/* Net Worth Section */}
-                  <div className="border-b pb-2">
-                    <p className="text-sm font-helvetica text-gray-600">
-                      Net Worth
-                    </p>
-                    <p className="text-navyLight text-xl  font-helvetica">
-                      ${netWorth.toLocaleString()}
-                    </p>
-                  </div>
-
-                  {/* Investment Experience Section */}
-                  <div className="border-b pb-2">
-                    <p className="text-sm font-helvetica text-gray-600">
-                      Investment Experience
-                    </p>
-                    <p className="text-navyLight text-xl  font-helvetica">
-                      {investmentExperience}
-                    </p>
-                  </div>
-
-                  {/* Risk Allocation Section */}
-                  <div className="relative pt-4">
-                    <div className="absolute top-4 right-0">
-                      <button className="p-2">
-                        <MoreHorizontal className="h-6 w-6 text-gray-400" />
-                      </button>
-                    </div>
-
-                    <h3 className="text-sm font-helvetica text-gray-600 mb-6">
-                      Risk Allocation
-                    </h3>
-
-                    {/* Risk Charts Container */}
-                    <div className="flex items-center justify-between space-x-4">
-                      <RiskChart
-                        value={riskAllocation.low}
-                        color="#4CAF50"
-                        label="Low"
-                      />
-                      <RiskChart
-                        value={riskAllocation.medium}
-                        color="#FFA726"
-                        label="Medium"
-                      />
-                      <RiskChart
-                        value={riskAllocation.high}
-                        color="#EF5350"
-                        label="High"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Subscription Button */}
-                  <Link href="/subscriptions" passHref>
-                    <button
-                      className="w-full bg-navy  text-white mt-3 py-3 px-6 rounded-lg 
-                                   hover:bg-navyLight transition-all duration-200
-                                   font-helvetica flex items-center justify-center space-x-2"
-                    >
-                      <span>View Subscription Plans</span>
-                      <svg
-                        className="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </button>
-                  </Link>
+                  <div></div>
                 </div>
-              </CardContent>
+              </div>
+
+              {/* User Information Section */}
+              <div className="space-y-2 p-2 bg-[#FAFBFB]">
+                <div className="border-b border-[#AAAAAA] pb-2">
+                  <div className="text-sm text-gray-500 pl-5 mb-2 font-helvatica">
+                    Your Risk Attitude
+                  </div>
+                  <div className="text-2xl text-navyLight font-cirka pl-5 font-medium">
+                    {riskAttitude}
+                  </div>
+                </div>
+
+                <div className="border-b border-[#AAAAAA] pb-2">
+                  <div className="text-sm text-gray-500 pl-5 mb-2 font-helvatica">
+                    Your Current Net Worth
+                  </div>
+                  <div className="text-2xl text-navyLight font-cirka pl-5 font-medium">
+                    ${netWorth.toLocaleString()}
+                  </div>
+                </div>
+
+                <div className="border-b border-[#AAAAAA] pb-2">
+                  <div className="text-sm text-gray-500 pl-5 mb-2 font-helvatica">
+                    Your Investment Experience
+                  </div>
+                  <div className="text-2xl text-navyLight font-cirka pl-5 font-medium">
+                    {investmentExperience}
+                  </div>
+                </div>
+              </div>
+
+              {/* Risk Allocation and Subscription Section */}
+              <div className="p-4 bg-[#FAFBFB] rounded-b-3xl">
+                <div className="relative pt-2 mb-4">
+                  <div className="absolute top-4 right-0">
+                    <button className="p-2">
+                      <MoreHorizontal className="h-6 w-6 text-gray-400" />
+                    </button>
+                  </div>
+
+                  <h3 className="text-sm font-helvetica text-gray-600 mb-6">
+                    Risk Allocation
+                  </h3>
+
+                  <div className="flex items-center justify-between space-x-4">
+                    <RiskChart
+                      value={riskAllocation.low}
+                      color="#4CAF50"
+                      label="Low"
+                    />
+                    <RiskChart
+                      value={riskAllocation.medium}
+                      color="#FFA726"
+                      label="Medium"
+                    />
+                    <RiskChart
+                      value={riskAllocation.high}
+                      color="#EF5350"
+                      label="High"
+                    />
+                  </div>
+                </div>
+
+                <Link href="/subscriptions" passHref>
+                  <button
+                    className="w-full bg-navy text-white mt-3 py-3 px-6 rounded-lg 
+                             hover:bg-navyLight transition-all duration-200
+                             font-helvetica flex items-center justify-center space-x-2"
+                  >
+                    <span>View Subscription Plans</span>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </Link>
+              </div>
             </Card>
           </div>
 
-          {/* Right Column */}
+          {/* Right Column - Risk Categories */}
           <div className="lg:col-span-8">
-            {/* Description text */}
             <p className="font-helvetica text-gray-600 mb-6">
               Based on your financial knowledge and experience, risk appetite,
               net worth, and <br />
               age, here is the recommended asset allocation for your profile.
             </p>
 
-            {/* Risk Categories */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {Object.entries(riskCategories).map(([risk, investments]) => (
                 <Card key={risk} className="h-full bg-white shadow-sm">
