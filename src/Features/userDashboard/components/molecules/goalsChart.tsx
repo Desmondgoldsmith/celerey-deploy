@@ -50,7 +50,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
   const renderGoalCard = (goal: Goal) => {
     if (goal.name === "add-goal") {
       return (
-        <div className="bg-gray-50 rounded-lg p-4 w-full h-[272px] flex flex-col items-center justify-center">
+        <div className="bg-[#F5F5F5] rounded-lg p-4 w-full h-[272px] flex flex-col items-center justify-center">
           <button className="w-12 h-12 rounded-full bg-[#1C1F33] flex items-center justify-center mb-3">
             <Plus className="h-6 w-6 text-white" />
           </button>
@@ -60,7 +60,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
     }
 
     return (
-      <div className="bg-gray-50 rounded-lg p-4 w-full h-[272px]">
+      <div className="bg-[#F5F5F5] rounded-lg p-4 w-full h-[272px]">
         <div className="flex justify-between items-center mb-4">
           <div></div>
           <MoreHorizontal className="h-4 w-4 text-gray-400" />
@@ -69,7 +69,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
           {goal.name}
         </div>
 
-        <div className="w-full flex justify-center mb-4">
+        <div className="w-full flex justify-center items-center">
           <div className="w-32 h-32">
             <Chart
               options={{
@@ -80,7 +80,7 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
                 colors: ["#0b026aFF"],
                 plotOptions: {
                   radialBar: {
-                    hollow: { size: "70%" },
+                    hollow: { size: "55%" },
                     track: { background: "#E5E7EB" },
                     dataLabels: {
                       name: { show: false },
@@ -96,14 +96,14 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
               }}
               series={[goal.progress]}
               type="radialBar"
-              height={128}
-              width={128}
+              height={100}
+              width={100}
             />
           </div>
         </div>
 
         <div className="text-center">
-          <div className="text-lg font-medium text-[#1C1F33]">
+          <div className="text-lg font-medium text-[#4F028F]">
             ${goal.amount.toLocaleString()}
           </div>
           <div className="text-xs text-gray-500 mt-1">
@@ -116,12 +116,12 @@ export const Goals: React.FC<{ Chart: any }> = ({ Chart }) => {
 
   return (
     <Card className="p-6 bg-white">
-      <div className="flex justify-between items-center border-b border-gray-100 pb-2 mb-6">
+      <div className="flex justify-between items-center border-b border-gray-100 pb-2 mb-3">
         <h2 className="text-xl font-cirka text-[#1C1F33]">Saving Goals</h2>
         <MoreHorizontal className="h-6 w-6 text-gray-400" />
       </div>
 
-      <div className="flex space-x-4 mb-6 border-b border-gray-100 pb-2">
+      <div className="flex space-x-4 mb-2 border-b border-gray-100 pb-2">
         {allCards
           .slice(activeSlide * 2, activeSlide * 2 + 2)
           .map((goal, index) => (
