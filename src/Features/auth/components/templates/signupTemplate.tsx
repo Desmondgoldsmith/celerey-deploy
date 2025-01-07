@@ -1,24 +1,30 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { SocialSignupButton } from "../molecules/socialSignupButton";
-import { useRouter } from "next/navigation";
+import { useState } from 'react'
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { SocialSignupButton } from '../molecules/socialSignupButton'
+import { useRouter } from 'next/navigation'
+import { useAuthStore } from '../../state'
+import Spinner from '@/components/ui/spinner'
 
 export const SignUpTemplate = () => {
-  const [email, setEmail] = useState("");
-  const router = useRouter();
+  const [email, setEmail] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    router.push("/auth/signup-otp");
-  };
+  const router = useRouter()
+  const { sendOTP, loading } = useAuthStore()
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    await sendOTP(email)
+    router.push('/auth/signup-otp')
+  }
 
   const handleSignup = () => {
-    router.push("/auth/signin");
-  };
+    router.push('/auth/signin')
+  }
 
+ 
   return (
     <div className="max-w-md mx-auto text-center">
       <div className="mb-8">
@@ -47,10 +53,11 @@ export const SignUpTemplate = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <Button
+          disabled={!email}
           type="submit"
           className="w-[450px] bg-navy hover:bg-navyLight text-white"
         >
-          send me a code
+        {loading && <Spinner className="text-white"/>}  Send Me a Code
         </Button>
       </form>
 
@@ -69,7 +76,7 @@ export const SignUpTemplate = () => {
       </div>
 
       <p className="mt-6 text-sm h">
-        <span className="text-navy">Already have an account ?</span>{" "}
+        <span className="text-navy">Already have an account ?</span>{' '}
         <span
           onClick={handleSignup}
           className="text-navyLight hover:cursor-pointer hover:underline "
@@ -78,5 +85,5 @@ export const SignUpTemplate = () => {
         </span>
       </p>
     </div>
-  );
-};
+  )
+}
