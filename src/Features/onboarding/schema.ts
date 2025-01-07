@@ -76,9 +76,14 @@ export interface RiskInfoSchema {
   illiquidInvestmentPercentage: string;
 }
 
+export interface KnowledgeInfoSchema {
+  knowledge: string;
+}
+
 export interface OnboardingFormData {
   personal: PersonalInfoSchema;
   financial: FinancialInfoSchema;
   goals: GoalsInfoSchema;
   risk: RiskInfoSchema;
+  knowledge: KnowledgeInfoSchema;
 }

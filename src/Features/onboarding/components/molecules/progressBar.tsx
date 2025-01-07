@@ -5,7 +5,7 @@ export const SectionProgressBars = ({
   currentSection,
 }: SectionProgressBarProps) => {
   return (
-    <div className="max-w-2xl mx-auto space-y-2">
+    <div className="max-w-3xl mx-auto space-y-2">
       <div className="flex gap-2">
         {Object.values(sections).map((section) => {
           const progressPercentage = section.isCompleted
@@ -30,8 +30,14 @@ export const SectionProgressBars = ({
               </div>
               <div
                 className={`text-sm mt-1 ${
-                  section.id === currentSection ? "text-black" : "text-gray-400"
-                }`}
+                  section.isCompleted
+                    ? "text-navyLight"
+                    : currentSection === section.id
+                    ? "text-black"
+                    : "text-gray-400"
+                }               
+
+                `}
               >
                 {section.title}
               </div>

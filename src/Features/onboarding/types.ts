@@ -154,7 +154,7 @@ export interface GoalsScreenProps {
 }
 
 export interface Section {
-  id: "personal" | "financial" | "goals" | "risk" ; // Financial Knowledge section to be added here
+  id: "personal" | "financial" | "goals" | "risk" | "knowledge" ; // Financial Knowledge section to be added here
   title: string;
   totalSteps: number;
   currentStep: number;
