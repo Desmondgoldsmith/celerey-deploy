@@ -18,11 +18,11 @@ const Chart = dynamic(() => import("react-apexcharts"), {
   ),
 });
 
-// New component for mobile greeting
+// mobile view:  greeting component
 const MobileGreeting: React.FC<{ userName: string }> = ({ userName }) => (
   <div className="mb-6 lg:hidden">
     <div className="text-center items-center mb-4">
-      <div className="text-[28px] font-cirka text-navy">
+      <div className="text-[28px] font-cirka text-black">
         Good Morning {userName}
       </div>
     </div>
@@ -41,7 +41,7 @@ const MobileNetWorth: React.FC<{ netWorth: number }> = ({ netWorth }) => (
         Your current networth is
       </div>
       <div className="text-[24px] text-navyLight font-cirka mt-1">
-        ${netWorth.toLocaleString()}
+        {netWorth.toLocaleString()}
       </div>
     </div>
   </div>
