@@ -16,8 +16,27 @@ export const UserProfile: React.FC<UserProfileProps> = ({
   riskAttitude,
   investmentExperience,
 }) => {
+  const actionItems = [
+    {
+      icon: "/assets/consultation.svg",
+      text: "Book a Virtual Consultation",
+      alt: "Consultation",
+    },
+    {
+      icon: "/assets/recommendation.svg",
+      text: "View advisors recommendation",
+      alt: "Advisor",
+    },
+    {
+      icon: "/assets/financialDoc.svg",
+      text: "Upload financial documents",
+      alt: "Upload Financial Document",
+    },
+  ];
+
+  // Only render on desktop
   return (
-    <Card className=" bg-white rounded-3xl">
+    <Card className="hidden lg:block bg-white rounded-3xl">
       <div className="p-8">
         <div className="flex justify-between items-start mb-2">
           <h2 className="text-2xl font-cirka text-navy leading-relaxed">
@@ -34,7 +53,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({
 
       <div className="space-y-2 p-2 bg-[#FAFBFB]">
         <div className="border-b border-[#AAAAAA] pb-2">
-          <div className="text-sm text-gray-500 pl-5  mb-2 font-helvatica">
+          <div className="text-sm text-gray-500 pl-5 mb-2 font-helvatica">
             Your Risk Attitude
           </div>
           <div className="text-2xl text-navyLight font-cirka pl-5 font-medium">
@@ -47,7 +66,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({
             Your Current Net Worth
           </div>
           <div className="text-2xl text-navyLight font-cirka pl-5 font-medium">
-            {netWorth.toLocaleString()}
+            ${netWorth.toLocaleString()}
           </div>
         </div>
 
@@ -62,67 +81,31 @@ export const UserProfile: React.FC<UserProfileProps> = ({
       </div>
 
       <div className="pb-2 bg-[#FAFBFB] rounded-b-3xl p-2 space-y-2">
-        <div className="flex items-center border-b justify-between border-[#AAAAAA] p-2 ">
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-xl flex items-center justify-center">
-              <Image
-                src="/assets/consultation.svg"
-                alt="Consultation"
-                width={48}
-                height={48}
-                className="w-full h-full object-contain"
-              />
+        {actionItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between border-b border-[#AAAAAA] p-2 last:border-b-0"
+          >
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center">
+                <Image
+                  src={item.icon}
+                  alt={item.alt}
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="text-navy font-helvatica text-sm">
+                {item.text}
+              </span>
             </div>
-            <span className="text-navy font-helvatica text-sm">
-              Book a Virtual Consultation
-            </span>
+            <button className="p-2 rounded-full bg-navy flex items-center justify-center">
+              <ChevronRight className="h-6 w-6 text-white" />
+            </button>
           </div>
-          <button className="p-2 rounded-full bg-navy flex items-center justify-center">
-            <ChevronRight className="h-6 w-6 text-white" />
-          </button>
-        </div>
-
-        <div className="flex items-center border-b justify-between border-[#AAAAAA] p-2">
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-xl flex items-center justify-center">
-              <Image
-                src="/assets/recommendation.svg"
-                alt="Advisor"
-                width={48}
-                height={48}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <span className="text-navy font-helvatica text-sm">
-              View advisors recommendation
-            </span>
-          </div>
-          <button className="p-2 rounded-full bg-navy flex items-center justify-center">
-            <ChevronRight className="h-6 w-6 text-white" />
-          </button>
-        </div>
-
-        <div className="flex items-center  justify-between p-2 ">
-          <div className="flex items-center space-x-4">
-            <div className="w-16 h-16 rounded-xl bg flex items-center justify-center p-1">
-              <Image
-                src="/assets/financialDoc.svg"
-                alt="Upload Financial Document"
-                width={48}
-                height={48}
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <span className="text-navy font-helvatica text-sm">
-              Upload financial documents
-            </span>
-          </div>
-          <button className="p-2 rounded-full bg-navy flex items-center justify-center">
-            <ChevronRight className="h-6 w-6 text-white" />
-          </button>
-        </div>
+        ))}
       </div>
-      {/* </div> */}
     </Card>
   );
 };
