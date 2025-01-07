@@ -9,7 +9,6 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
-// Dynamically import Chart component with responsive sizing
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
   loading: () => (
@@ -111,49 +110,46 @@ const AssetAllocationTemplate: React.FC<AssetAllocationProps> = ({
   riskAllocation,
 }) => {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="mx-auto max-w-7xl p-3 md:p-4 lg:p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
+    <div className="min-h-screen bg-white w-full overflow-x-hidden">
+      <div className="w-full px-3 md:px-4 lg:px-8 mx-auto max-w-7xl">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
           {/* Left Column - User Info */}
-          <div className="lg:col-span-4">
-            <Card className="bg-white rounded-2xl md:rounded-3xl">
+          <div className="lg:col-span-4 w-full">
+            <Card className="bg-white rounded-2xl md:rounded-3xl w-full">
               {/* User Header Section */}
               <div className="p-3 md:p-4">
                 <div className="flex justify-between items-start mb-2">
-                  <h2 className="text-xl md:text-2xl font-cirka text-navy leading-relaxed">
-                    Hello {userName} welcome to
-                    <br />
-                    your Celerey dashboard.
+                  <h2 className="text-xl md:text-2xl font-cirka text-navy leading-relaxed break-words">
+                    Hello {userName} welcome to your Celerey dashboard.
                   </h2>
-                  <div></div>
                 </div>
               </div>
 
               {/* User Information Section */}
-              <div className="space-y-2 p-2 bg-[#FAFBFB]">
+              <div className="space-y-2 p-2 bg-[#FAFBFB] w-full">
                 <div className="border-b border-[#AAAAAA] pb-2">
-                  <div className="text-xs md:text-sm text-gray-500 pl-3 md:pl-5 mb-2 font-helvatica">
+                  <div className="text-xs md:text-sm text-gray-500 px-3 md:px-5 mb-2 font-helvatica">
                     Your Risk Attitude
                   </div>
-                  <div className="text-xl md:text-2xl text-navyLight font-cirka pl-3 md:pl-5 font-medium">
+                  <div className="text-xl md:text-2xl text-navyLight font-cirka px-3 md:px-5 font-medium">
                     {riskAttitude}
                   </div>
                 </div>
 
                 <div className="border-b border-[#AAAAAA] pb-2">
-                  <div className="text-xs md:text-sm text-gray-500 pl-3 md:pl-5 mb-2 font-helvatica">
+                  <div className="text-xs md:text-sm text-gray-500 px-3 md:px-5 mb-2 font-helvatica">
                     Your Current Net Worth
                   </div>
-                  <div className="text-xl md:text-2xl text-navyLight font-cirka pl-3 md:pl-5 font-medium">
+                  <div className="text-xl md:text-2xl text-navyLight font-cirka px-3 md:px-5 font-medium">
                     ${netWorth.toLocaleString()}
                   </div>
                 </div>
 
                 <div className="border-b border-[#AAAAAA] pb-2">
-                  <div className="text-xs md:text-sm text-gray-500 pl-3 md:pl-5 mb-2 font-helvatica">
+                  <div className="text-xs md:text-sm text-gray-500 px-3 md:px-5 mb-2 font-helvatica">
                     Your Investment Experience
                   </div>
-                  <div className="text-xl md:text-2xl text-navyLight font-cirka pl-3 md:pl-5 font-medium">
+                  <div className="text-xl md:text-2xl text-navyLight font-cirka px-3 md:px-5 font-medium">
                     {investmentExperience}
                   </div>
                 </div>
@@ -218,18 +214,18 @@ const AssetAllocationTemplate: React.FC<AssetAllocationProps> = ({
           </div>
 
           {/* Right Column - Risk Categories */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 w-full">
             <p className="text-sm md:text-base font-helvetica text-gray-600 mb-4 md:mb-6">
               Based on your financial knowledge and experience, risk appetite,
               net worth, and age, here is the recommended asset allocation for
               your profile.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {Object.entries(riskCategories).map(([risk, investments]) => (
-                <Card key={risk} className="h-full bg-white shadow-sm">
+                <Card key={risk} className="w-full h-full bg-white shadow-sm">
                   <CardHeader className="p-4 md:p-6">
-                    <h3 className="text-base md:text-lg font-cirka text-center items-center capitalize">
+                    <h3 className="text-base md:text-lg font-cirka text-center capitalize">
                       {risk} Risk
                     </h3>
                   </CardHeader>
