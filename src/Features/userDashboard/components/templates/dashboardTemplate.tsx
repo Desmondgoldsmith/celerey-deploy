@@ -31,16 +31,16 @@ const MobileGreeting: React.FC<{ userName: string }> = ({ userName }) => (
 
 //  for mobile view : net worth section
 const MobileNetWorth: React.FC<{ netWorth: number }> = ({ netWorth }) => (
-  <div className="lg:hidden bg-white p-6 rounded-lg mb-4">
+  <div className="lg:hidden bg-white p-6 rounded-lg mb-2">
     <div className="flex justify-between items-center">
       <div></div>
       <MoreHorizontal className="h-6 w-6 text-gray-400" />
     </div>
-    <div className="pb-4 text-center items-center">
-      <div className="text-base text-gray-600 font-helvatica">
+    <div className="pb-2 text-center items-center">
+      <div className="text-lg text-gray-600 font-cirka">
         Your current networth is
       </div>
-      <div className="text-[24px] text-navyLight font-cirka mt-1">
+      <div className="text-[28px] text-navyLight font-cirka mt-1">
         {netWorth.toLocaleString()}
       </div>
     </div>
@@ -52,8 +52,8 @@ const DashboardTemplate: React.FC<DashboardProps> = ({
   netWorth = 103550.43,
   riskAttitude = "Somewhat Aggressive",
   investmentExperience = "Advanced",
-  portfolioData,
-  goals,
+  // portfolioData,
+  // goals,
 }) => {
   const [timeframe, setTimeframe] = useState<"1D" | "1W" | "1M" | "3M" | "1Y">(
     "1M"
@@ -93,7 +93,7 @@ const DashboardTemplate: React.FC<DashboardProps> = ({
           </div>
         </div>
 
-        {/* Mobile Layout - Restructured according to screenshot */}
+        {/* Mobile Layout  */}
         <div className="lg:hidden space-y-6">
           {/* 1. Raw greeting text */}
           <MobileGreeting userName={userName} />
@@ -113,7 +113,7 @@ const DashboardTemplate: React.FC<DashboardProps> = ({
             <MobileActionItems />
           </div>
 
-          {/* Remaining components in order */}
+          {/* Remaining components */}
           <Goals Chart={Chart} />
           <RiskAllocation Chart={Chart} />
           <AssetAllocation Chart={Chart} />
