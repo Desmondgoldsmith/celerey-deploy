@@ -98,7 +98,8 @@ export default function KnowledgeInfo() {
       case 0:
         return (
           <SurveyScreen
-            onChange={(value) => handleFormUpdate({ riskAttitude: value })}
+            value={formData.knowledge.cashKnowledge}
+            onChange={(value) => handleFormUpdate({ cashKnowledge: value })}
             onBack={handleBack}
             onContinue={handleContinue}
           />

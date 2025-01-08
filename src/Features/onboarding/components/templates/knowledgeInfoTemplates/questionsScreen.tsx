@@ -6,7 +6,7 @@ import { RiskOptionsScreenProps } from "../../../types";
 const QUESTIONS = [
   {
     id: "investmentExperience",
-    question: "What is your investment experience?",
+    question: "How much knowledge do you have about cash and cash equivalents?",
     options: [
       { id: "none", value: "None" },
       { id: "basic", value: "Basic" },
@@ -57,10 +57,8 @@ export const SurveyScreen: React.FC<RiskOptionsScreenProps> = ({
   onBack,
   onContinue,
 }) => {
-  // Track the current question index
   const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
 
-  // Get the current question and its options
   const currentQuestion = QUESTIONS[currentQuestionIndex];
 
   const handleOptionSelect = (optionId: string) => {
@@ -71,7 +69,7 @@ export const SurveyScreen: React.FC<RiskOptionsScreenProps> = ({
     if (currentQuestionIndex < QUESTIONS.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      onContinue(); // Trigger the continue action if no more questions
+      onContinue();
     }
   };
 
@@ -79,14 +77,21 @@ export const SurveyScreen: React.FC<RiskOptionsScreenProps> = ({
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     } else {
-      onBack(); // Trigger the back action if on the first question
+      onBack();
     }
   };
 
-  return (
-    <div className="text-center max-w-xl mx-auto">
-      <h1 className="text-4xl font-cirka mb-4">{currentQuestion.question}</h1>
-      <div className="space-y-4 mb-8">
+return (
+  <div className=" max-w-3xl mx-auto">
+    <h1 className="text-4xl text-center font-cirka pb-5 border-b">
+      Financial Knowledge and Experience
+    </h1>
+
+    <div className="flex gap-4 border-b py-4 mb-4 items-center">
+      <h1 className="flex-1 font-helvetica">{currentQuestion.question}</h1>
+
+      
+      <div className="flex-1 flex gap-4 items-end">
         {currentQuestion.options.map((option) => (
           <OptionCard
             key={option.id}
@@ -96,19 +101,21 @@ export const SurveyScreen: React.FC<RiskOptionsScreenProps> = ({
           />
         ))}
       </div>
-
-      <div className="flex gap-4">
-        <Button variant="outline" onClick={handlePrevious} className="flex-1">
-          {currentQuestionIndex > 0 ? "Previous" : "Back"}
-        </Button>
-        <Button
-          onClick={handleNext}
-          className="flex-1 bg-navy hover:bg-navyLight text-white"
-          disabled={!value}
-        >
-          {currentQuestionIndex < QUESTIONS.length - 1 ? "Next" : "Continue"}
-        </Button>
-      </div>
     </div>
-  );
+
+    <div className="flex gap-4">
+      <Button variant="outline" onClick={handlePrevious} className="flex-1">
+        {currentQuestionIndex > 0 ? "Previous" : "Back"}
+      </Button>
+      <Button
+        onClick={handleNext}
+        className="flex-1 bg-navy hover:bg-navyLight text-white"
+        disabled={!value}
+      >
+        {currentQuestionIndex < QUESTIONS.length - 1 ? "Next" : "Continue"}
+      </Button>
+    </div>
+  </div>
+);
+
 };

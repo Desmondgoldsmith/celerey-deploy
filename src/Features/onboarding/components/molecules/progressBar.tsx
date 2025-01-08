@@ -6,7 +6,7 @@ export const SectionProgressBars = ({
 }: SectionProgressBarProps) => {
   return (
     <div className="max-w-3xl mx-auto space-y-2">
-      <div className="flex gap-2 justify-center text-center md:text-left md:justify-start">
+      <div className="flex gap-2 justify-center text-center md:text-left">
         {Object.values(sections).map((section) => {
           const progressPercentage = section.isCompleted
             ? 100
