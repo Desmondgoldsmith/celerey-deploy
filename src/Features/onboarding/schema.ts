@@ -78,7 +78,7 @@ export interface RiskInfoSchema {
 
 export interface KnowledgeInfoSchema {
   cashKnowledge: string;
-  investingExpereince: string;
+  investingExperience: string;
   publicSharesKnowledge: string;
   publicSharesExperience: string;
   investmentGradeBondsKnowledge: string;
@@ -102,6 +102,7 @@ export interface KnowledgeInfoSchema {
   leveragedInstumentsExperience: string;
   privateCreditKnowledge: string;
 
+  [key: string]: string | undefined;
 }
 
 export interface OnboardingFormData {

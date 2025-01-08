@@ -8,7 +8,6 @@ import { SectionProgressBars } from "@/Features/onboarding/components/molecules/
 import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
 import { SurveyScreen } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/questionsScreen";
 
-
 export default function KnowledgeInfo() {
   const router = useRouter();
   const {
@@ -22,15 +21,15 @@ export default function KnowledgeInfo() {
   } = useOnboardingStore();
 
   useEffect(() => {
-    if (!sections.risk.isCompleted) {
-      router.push("/risk-info");
+    if (!sections?.risk?.isCompleted) {
+      router.push("/risk-info").catch(console.error);
       return;
     }
 
     if (currentSection !== "knowledge") {
       setActiveSection("knowledge");
     }
-  }, [sections.risk.isCompleted, currentSection, router, setActiveSection]);
+  }, [sections, currentSection, router, setActiveSection]);
 
   const handleFormUpdate = useCallback(
     (updates: Partial<KnowledgeInfoSchema>) => {
@@ -40,46 +39,51 @@ export default function KnowledgeInfo() {
   );
 
   const validateCurrentStep = useCallback((): boolean => {
-    const currentStepIndex = sections[currentSection].currentStep;
+    const currentStepIndex = sections[currentSection]?.currentStep;
     const data = formData.knowledge;
 
+    if (!data) return false;
+
     switch (currentStepIndex) {
-      case 0: // Welcome screen, no validation needed
+      case 0:
         return true;
-      case 1: // Goals information validation
+      case 1:
         return (
-          !!data.knowledge
+          !!data.cashKnowledge &&
+          !!data.investingExperience &&
+          !!data.publicSharesKnowledge &&
+          !!data.publicSharesExperience &&
+          !!data.investmentGradeBondsKnowledge
         );
       default:
         return true;
     }
-  }, [currentSection, sections, formData.knowledge]);
+  }, [currentSection, sections, formData]);
 
   const handleBack = useCallback(() => {
-    const currentStepIndex = sections[currentSection].currentStep;
+    const currentStepIndex = sections[currentSection]?.currentStep;
     if (currentStepIndex > 0) {
-      const newStep = currentStepIndex - 1;
-      updateSectionProgress(currentSection, newStep);
+      updateSectionProgress(currentSection, currentStepIndex - 1);
     } else {
-      router.push("/risk-info");
+      router.push("/risk-info")
     }
   }, [currentSection, sections, router, updateSectionProgress]);
 
   const handleContinue = useCallback(() => {
-    const currentStepIndex = sections[currentSection].currentStep;
+    const currentStepIndex = sections[currentSection]?.currentStep;
     const isLastStep =
-      currentStepIndex === sections[currentSection].totalSteps - 1;
+      currentStepIndex === sections[currentSection]?.totalSteps - 1;
 
     if (!validateCurrentStep()) {
+      console.error("Validation failed.");
       return;
     }
 
     if (isLastStep) {
       completeSection("knowledge");
-      router.push("#");
+      router.push("#")
     } else {
-      const newStep = currentStepIndex + 1;
-      updateSectionProgress(currentSection, newStep);
+      updateSectionProgress(currentSection, currentStepIndex + 1);
     }
   }, [
     currentSection,
@@ -91,25 +95,20 @@ export default function KnowledgeInfo() {
   ]);
 
   const renderStep = () => {
-    const currentStepIndex = sections[currentSection].currentStep;
-    const goalsData = formData.goals;
+    const currentStepIndex = sections[currentSection]?.currentStep || 0;
+    const knowledgeData = formData.knowledge || {};
 
     switch (currentStepIndex) {
       case 0:
         return (
           <SurveyScreen
-            value={formData.knowledge.cashKnowledge}
-            onChange={(value) => handleFormUpdate({ cashKnowledge: value })}
-            onBack={handleBack}
-            onContinue={handleContinue}
-          />
-        );
-      case 1:
-        return (
-          <GoalsScreen
-            retirementAge={goalsData.retirementAge}
-            retirementIncome={goalsData.retirementIncome}
-            goalsCurrency={goalsData.goalsCurrency}
+            cashKnowledge={knowledgeData.cashKnowledge}
+            investingExperience={knowledgeData.investingExperience}
+            publicSharesKnowledge={knowledgeData.publicSharesKnowledge}
+            publicSharesExperience={knowledgeData.publicSharesExperience}
+            investmentGradeBondsKnowledge={
+              knowledgeData.investmentGradeBondsKnowledge
+            }
             onChange={(field, value) => handleFormUpdate({ [field]: value })}
             onBack={handleBack}
             onContinue={handleContinue}

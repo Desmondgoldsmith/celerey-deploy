@@ -1,11 +1,18 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { OptionCard } from "../../molecules/knowledgeOptionCard";
-import { RiskOptionsScreenProps } from "../../../types";
+import { KnowledgeInfoSchema } from "../../../schema";
+
+interface SurveyScreenProps {
+  value: KnowledgeInfoSchema;
+  onChange: (updates: Partial<KnowledgeInfoSchema>) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
 
 const QUESTIONS = [
   {
-    id: "investmentExperience",
+    id: "cashKnowledge",
     question: "How much knowledge do you have about cash and cash equivalents?",
     options: [
       { id: "none", value: "None" },
@@ -14,108 +21,116 @@ const QUESTIONS = [
     ],
   },
   {
-    id: "riskTolerance",
-    question: "How much risk are you comfortable with in your investments?",
+    id: "investingExperience",
+    question: "How much experience do you have with investing?",
     options: [
-      { id: "low", value: "Low" },
-      { id: "medium", value: "Medium" },
-      { id: "high", value: "High" },
+      { id: "none", value: "None" },
+      { id: "basic", value: "Basic" },
+      { id: "informed", value: "Informed" },
     ],
   },
   {
-    id: "investmentGoals",
-    question: "What is your primary investment goal?",
+    id: "publicSharesKnowledge",
+    question: "How much knowledge do you have about public shares?",
     options: [
-      { id: "growth", value: "Growth" },
-      { id: "income", value: "Income" },
-      { id: "stability", value: "Stability" },
+      { id: "none", value: "None" },
+      { id: "basic", value: "Basic" },
+      { id: "informed", value: "Informed" },
     ],
   },
   {
-    id: "marketKnowledge",
-    question: "How familiar are you with financial markets?",
+    id: "publicSharesExperience",
+    question: "How much experience do you have with public shares?",
     options: [
-      { id: "novice", value: "Novice" },
-      { id: "intermediate", value: "Intermediate" },
-      { id: "expert", value: "Expert" },
+      { id: "none", value: "None" },
+      { id: "basic", value: "Basic" },
+      { id: "informed", value: "Informed" },
     ],
   },
   {
-    id: "investmentHorizon",
-    question: "What is your typical investment horizon?",
+    id: "investmentGradeBondsKnowledge",
+    question: "How much knowledge do you have about investment grade bonds?",
     options: [
-      { id: "short_term", value: "Short-term (1-3 years)" },
-      { id: "medium_term", value: "Medium-term (3-10 years)" },
-      { id: "long_term", value: "Long-term (10+ years)" },
+      { id: "none", value: "None" },
+      { id: "basic", value: "Basic" },
+      { id: "informed", value: "Informed" },
     ],
   },
 ];
 
-export const SurveyScreen: React.FC<RiskOptionsScreenProps> = ({
+export const SurveyScreen: React.FC<SurveyScreenProps> = ({
   value,
   onChange,
   onBack,
   onContinue,
 }) => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const questionsPerPage = 5;
 
-  const currentQuestion = QUESTIONS[currentQuestionIndex];
+  const startIndex = currentPage * questionsPerPage;
+  const endIndex = startIndex + questionsPerPage;
+  const currentQuestions = QUESTIONS.slice(startIndex, endIndex);
 
-  const handleOptionSelect = (optionId: string) => {
-    onChange(optionId);
+  const handleOptionSelect = (questionId: string, optionId: string) => {
+    onChange({ [questionId]: optionId });
   };
 
-  const handleNext = () => {
-    if (currentQuestionIndex < QUESTIONS.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+  const handleNextPage = () => {
+    if (endIndex < QUESTIONS.length) {
+      setCurrentPage(currentPage + 1);
     } else {
       onContinue();
     }
   };
 
-  const handlePrevious = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
     } else {
       onBack();
     }
   };
 
-return (
-  <div className=" max-w-3xl mx-auto">
-    <h1 className="text-4xl text-center font-cirka pb-5 border-b">
-      Financial Knowledge and Experience
-    </h1>
+  return (
+    <div className="max-w-3xl mx-auto">
+      <h1 className="text-4xl text-center font-cirka pb-5 border-b">
+        Financial Knowledge and Experience
+      </h1>
 
-    <div className="flex gap-4 border-b py-4 mb-4 items-center">
-      <h1 className="flex-1 font-helvetica">{currentQuestion.question}</h1>
+      {currentQuestions.map((question) => (
+        <div
+          key={question.id}
+          className="flex gap-4 border-b py-3 mb-3 items-center"
+        >
+          <h2 className="flex-1 font-helvetica">{question.question}</h2>
+          <div className="flex-1 flex gap-4 items-end">
+            {question.options.map((option) => (
+              <OptionCard
+                key={option.id}
+                question={option.value}
+                selected={value[question.id] === option.id}
+                onClick={() => handleOptionSelect(question.id, option.id)}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
 
-      
-      <div className="flex-1 flex gap-4 items-end">
-        {currentQuestion.options.map((option) => (
-          <OptionCard
-            key={option.id}
-            question={option.value}
-            selected={value === option.id}
-            onClick={() => handleOptionSelect(option.id)}
-          />
-        ))}
+      <div className="flex gap-4 max-w-md mx-auto">
+        <Button
+          variant="outline"
+          onClick={handlePreviousPage}
+          className="flex-1"
+        >
+          {currentPage > 0 ? "Previous" : "Back"}
+        </Button>
+        <Button
+          onClick={handleNextPage}
+          className="flex-1 bg-navy hover:bg-navyLight text-white"
+        >
+          {endIndex < QUESTIONS.length ? "Next" : "Continue"}
+        </Button>
       </div>
     </div>
-
-    <div className="flex gap-4">
-      <Button variant="outline" onClick={handlePrevious} className="flex-1">
-        {currentQuestionIndex > 0 ? "Previous" : "Back"}
-      </Button>
-      <Button
-        onClick={handleNext}
-        className="flex-1 bg-navy hover:bg-navyLight text-white"
-        disabled={!value}
-      >
-        {currentQuestionIndex < QUESTIONS.length - 1 ? "Next" : "Continue"}
-      </Button>
-    </div>
-  </div>
-);
-
+  );
 };
