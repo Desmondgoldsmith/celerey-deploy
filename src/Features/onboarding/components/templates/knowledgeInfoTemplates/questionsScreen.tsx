@@ -56,6 +56,7 @@ const QUESTIONS = [
       { id: "informed", value: "Informed" },
     ],
   },
+  // Add more questions as needed
 ];
 
 export const SurveyScreen: React.FC<SurveyScreenProps> = ({
@@ -79,7 +80,7 @@ export const SurveyScreen: React.FC<SurveyScreenProps> = ({
     if (endIndex < QUESTIONS.length) {
       setCurrentPage(currentPage + 1);
     } else {
-      onContinue();
+      onContinue(); // Trigger "Continue" when all questions are answered
     }
   };
 
@@ -87,7 +88,7 @@ export const SurveyScreen: React.FC<SurveyScreenProps> = ({
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     } else {
-      onBack();
+      onBack(); // Trigger "Back" when on the first page
     }
   };
 

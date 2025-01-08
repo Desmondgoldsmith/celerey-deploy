@@ -22,7 +22,7 @@ export default function KnowledgeInfo() {
 
   useEffect(() => {
     if (!sections?.risk?.isCompleted) {
-      router.push("/risk-info").catch(console.error);
+      router.push("/risk-info")
       return;
     }
 
@@ -65,7 +65,7 @@ export default function KnowledgeInfo() {
     if (currentStepIndex > 0) {
       updateSectionProgress(currentSection, currentStepIndex - 1);
     } else {
-      router.push("/risk-info")
+      router.push("/risk-info");
     }
   }, [currentSection, sections, router, updateSectionProgress]);
 
@@ -81,7 +81,7 @@ export default function KnowledgeInfo() {
 
     if (isLastStep) {
       completeSection("knowledge");
-      router.push("#")
+      router.push("#");
     } else {
       updateSectionProgress(currentSection, currentStepIndex + 1);
     }
@@ -102,14 +102,8 @@ export default function KnowledgeInfo() {
       case 0:
         return (
           <SurveyScreen
-            cashKnowledge={knowledgeData.cashKnowledge}
-            investingExperience={knowledgeData.investingExperience}
-            publicSharesKnowledge={knowledgeData.publicSharesKnowledge}
-            publicSharesExperience={knowledgeData.publicSharesExperience}
-            investmentGradeBondsKnowledge={
-              knowledgeData.investmentGradeBondsKnowledge
-            }
-            onChange={(field, value) => handleFormUpdate({ [field]: value })}
+            value={knowledgeData}
+            onChange={handleFormUpdate}
             onBack={handleBack}
             onContinue={handleContinue}
           />
