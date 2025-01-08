@@ -2,15 +2,14 @@
 
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { GoalsInfoSchema } from "@/Features/onboarding/schema";
-
-import { useOnboardingStore, SectionId } from "@/Features/onboarding/state";
+import { KnowledgeInfoSchema } from "@/Features/onboarding/schema";
+import { useOnboardingStore } from "@/Features/onboarding/state";
 import { SectionProgressBars } from "@/Features/onboarding/components/molecules/progressBar";
 import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
-import { WelcomeScreen } from "@/Features/onboarding/components/templates/goalsInfoTemplates/welcomeScreen";
-import { GoalsScreen } from "@/Features/onboarding/components/templates/goalsInfoTemplates/goalsScreen";
+import { SurveyScreen } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/questionsScreen";
 
-export default function GoalsInfo() {
+
+export default function KnowledgeInfo() {
   const router = useRouter();
   const {
     sections,
@@ -23,40 +22,38 @@ export default function GoalsInfo() {
   } = useOnboardingStore();
 
   useEffect(() => {
-    if (!sections.financial.isCompleted) {
-      router.push("/financial-info");
+    if (!sections.risk.isCompleted) {
+      router.push("/risk-info");
       return;
     }
 
-    if (currentSection !== "goals") {
-      setActiveSection("goals");
+    if (currentSection !== "knowledge") {
+      setActiveSection("knowledge");
     }
-  }, [sections.financial.isCompleted, currentSection, router, setActiveSection]);
+  }, [sections.risk.isCompleted, currentSection, router, setActiveSection]);
 
   const handleFormUpdate = useCallback(
-    (updates: Partial<GoalsInfoSchema>) => {
-      updateFormData("goals", updates);
+    (updates: Partial<KnowledgeInfoSchema>) => {
+      updateFormData("knowledge", updates);
     },
     [updateFormData]
   );
 
   const validateCurrentStep = useCallback((): boolean => {
     const currentStepIndex = sections[currentSection].currentStep;
-    const data = formData.goals;
+    const data = formData.knowledge;
 
     switch (currentStepIndex) {
       case 0: // Welcome screen, no validation needed
         return true;
-      case 1: 
+      case 1: // Goals information validation
         return (
-          !!data.retirementAge &&
-          !!data.retirementIncome &&
-          !!data.goalsCurrency
+          !!data.knowledge
         );
       default:
         return true;
     }
-  }, [currentSection, sections, formData.goals]);
+  }, [currentSection, sections, formData.knowledge]);
 
   const handleBack = useCallback(() => {
     const currentStepIndex = sections[currentSection].currentStep;
@@ -64,27 +61,9 @@ export default function GoalsInfo() {
       const newStep = currentStepIndex - 1;
       updateSectionProgress(currentSection, newStep);
     } else {
-      router.push("/financial-info");
+      router.push("/risk-info");
     }
   }, [currentSection, sections, router, updateSectionProgress]);
-
-
-    const getNextSection = useCallback(
-      (currentSectionId: SectionId): SectionId | null => {
-        const sectionOrder: SectionId[] = [
-          "personal",
-          "financial",
-          "goals",
-          "risk",
-          "knowledge",
-        ];
-        const currentIndex = sectionOrder.indexOf(currentSectionId);
-        return currentIndex < sectionOrder.length - 1
-          ? sectionOrder[currentIndex + 1]
-          : null;
-      },
-      []
-    );
 
   const handleContinue = useCallback(() => {
     const currentStepIndex = sections[currentSection].currentStep;
@@ -95,24 +74,18 @@ export default function GoalsInfo() {
       return;
     }
 
-   if (isLastStep) {
-     completeSection(currentSection);
-     const nextSection = getNextSection(currentSection);
-     if (nextSection) {
-       setActiveSection(nextSection);
-       router.push(`/${nextSection}-info`);
-     }
-   } else {
-     const newStep = currentStepIndex + 1;
-     updateSectionProgress(currentSection, newStep);
-   }
+    if (isLastStep) {
+      completeSection("knowledge");
+      router.push("#");
+    } else {
+      const newStep = currentStepIndex + 1;
+      updateSectionProgress(currentSection, newStep);
+    }
   }, [
     currentSection,
     sections,
     validateCurrentStep,
     completeSection,
-    getNextSection,
-    setActiveSection,
     router,
     updateSectionProgress,
   ]);
@@ -124,7 +97,9 @@ export default function GoalsInfo() {
     switch (currentStepIndex) {
       case 0:
         return (
-          <WelcomeScreen
+          <SurveyScreen
+            onChange={(value) => handleFormUpdate({ riskAttitude: value })}
+            onBack={handleBack}
             onContinue={handleContinue}
           />
         );

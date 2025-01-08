@@ -39,6 +39,23 @@ export interface OptionCardProps {
   onClick: () => void;
 }
 
+export interface SurveyOptionProps {
+  question: string;
+  selected: boolean;
+  onClick?: () => void;
+}
+
+export interface SurveyOptionCardProps {
+  id: string;
+  question: string;
+  options: {
+    id: string; 
+    value: string;
+    selected: boolean;
+  }[];
+  onClick: () => void;
+}
+
 export interface SectionProgressBarProps {
   sections: Record<Section["id"], Section>;
   currentSection: Section["id"];
@@ -233,5 +250,33 @@ export interface RiskInfoFormData {
   investmentObjective: string;
   investmentHorizon: string;
   illiquidInvestmentPercentage: string;
+}
+
+export interface KnowledgeInfoFormData {
+  cashKnowledge: string;
+  investingExpereince: string;
+  publicSharesKnowledge: string;
+  publicSharesExperience: string;
+  investmentGradeBondsKnowledge: string;
+  investmentGradeBondsExperience: string;
+  nonInvestmentGradeBondsKnowledge: string;
+  nonInvestmentGradeBondsExperience: string;
+  collectiveInvestmentsInstumentsKnowledge: string;
+  collectiveInvestmentsInstumentsExperience: string;
+  derivativesKnowledge: string;
+  derivativesExperience: string;
+  forexKnowledge: string;
+  commoditiesKnowledge: string;
+  commoditiesExperience: string;
+  hybridInvestmentsKnowledge: string;
+  privateMarketInstrumentsKnowledge: string;
+  privateMarketInstrumentsExperience: string;
+  realEstateKnowledge: string;
+  realEstateExperience: string;
+  altAssetsKnowledge: string;
+  leveragedInstumentsKnowledge: string;
+  leveragedInstumentsExperience: string;
+  privateCreditKnowledge: string;
+
 }
 

@@ -14,7 +14,7 @@ export type SectionId =
   | "financial"
   | "goals"
   | "risk"
-  | "knowledge"; // Financial Knowledge section to be added here
+  | "knowledge"; 
 
 // the various section structures
 const DEFAULT_SECTIONS: Record<SectionId, Section> = {
@@ -145,7 +145,30 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
     illiquidInvestmentPercentage: "",
   },
   knowledge: {
-    knowledge: "",
+    cashKnowledge: "",
+    investingExpereince: "",
+    publicSharesKnowledge: "",
+    publicSharesExperience: "",
+    investmentGradeBondsKnowledge: "",
+    investmentGradeBondsExperience: "",
+    nonInvestmentGradeBondsKnowledge: "",
+    nonInvestmentGradeBondsExperience: "",
+    collectiveInvestmentsInstumentsKnowledge: "",
+    collectiveInvestmentsInstumentsExperience: "",
+    derivativesKnowledge: "",
+    derivativesExperience: "",
+    forexKnowledge: "",
+    commoditiesKnowledge: "",
+    commoditiesExperience: "",
+    hybridInvestmentsKnowledge: "",
+    privateMarketInstrumentsKnowledge: "",
+    privateMarketInstrumentsExperience: "",
+    realEstateKnowledge: "",
+    realEstateExperience: "",
+    altAssetsKnowledge: "",
+    leveragedInstumentsKnowledge: "",
+    leveragedInstumentsExperience: "",
+    privateCreditKnowledge: "",
   },
 };
 

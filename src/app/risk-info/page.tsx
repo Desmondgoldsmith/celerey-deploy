@@ -90,6 +90,7 @@ export default function RiskInfo() {
         "financial",
         "goals",
         "risk",
+        "knowledge",
       ];
       const currentIndex = sectionOrder.indexOf(currentSectionId);
       return currentIndex < sectionOrder.length - 1
