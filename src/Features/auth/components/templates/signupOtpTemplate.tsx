@@ -29,8 +29,8 @@ export const SignupOTPTemplate = () => {
         <Image
           src="/assets/logo1.svg"
           alt="Celerey Logo"
-          width={60}
-          height={60}
+          width={50}
+          height={50}
           className="mx-auto"
         />
         <h1 className="text-3xl font-cirka mt-4 mb-2">
@@ -47,7 +47,7 @@ export const SignupOTPTemplate = () => {
       <Button
         disabled={otpValues.join('').length !== OTP_LENGTH}
         onClick={handleAccountCreation}
-        className="w-80 bg-navy text-white mb-4 hover:bg-navyLight"
+        className="md:w-80 w-full bg-navy text-white mb-4 hover:bg-navyLight"
       >
        {loading && <Spinner className="text-white"/>} Create My Account
       </Button>

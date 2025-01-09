@@ -73,13 +73,15 @@ export default function RiskInfo() {
     }
   }, [currentSection, sections, formData.risk]);
 
-  const handleBack = useCallback(() => {
-    const currentStepIndex = sections[currentSection].currentStep;
-    if (currentStepIndex > 0) {
-      const newStep = currentStepIndex - 1;
-      updateSectionProgress(currentSection, newStep);
-    }
-  }, [currentSection, sections, updateSectionProgress]);
+   const handleBack = useCallback(() => {
+     const currentStepIndex = sections[currentSection].currentStep;
+     if (currentStepIndex > 0) {
+       const newStep = currentStepIndex - 1;
+       updateSectionProgress(currentSection, newStep);
+     } else {
+       router.push("/goals-info");
+     }
+   }, [currentSection, sections, router, updateSectionProgress]);
 
   const getNextSection = useCallback(
     (currentSectionId: SectionId): SectionId | null => {
@@ -88,6 +90,7 @@ export default function RiskInfo() {
         "financial",
         "goals",
         "risk",
+        "knowledge",
       ];
       const currentIndex = sectionOrder.indexOf(currentSectionId);
       return currentIndex < sectionOrder.length - 1

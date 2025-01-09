@@ -76,9 +76,39 @@ export interface RiskInfoSchema {
   illiquidInvestmentPercentage: string;
 }
 
+export interface KnowledgeInfoSchema {
+  cashKnowledge?: string;
+  investingExperience?: string;
+  publicSharesKnowledge?: string;
+  publicSharesExperience?: string;
+  investmentGradeBondsKnowledge?: string;
+  investmentGradeBondsExperience?: string;
+  nonInvestmentGradeBondsKnowledge?: string;
+  nonInvestmentGradeBondsExperience?: string;
+  collectiveInvestmentsInstrumentsKnowledge?: string;
+  collectiveInvestmentsInstrumentsExperience?: string;
+  derivativesKnowledge?: string;
+  derivativesExperience?: string;
+  forexKnowledge?: string;
+  commoditiesKnowledge?: string;
+  commoditiesExperience?: string;
+  hybridInvestmentsKnowledge?: string;
+  privateMarketInstrumentsKnowledge?: string;
+  privateMarketInstrumentsExperience?: string;
+  realEstateKnowledge?: string;
+  realEstateExperience?: string;
+  altAssetsKnowledge?: string;
+  leveragedInstrumentsKnowledge?: string;
+  leveragedInstrumentsExperience?: string;
+  privateCreditKnowledge?: string;
+
+  [key: string]: string | undefined;
+}
+
 export interface OnboardingFormData {
   personal: PersonalInfoSchema;
   financial: FinancialInfoSchema;
   goals: GoalsInfoSchema;
   risk: RiskInfoSchema;
+  knowledge: KnowledgeInfoSchema;
 }

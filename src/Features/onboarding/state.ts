@@ -1,9 +1,20 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { PersonalInfoSchema, FinancialInfoSchema, GoalsInfoSchema, RiskInfoSchema } from "./schema";
+import {
+  PersonalInfoSchema,
+  FinancialInfoSchema,
+  GoalsInfoSchema,
+  RiskInfoSchema,
+  KnowledgeInfoSchema,
+} from "./schema";
 import { Section } from "./types";
 
-export type SectionId = "personal" | "financial" | "goals" | "risk"  // Financial Knowledge section to be added here
+export type SectionId =
+  | "personal"
+  | "financial"
+  | "goals"
+  | "risk"
+  | "knowledge"; 
 
 // the various section structures
 const DEFAULT_SECTIONS: Record<SectionId, Section> = {
@@ -34,19 +45,19 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   risk: {
     id: "risk",
     title: "Risk Profile",
-    totalSteps: 9,
+    totalSteps: 10,
     currentStep: 0,
     isCompleted: false,
     isActive: false,
   },
-  // knowledge: {
-  //   id: "knowledge",
-  //   title: "Financial Knowledge",
-  //   totalSteps: 6,
-  //   currentStep: 0,
-  //   isCompleted: false,
-  //   isActive: false,
-  // },
+  knowledge: {
+    id: "knowledge",
+    title: "Financial Knowledge",
+    totalSteps: 6,
+    currentStep: 0,
+    isCompleted: false,
+    isActive: false,
+  },
 };
 
 interface OnboardingFormData {
@@ -54,6 +65,7 @@ interface OnboardingFormData {
   financial: FinancialInfoSchema;
   goals: GoalsInfoSchema;
   risk: RiskInfoSchema;
+  knowledge: KnowledgeInfoSchema;
 }
 
 // setting the shape of the onboarding data
@@ -123,14 +135,40 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
     goalsCurrency: "",
   },
   risk: {
-  riskAttitude: "",
-  riskTolerance: "",
-  riskTolerancePercentage: "",
-  riskReaction: "",
-  riskApproach: "",
-  investmentObjective: "",
-  investmentHorizon: "",
-  illiquidInvestmentPercentage: "",
+    riskAttitude: "",
+    riskTolerance: "",
+    riskTolerancePercentage: "",
+    riskReaction: "",
+    riskApproach: "",
+    investmentObjective: "",
+    investmentHorizon: "",
+    illiquidInvestmentPercentage: "",
+  },
+  knowledge: {
+    cashKnowledge: "",
+    investingExperience: "",
+    publicSharesKnowledge: "",
+    publicSharesExperience: "",
+    investmentGradeBondsKnowledge: "",
+    investmentGradeBondsExperience: "",
+    nonInvestmentGradeBondsKnowledge: "",
+    nonInvestmentGradeBondsExperience: "",
+    collectiveInvestmentsInstumentsKnowledge: "",
+    collectiveInvestmentsInstumentsExperience: "",
+    derivativesKnowledge: "",
+    derivativesExperience: "",
+    forexKnowledge: "",
+    commoditiesKnowledge: "",
+    commoditiesExperience: "",
+    hybridInvestmentsKnowledge: "",
+    privateMarketInstrumentsKnowledge: "",
+    privateMarketInstrumentsExperience: "",
+    realEstateKnowledge: "",
+    realEstateExperience: "",
+    altAssetsKnowledge: "",
+    leveragedInstumentsKnowledge: "",
+    leveragedInstumentsExperience: "",
+    privateCreditKnowledge: "",
   },
 };
 

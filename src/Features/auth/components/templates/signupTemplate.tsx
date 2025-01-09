@@ -55,7 +55,7 @@ export const SignUpTemplate = () => {
         <Button
           disabled={!email}
           type="submit"
-          className="w-[450px] bg-navy hover:bg-navyLight text-white"
+          className="md:w-[450px] w-full bg-navy hover:bg-navyLight text-white"
         >
         {loading && <Spinner className="text-white"/>}  Send Me a Code
         </Button>
@@ -75,8 +75,8 @@ export const SignUpTemplate = () => {
         <SocialSignupButton provider="linkedin" onClick={() => {}} />
       </div>
 
-      <p className="mt-6 text-sm h">
-        <span className="text-navy">Already have an account ?</span>{' '}
+      <p className="mt-6 text-sm">
+        <span className="text-navy">Already have an account ?</span>{" "}
         <span
           onClick={handleSignup}
           className="text-navyLight hover:cursor-pointer hover:underline "

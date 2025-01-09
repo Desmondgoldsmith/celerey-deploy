@@ -3,7 +3,8 @@
 import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { GoalsInfoSchema } from "@/Features/onboarding/schema";
-import { useOnboardingStore } from "@/Features/onboarding/state";
+
+import { useOnboardingStore, SectionId } from "@/Features/onboarding/state";
 import { SectionProgressBars } from "@/Features/onboarding/components/molecules/progressBar";
 import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
 import { WelcomeScreen } from "@/Features/onboarding/components/templates/goalsInfoTemplates/welcomeScreen";
@@ -46,7 +47,7 @@ export default function GoalsInfo() {
     switch (currentStepIndex) {
       case 0: // Welcome screen, no validation needed
         return true;
-      case 1: // Goals information validation
+      case 1: 
         return (
           !!data.retirementAge &&
           !!data.retirementIncome &&
@@ -67,6 +68,24 @@ export default function GoalsInfo() {
     }
   }, [currentSection, sections, router, updateSectionProgress]);
 
+
+    const getNextSection = useCallback(
+      (currentSectionId: SectionId): SectionId | null => {
+        const sectionOrder: SectionId[] = [
+          "personal",
+          "financial",
+          "goals",
+          "risk",
+          "knowledge",
+        ];
+        const currentIndex = sectionOrder.indexOf(currentSectionId);
+        return currentIndex < sectionOrder.length - 1
+          ? sectionOrder[currentIndex + 1]
+          : null;
+      },
+      []
+    );
+
   const handleContinue = useCallback(() => {
     const currentStepIndex = sections[currentSection].currentStep;
     const isLastStep =
@@ -76,18 +95,24 @@ export default function GoalsInfo() {
       return;
     }
 
-    if (isLastStep) {
-      completeSection("goals");
-      router.push("/risk-info");
-    } else {
-      const newStep = currentStepIndex + 1;
-      updateSectionProgress(currentSection, newStep);
-    }
+   if (isLastStep) {
+     completeSection(currentSection);
+     const nextSection = getNextSection(currentSection);
+     if (nextSection) {
+       setActiveSection(nextSection);
+       router.push(`/${nextSection}-info`);
+     }
+   } else {
+     const newStep = currentStepIndex + 1;
+     updateSectionProgress(currentSection, newStep);
+   }
   }, [
     currentSection,
     sections,
     validateCurrentStep,
     completeSection,
+    getNextSection,
+    setActiveSection,
     router,
     updateSectionProgress,
   ]);
