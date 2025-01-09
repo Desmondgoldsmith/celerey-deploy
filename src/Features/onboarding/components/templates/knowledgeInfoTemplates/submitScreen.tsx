@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
 
 interface NetWorthScreenProps {
   onContinue: () => void;
@@ -9,14 +10,17 @@ interface NetWorthScreenProps {
 
 export const SubmitScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
   const [firstName, setFirstName] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    setIsLoading(true);
+    // Simulate a delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     router.push("/asset-allocation");
   };
 
   useEffect(() => {
-    // Fetch the state from local storage
     const storedState = localStorage.getItem("onboarding-storage");
     if (storedState) {
       const parsedState = JSON.parse(storedState);
@@ -55,8 +59,10 @@ export const SubmitScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
           type="submit"
           className="flex-1 bg-navy w-full hover:bg-navyLight text-white"
           onClick={handleSave}
+          disabled={isLoading}
         >
           Submit
+          {isLoading && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
         </Button>
       </div>
     </form>
