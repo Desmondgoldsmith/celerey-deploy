@@ -6,7 +6,12 @@ import { KnowledgeInfoSchema } from "@/Features/onboarding/schema";
 import { useOnboardingStore } from "@/Features/onboarding/state";
 import { SectionProgressBars } from "@/Features/onboarding/components/molecules/progressBar";
 import { OnboardingLayout } from "@/Features/onboarding/components/templates/sharedTemplates/onboardingLayout";
-import { SurveyScreen } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/questionsScreen";
+import { Page1 } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/page1";
+import { Page2 } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/page2";
+import { Page3 } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/page3";
+import { Page4 } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/page4";
+import { Page5 } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/page5";
+import { SubmitScreen } from "@/Features/onboarding/components/templates/knowledgeInfoTemplates/submitScreen";
 
 export default function KnowledgeInfo() {
   const router = useRouter();
@@ -22,7 +27,7 @@ export default function KnowledgeInfo() {
 
   useEffect(() => {
     if (!sections?.risk?.isCompleted) {
-      router.push("/risk-info")
+      router.push("/risk-info");
       return;
     }
 
@@ -42,6 +47,9 @@ export default function KnowledgeInfo() {
     const currentStepIndex = sections[currentSection]?.currentStep;
     const data = formData.knowledge;
 
+    console.log("Validating step:", currentStepIndex);
+    console.log("Form data:", data);
+
     if (!data) return false;
 
     switch (currentStepIndex) {
@@ -54,6 +62,37 @@ export default function KnowledgeInfo() {
           !!data.publicSharesKnowledge &&
           !!data.publicSharesExperience &&
           !!data.investmentGradeBondsKnowledge
+        );
+      case 2:
+        return (
+          !!data.investmentGradeBondsExperience &&
+          !!data.nonInvestmentGradeBondsKnowledge &&
+          !!data.nonInvestmentGradeBondsExperience &&
+          !!data.collectiveInvestmentsInstrumentsKnowledge &&
+          !!data.collectiveInvestmentsInstrumentsExperience
+        );
+      case 3:
+        return (
+          !!data.derivativesKnowledge &&
+          !!data.derivativesExperience &&
+          !!data.forexKnowledge &&
+          !!data.commoditiesKnowledge &&
+          !!data.commoditiesExperience
+        );
+      case 4:
+        return (
+          !!data.hybridInvestmentsKnowledge &&
+          !!data.privateMarketInstrumentsKnowledge &&
+          !!data.privateMarketInstrumentsExperience &&
+          !!data.realEstateKnowledge &&
+          !!data.realEstateExperience
+        );
+      case 5:
+        return (
+          !!data.altAssetsKnowledge &&
+          !!data.leveragedInstrumentsKnowledge &&
+          !!data.leveragedInstrumentsExperience &&
+          !!data.privateCreditKnowledge
         );
       default:
         return true;
@@ -74,8 +113,11 @@ export default function KnowledgeInfo() {
     const isLastStep =
       currentStepIndex === sections[currentSection]?.totalSteps - 1;
 
+    console.log("Current step index:", currentStepIndex);
+    console.log("Is last step:", isLastStep);
+
     if (!validateCurrentStep()) {
-      console.error("Validation failed.");
+      console.error("Validation failed on step:", currentStepIndex);
       return;
     }
 
@@ -98,16 +140,56 @@ export default function KnowledgeInfo() {
     const currentStepIndex = sections[currentSection]?.currentStep || 0;
     const knowledgeData = formData.knowledge || {};
 
+    console.log("Rendering step:", currentStepIndex);
+
     switch (currentStepIndex) {
       case 0:
         return (
-          <SurveyScreen
+          <Page1
             value={knowledgeData}
             onChange={handleFormUpdate}
             onBack={handleBack}
             onContinue={handleContinue}
           />
         );
+      case 1:
+        return (
+          <Page2
+            value={knowledgeData}
+            onChange={handleFormUpdate}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 2:
+        return (
+          <Page3
+            value={knowledgeData}
+            onChange={handleFormUpdate}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 3:
+        return (
+          <Page4
+            value={knowledgeData}
+            onChange={handleFormUpdate}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 4:
+        return (
+          <Page5
+            value={knowledgeData}
+            onChange={handleFormUpdate}
+            onBack={handleBack}
+            onContinue={handleContinue}
+          />
+        );
+      case 5:
+        return <SubmitScreen onContinue={handleContinue} onBack={handleBack} />;
       default:
         return null;
     }

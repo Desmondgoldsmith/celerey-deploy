@@ -146,7 +146,7 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
   },
   knowledge: {
     cashKnowledge: "",
-    investingExpereince: "",
+    investingExperience: "",
     publicSharesKnowledge: "",
     publicSharesExperience: "",
     investmentGradeBondsKnowledge: "",

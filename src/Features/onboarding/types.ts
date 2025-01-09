@@ -254,7 +254,7 @@ export interface RiskInfoFormData {
 
 export interface KnowledgeInfoFormData {
   cashKnowledge: string;
-  investingExpereince: string;
+  investingExperience: string;
   publicSharesKnowledge: string;
   publicSharesExperience: string;
   investmentGradeBondsKnowledge: string;
