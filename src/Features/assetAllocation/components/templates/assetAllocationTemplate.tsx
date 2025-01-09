@@ -38,7 +38,7 @@ const RiskChart: React.FC<{ value: number; color: string; label: string }> = ({
           endAngle: 135,
           hollow: {
             margin: 0,
-            size: "55%",
+            size: "58%",
           },
           track: {
             background:
@@ -215,7 +215,7 @@ const AssetAllocationTemplate: React.FC<AssetAllocationProps> = ({
 
           {/* Right Column - Risk Categories */}
           <div className="lg:col-span-8 w-full">
-            <p className="text-sm md:text-base font-helvetica text-gray-600 mb-4 md:mb-6">
+            <p className="text-center pt-2 pb-2 md:text-left md:pt-0 md:pb-0 text-sm md:text-base font-helvetica text-gray-600 mb-4 md:mb-6">
               Based on your financial knowledge and experience, risk appetite,
               net worth, and age, here is the recommended asset allocation for
               your profile.

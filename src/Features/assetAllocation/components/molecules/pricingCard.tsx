@@ -4,6 +4,13 @@ import { ToggleButton } from "./toggleButton";
 import { FeaturesList } from "./featureList";
 import Link from "next/link";
 
+// Define discount rates for each tier
+const BIENNIAL_DISCOUNTS = {
+  Standard: 0.1, // 10% discount
+  Pro: 0.12, // 12% discount
+  Elite: 0.15, // 15% discount
+};
+
 interface PricingCardProps {
   tier: SubscriptionTier;
 }
@@ -11,9 +18,44 @@ interface PricingCardProps {
 export const PricingCard: React.FC<PricingCardProps> = ({ tier }) => {
   const [interval, setInterval] = useState<SubscriptionInterval>("yearly");
 
-  const calculatePrice = () => {
-    const yearlyPrice = tier.price * 12;
-    return interval === "yearly" ? yearlyPrice : yearlyPrice * 2;
+  const calculateYearlyPrice = () => {
+    return tier.price * 12;
+  };
+
+  const calculateBiennialPrice = () => {
+    const twoYearPrice = calculateYearlyPrice() * 2;
+    const discountRate =
+      BIENNIAL_DISCOUNTS[tier.name as keyof typeof BIENNIAL_DISCOUNTS] || 0;
+    const discountAmount = twoYearPrice * discountRate;
+    return twoYearPrice - discountAmount;
+  };
+
+  const getPrice = () => {
+    return interval === "yearly"
+      ? calculateYearlyPrice()
+      : calculateBiennialPrice();
+  };
+
+  const getDiscountAmount = () => {
+    const twoYearPrice = calculateYearlyPrice() * 2;
+    const discountRate =
+      BIENNIAL_DISCOUNTS[tier.name as keyof typeof BIENNIAL_DISCOUNTS] || 0;
+    return twoYearPrice * discountRate;
+  };
+
+  const getDiscountMessage = () => {
+    if (interval === "biennial") {
+      const discountPercent =
+        BIENNIAL_DISCOUNTS[tier.name as keyof typeof BIENNIAL_DISCOUNTS] * 100;
+      const savingsAmount = getDiscountAmount();
+      return (
+        <div className="text-green-600 text-sm font-semibold mt-2">
+          Save {discountPercent}% (${savingsAmount.toFixed(2)}) with biennial
+          billing
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -31,19 +73,28 @@ export const PricingCard: React.FC<PricingCardProps> = ({ tier }) => {
             { label: "Yearly", value: "yearly" },
             { label: "Biennial", value: "biennial" },
           ]}
-          value={interval} // Using value instead of defaultValue
+          value={interval}
           onChange={(value) => setInterval(value)}
         />
+        {getDiscountMessage()}
       </div>
 
       <div className="mb-6">
-        <div className="text-3xl font-bold">
-          ${calculatePrice().toLocaleString()}
+        <div className="flex items-baseline gap-2">
+          <div className="text-3xl font-bold">
+            ${getPrice().toLocaleString()}
+          </div>
+          {interval === "biennial" && (
+            <div className="text-[#242424] text-sm">
+              (${(getPrice() / 24).toFixed(2)}/month)
+            </div>
+          )}
         </div>
         <div className="text-[#242424] text-sm">
           {interval === "yearly" ? "Per year" : "Every two years"}
         </div>
       </div>
+
       <Link href="/dashboard" passHref>
         <button className="bg-[#F4F5F6] w-full border border-navy text-navy rounded-md py-2 px-4 hover:bg-navy hover:text-white transition-colors mb-6">
           Subscribe
