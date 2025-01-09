@@ -1,7 +1,7 @@
 export interface BaseScreenProps {
   onBack: () => void;
-  onContinue: () => void;
-}
+    onContinue: () => void;
+  }
 
 export interface FileUploadProps {
   label: string;
@@ -36,6 +36,23 @@ export interface OptionCardProps {
   title: string;
   description: string;
   selected: boolean;
+  onClick: () => void;
+}
+
+export interface SurveyOptionProps {
+  question: string;
+  selected: boolean;
+  onClick?: () => void;
+}
+
+export interface SurveyOptionCardProps {
+  id: string;
+  question: string;
+  options: {
+    id: string; 
+    value: string;
+    selected: boolean;
+  }[];
   onClick: () => void;
 }
 
@@ -131,9 +148,30 @@ export interface OptionsScreenProps extends BaseScreenProps {
   value: string[];
   onChange: (value: string[]) => void;
 }
+export interface RiskOptionsScreenProps extends BaseScreenProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+
+// FinancialInfo Screen Props
+export interface CurrencyScreenProps {
+  value: string;
+  onChange: (value: string) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
+export interface GoalsScreenProps {
+  retirementAge: string;
+  retirementIncome: string;
+  goalsCurrency: string;
+  onChange: (field: string, value: string) => void;
+  onBack: () => void;
+  onContinue: () => void;
+}
 
 export interface Section {
-  id: "personal" | "financial" | "goals" | "risk";
+  id: "personal" | "financial" | "goals" | "risk" | "knowledge" ; // Financial Knowledge section to be added here
   title: string;
   totalSteps: number;
   currentStep: number;
@@ -167,3 +205,78 @@ export interface PersonalInfoFormData {
   identification: IdentificationDocument;
   options: string[];
 }
+
+export interface FinancialInfoFormData {
+  currency: string;
+  passiveIncome: {
+    rentalIncome: string;
+    dividends: string;
+    interestIncome: string;
+    otherIncome: string;
+  };
+  annualExpenses: {
+    home: string;
+    childcare: string;
+    education: string;
+    healthcare: string;
+    travel: string;
+    giving: string;
+  };
+  assets: {
+    realEstate: string;
+    cash: string;
+    publicSecurities: string;
+    privateSecurities: string;
+  };
+  liabilities: {
+    mortgages: string;
+    loans: string;
+    creditCards: string;
+    assetFinance: string;
+    otherLiabilities: string;
+  };
+}
+export interface GoalsInfoFormData {
+    retirementAge: string;
+    retirementIncome: string;
+    goalsCurrency: string;
+}
+export interface RiskInfoFormData {
+  riskAttitude: string;
+  riskTolerance: string;
+  riskTolerancePercentage: string;
+  riskReaction: string;
+  riskApproach: string;
+  investmentObjective: string;
+  investmentHorizon: string;
+  illiquidInvestmentPercentage: string;
+}
+
+export interface KnowledgeInfoFormData {
+  cashKnowledge: string;
+  investingExperience: string;
+  publicSharesKnowledge: string;
+  publicSharesExperience: string;
+  investmentGradeBondsKnowledge: string;
+  investmentGradeBondsExperience: string;
+  nonInvestmentGradeBondsKnowledge: string;
+  nonInvestmentGradeBondsExperience: string;
+  collectiveInvestmentsInstumentsKnowledge: string;
+  collectiveInvestmentsInstumentsExperience: string;
+  derivativesKnowledge: string;
+  derivativesExperience: string;
+  forexKnowledge: string;
+  commoditiesKnowledge: string;
+  commoditiesExperience: string;
+  hybridInvestmentsKnowledge: string;
+  privateMarketInstrumentsKnowledge: string;
+  privateMarketInstrumentsExperience: string;
+  realEstateKnowledge: string;
+  realEstateExperience: string;
+  altAssetsKnowledge: string;
+  leveragedInstumentsKnowledge: string;
+  leveragedInstumentsExperience: string;
+  privateCreditKnowledge: string;
+
+}
+

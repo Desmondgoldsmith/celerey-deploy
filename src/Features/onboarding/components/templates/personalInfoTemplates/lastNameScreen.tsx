@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { FormInput } from "../../molecules/formInput";
-import BottomSection from "../../molecules/bottomSection";
 import { LastNameScreenProps } from "@/Features/onboarding/types";
 
 export const LastNameScreen = ({
@@ -53,7 +52,6 @@ export const LastNameScreen = ({
           Continue
         </Button>
       </div>
-      <BottomSection />
     </form>
   );
 };

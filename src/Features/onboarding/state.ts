@@ -1,9 +1,20 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { PersonalInfoSchema, FinancialInfoSchema } from "./schema";
+import {
+  PersonalInfoSchema,
+  FinancialInfoSchema,
+  GoalsInfoSchema,
+  RiskInfoSchema,
+  KnowledgeInfoSchema,
+} from "./schema";
 import { Section } from "./types";
 
-export type SectionId = "personal" | "financial" | "goals" | "risk";
+export type SectionId =
+  | "personal"
+  | "financial"
+  | "goals"
+  | "risk"
+  | "knowledge"; 
 
 // the various section structures
 const DEFAULT_SECTIONS: Record<SectionId, Section> = {
@@ -18,7 +29,7 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   financial: {
     id: "financial",
     title: "Financial Information",
-    totalSteps: 8,
+    totalSteps: 6,
     currentStep: 0,
     isCompleted: false,
     isActive: false,
@@ -26,7 +37,7 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   goals: {
     id: "goals",
     title: "Goals & Aspirations",
-    totalSteps: 6,
+    totalSteps: 2,
     currentStep: 0,
     isCompleted: false,
     isActive: false,
@@ -34,7 +45,15 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
   risk: {
     id: "risk",
     title: "Risk Profile",
-    totalSteps: 7,
+    totalSteps: 10,
+    currentStep: 0,
+    isCompleted: false,
+    isActive: false,
+  },
+  knowledge: {
+    id: "knowledge",
+    title: "Financial Knowledge",
+    totalSteps: 6,
     currentStep: 0,
     isCompleted: false,
     isActive: false,
@@ -44,6 +63,9 @@ const DEFAULT_SECTIONS: Record<SectionId, Section> = {
 interface OnboardingFormData {
   personal: PersonalInfoSchema;
   financial: FinancialInfoSchema;
+  goals: GoalsInfoSchema;
+  risk: RiskInfoSchema;
+  knowledge: KnowledgeInfoSchema;
 }
 
 // setting the shape of the onboarding data
@@ -78,7 +100,75 @@ const DEFAULT_FORM_DATA: OnboardingFormData = {
     options: [],
   },
   financial: {
-    name: "",
+    currency: "",
+    passiveIncome: {
+      rentalIncome: "",
+      dividends: "",
+      interestIncome: "",
+      otherIncome: "",
+    },
+    annualExpenses: {
+      home: "",
+      childcare: "",
+      education: "",
+      healthcare: "",
+      travel: "",
+      giving: "",
+    },
+    assets: {
+      realEstate: "",
+      cash: "",
+      publicSecurities: "",
+      privateSecurities: "",
+    },
+    liabilities: {
+      mortgages: "",
+      loans: "",
+      creditCards: "",
+      assetFinance: "",
+      otherLiabilities: "",
+    },
+  },
+  goals: {
+    retirementAge: "",
+    retirementIncome: "",
+    goalsCurrency: "",
+  },
+  risk: {
+    riskAttitude: "",
+    riskTolerance: "",
+    riskTolerancePercentage: "",
+    riskReaction: "",
+    riskApproach: "",
+    investmentObjective: "",
+    investmentHorizon: "",
+    illiquidInvestmentPercentage: "",
+  },
+  knowledge: {
+    cashKnowledge: "",
+    investingExperience: "",
+    publicSharesKnowledge: "",
+    publicSharesExperience: "",
+    investmentGradeBondsKnowledge: "",
+    investmentGradeBondsExperience: "",
+    nonInvestmentGradeBondsKnowledge: "",
+    nonInvestmentGradeBondsExperience: "",
+    collectiveInvestmentsInstumentsKnowledge: "",
+    collectiveInvestmentsInstumentsExperience: "",
+    derivativesKnowledge: "",
+    derivativesExperience: "",
+    forexKnowledge: "",
+    commoditiesKnowledge: "",
+    commoditiesExperience: "",
+    hybridInvestmentsKnowledge: "",
+    privateMarketInstrumentsKnowledge: "",
+    privateMarketInstrumentsExperience: "",
+    realEstateKnowledge: "",
+    realEstateExperience: "",
+    altAssetsKnowledge: "",
+    leveragedInstumentsKnowledge: "",
+    leveragedInstumentsExperience: "",
+    privateCreditKnowledge: "",
   },
 };
 
