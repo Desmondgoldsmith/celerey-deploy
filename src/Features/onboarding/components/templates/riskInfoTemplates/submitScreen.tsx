@@ -25,7 +25,7 @@ export const SubmitScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
 
   return (
     <form onSubmit={handleSubmit} className="text-center max-w-xl mx-auto">
-      <h1 className="text-4xl font-cirka mb-6">
+      <h1 className="text-3xl font-cirka mb-6">
         Thank You
         <span className="text-navyLight"> {firstName || "User"}</span>, although
         the risk tolerance is selected at the beginning, was moderate, based on

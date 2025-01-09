@@ -82,7 +82,7 @@ export const Page1: React.FC<PageProps> = ({
       {QUESTIONS.map((question) => (
         <div
           key={question.id}
-          className="flex gap-4 border-b py-3 mb-3 items-center"
+          className="flex flex-col md:flex-row gap-4 border-b py-3 mb-3 items-center"
         >
           <h2 className="flex-1 font-helvetica">{question.question}</h2>
           <div className="flex-1 flex gap-4 items-end">

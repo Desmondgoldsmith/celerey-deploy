@@ -40,7 +40,7 @@ export const OnboardingLayout: React.FC<OnboardingLayoutProps> = ({
             </a>
           </div>
           <button
-            className="md:hidden text-gray-600"
+            className="md:hidden text-gray-600 transition-all"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >

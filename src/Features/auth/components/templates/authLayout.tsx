@@ -1,11 +1,20 @@
-import { ReactNode } from "react";
+"use client";
+
+import { ReactNode, useState } from "react";
 import Image from "next/image";
+import { Menu, X } from "lucide-react";
 
 interface AuthLayoutProps {
   children: ReactNode;
 }
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <nav className="px-6 py-4 border-b bg-white">
@@ -19,7 +28,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
               priority
             />
           </div>
-          <div className="flex gap-4">
+          <div className="hidden md:flex gap-4">
             <a href="#" className="text-sm font-helvetica text-gray-600">
               Tax Calculator
             </a>
@@ -30,7 +39,36 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
               Knowledge Hub
             </a>
           </div>
+          <button
+            className="md:hidden text-gray-600 transition-all"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 text-right rounded-lg p-4">
+            <a
+              href="#"
+              className="block text-sm font-helvetica text-gray-700 mb-2 border-b pb-2 hover:text-navy hover:border-navy transition-colors"
+            >
+              Tax Calculator
+            </a>
+            <a
+              href="#"
+              className="block text-sm font-helvetica text-gray-700 mb-2 border-b pb-2 hover:text-navy hover:border-navy transition-colors"
+            >
+              Goals & Planning
+            </a>
+            <a
+              href="#"
+              className="block text-sm font-helvetica text-gray-700 hover:text-navy transition-colors"
+            >
+              Knowledge Hub
+            </a>
+          </div>
+        )}
       </nav>
       <div className="flex-grow bg-offWhite">
         <main className="max-w-7xl mx-auto px-6 py-8">{children}</main>

@@ -50,7 +50,7 @@ export const DateOfBirthScreen = ({
         Please tell us when you were born
       </h1>
 
-      <div className="flex justify-center gap-2 mb-12">
+      <div className="flex justify-center gap-2 mb-12 flex-wrap">
         <input
           type="text"
           placeholder="D"

@@ -8,7 +8,7 @@ export const WelcomeScreen = ({ onContinue }: { onContinue: () => void }) => (
     </h1>
     <Button
       onClick={onContinue}
-      className="w-[380px] bg-navy text-white hover:bg-navyLight px-8"
+      className="md:w-[380px] w-full bg-navy text-white hover:bg-navyLight px-8"
     >
       Let&apos;s Get Started
     </Button>
