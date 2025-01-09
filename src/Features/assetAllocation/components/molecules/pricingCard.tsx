@@ -4,7 +4,6 @@ import { ToggleButton } from "./toggleButton";
 import { FeaturesList } from "./featureList";
 import Link from "next/link";
 
-// Define discount rates for each tier
 const BIENNIAL_DISCOUNTS = {
   Standard: 0.1, // 10% discount
   Pro: 0.12, // 12% discount
