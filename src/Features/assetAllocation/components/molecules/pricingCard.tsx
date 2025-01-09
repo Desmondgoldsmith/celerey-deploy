@@ -49,7 +49,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({ tier }) => {
         BIENNIAL_DISCOUNTS[tier.name as keyof typeof BIENNIAL_DISCOUNTS] * 100;
       const savingsAmount = getDiscountAmount();
       return (
-        <div className="text-green-600 text-sm font-semibold mt-2">
+        <div className="text-navyLight text-sm font-cirka mt-4 font-semibold">
           Save {discountPercent}% (${savingsAmount.toFixed(2)}) with biennial
           billing
         </div>
