@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 interface NetWorthScreenProps {
@@ -8,6 +9,11 @@ interface NetWorthScreenProps {
 
 export const SubmitScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
   const [firstName, setFirstName] = useState<string | null>(null);
+  const router = useRouter();
+
+  const handleSave = () => {
+    router.push("/asset-allocation");
+  };
 
   useEffect(() => {
     // Fetch the state from local storage
@@ -47,7 +53,8 @@ export const SubmitScreen = ({ onContinue, onBack }: NetWorthScreenProps) => {
         </Button>
         <Button
           type="submit"
-          className="flex-1 bg-navy hover:bg-navyLight text-white"
+          className="flex-1 bg-navy w-full hover:bg-navyLight text-white"
+          onClick={handleSave}
         >
           Submit
         </Button>
