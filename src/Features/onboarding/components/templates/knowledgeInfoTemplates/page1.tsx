@@ -84,7 +84,7 @@ export const Page1: React.FC<PageProps> = ({
           key={question.id}
           className="flex flex-col md:flex-row gap-4 border-b py-3 mb-3 items-center"
         >
-          <h2 className="flex-1 font-helvetica">{question.question}</h2>
+          <h2 className="flex-1 font-helvetica text-center md:text-left">{question.question}</h2>
           <div className="flex-1 flex gap-4 items-end">
             {question.options.map((option) => (
               <OptionCard
