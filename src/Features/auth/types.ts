@@ -23,8 +23,6 @@ export interface AuthState {
   sendOTP: (email: string) => Promise<void>;
   validateOTP: (otp: string) => Promise<void>;
   logout: () => void;
-
-  isRouteProtected: (path: string) => boolean;
 }
 
 export interface AuthResponse {

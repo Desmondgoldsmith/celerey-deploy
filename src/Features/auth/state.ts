@@ -8,20 +8,17 @@ import {
   sendOTP as sendOTPApi,
   validateOTP as validateOTPApi,
 } from "./service";
-import protectedRoutes from "@/utils/protectedRoutes";
 import { DEFAULT_AUTH_ERROR_MESSAGE } from "./constants";
 
 export const useAuthStore = create<AuthState>()(
   persist(
     immer((set, get) => ({
-      isAuthenticated: false,
+      isAuthenticated: true,
       accessToken: null,
       user: null,
       loading: false,
       error: "",
-      isRouteProtected: (path: string) => {
-        return protectedRoutes.includes(path);
-      },
+
       setAuth: ({ accessToken, user }) =>
         set((state) => {
           state.isAuthenticated = true;
