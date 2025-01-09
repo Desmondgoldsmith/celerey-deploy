@@ -107,7 +107,7 @@ export const PortfolioChart: React.FC<PortfolioChartProps> = ({
         </div>
       </div>
 
-      <div className="border-t border-[#AAAAAA] p-4 pt-10">
+      <div className="border-t border-[#AAAAAA] p-3 pt-10">
         <div className="text-sm text-gray-600">
           <span className="text-green-500 font-medium">↑ 12%</span>
           <span className="ml-2">Last 30 Days</span>
