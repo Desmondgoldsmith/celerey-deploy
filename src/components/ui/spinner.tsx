@@ -1,6 +1,10 @@
 import { cn } from "@/lib/utils";
 
-const Spinner = ({ className }: unknown) => {
+interface SpinnerProps {
+  className?: string;
+}
+
+const Spinner = ({ className }: SpinnerProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
