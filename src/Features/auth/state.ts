@@ -53,6 +53,8 @@ export const useAuthStore = create<AuthState>()(
           set((state) => {
             state.loading = true;
           });
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           const email = get().user?.email;
           if (!email) {
             set(
