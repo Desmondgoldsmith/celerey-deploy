@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { ChartType, DashboardProps } from "../../types";
+import { ChartType } from "../../types";
+import Image from "next/image";
+import { ChevronRight, MoreHorizontal } from "lucide-react";
 import { PortfolioChart } from "../molecules/portfolioChart";
 import { GeographicSpread } from "../molecules/geographicSpread";
 import { RiskAllocation } from "../molecules/riskAllocationCharts";
@@ -8,8 +10,13 @@ import { AssetAllocation } from "../molecules/assetAllocationChart";
 import { Goals } from "../molecules/goalsChart";
 import { UserProfile } from "../molecules/userProfile";
 import { IncomeVsExpenditure } from "../molecules/incomeVsExpenditure";
-import { ChevronRight, MoreHorizontal } from "lucide-react";
-import Image from "next/image";
+
+const DEFAULT_USER_DATA = {
+  userName: "Jude",
+  netWorth: 103550.43,
+  riskAttitude: "Somewhat Aggressive",
+  investmentExperience: "Advanced",
+};
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -18,7 +25,7 @@ const Chart = dynamic(() => import("react-apexcharts"), {
   ),
 }) as unknown as ChartType;
 
-// mobile view:  greeting component
+// Mobile components
 const MobileGreeting: React.FC<{ userName: string }> = ({ userName }) => (
   <div className="mb-6 lg:hidden">
     <div className="text-center items-center mb-4">
@@ -29,7 +36,6 @@ const MobileGreeting: React.FC<{ userName: string }> = ({ userName }) => (
   </div>
 );
 
-//  for mobile view : net worth section
 const MobileNetWorth: React.FC<{ netWorth: number }> = ({ netWorth }) => (
   <div className="lg:hidden bg-white p-6 rounded-lg mb-2">
     <div className="flex justify-between items-center">
@@ -47,80 +53,6 @@ const MobileNetWorth: React.FC<{ netWorth: number }> = ({ netWorth }) => (
   </div>
 );
 
-const DashboardTemplate: React.FC<DashboardProps> = ({
-  userName = "Jude",
-  netWorth = 103550.43,
-  riskAttitude = "Somewhat Aggressive",
-  investmentExperience = "Advanced",
-  // portfolioData,
-  // goals,
-}) => {
-  const [timeframe, setTimeframe] = useState<"1D" | "1W" | "1M" | "3M" | "1Y">(
-    "1M"
-  );
-
-  return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-[1440px] mx-auto">
-        {/* Desktop Layout */}
-        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-6">
-          {/* Left Column */}
-          <div className="col-span-4 space-y-6">
-            <UserProfile
-              userName={userName}
-              netWorth={netWorth}
-              riskAttitude={riskAttitude}
-              investmentExperience={investmentExperience}
-            />
-            <Goals Chart={Chart} />
-          </div>
-
-          {/* Middle Column */}
-          <div className="col-span-5 space-y-6">
-            <PortfolioChart
-              Chart={Chart}
-              timeframe={timeframe}
-              onTimeframeChange={setTimeframe}
-            />
-            <GeographicSpread />
-          </div>
-
-          {/* Right Column */}
-          <div className="col-span-3 space-y-6">
-            <RiskAllocation Chart={Chart} />
-            <AssetAllocation Chart={Chart} />
-            <IncomeVsExpenditure Chart={Chart} />
-          </div>
-        </div>
-
-        {/* Mobile Layout  */}
-        <div className="lg:hidden space-y-6">
-          <MobileGreeting userName={userName} />
-
-          <MobileNetWorth netWorth={netWorth} />
-
-          <PortfolioChart
-            Chart={Chart}
-            timeframe={timeframe}
-            onTimeframeChange={setTimeframe}
-          />
-
-          <div className="bg-white rounded-lg overflow-hidden">
-            <MobileActionItems />
-          </div>
-
-          <Goals Chart={Chart} />
-          <RiskAllocation Chart={Chart} />
-          <AssetAllocation Chart={Chart} />
-          <IncomeVsExpenditure Chart={Chart} />
-          <GeographicSpread />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Mobile action items component
 const MobileActionItems = () => {
   const actionItems = [
     {
@@ -166,6 +98,70 @@ const MobileActionItems = () => {
           </button>
         </div>
       ))}
+    </div>
+  );
+};
+
+const DashboardTemplate: React.FC = () => {
+  const [timeframe, setTimeframe] = useState<"1D" | "1W" | "1M" | "3M" | "1Y">(
+    "1M"
+  );
+  const { userName, netWorth, riskAttitude, investmentExperience } =
+    DEFAULT_USER_DATA;
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-[1440px] mx-auto">
+        {/* Desktop Layout */}
+        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-6">
+          {/* Left Column */}
+          <div className="col-span-4 space-y-6">
+            <UserProfile
+              userName={userName}
+              netWorth={netWorth}
+              riskAttitude={riskAttitude}
+              investmentExperience={investmentExperience}
+            />
+            <Goals Chart={Chart} />
+          </div>
+
+          {/* Middle Column */}
+          <div className="col-span-5 space-y-6">
+            <PortfolioChart
+              Chart={Chart}
+              timeframe={timeframe}
+              onTimeframeChange={setTimeframe}
+            />
+            <GeographicSpread />
+          </div>
+
+          {/* Right Column */}
+          <div className="col-span-3 space-y-6">
+            <RiskAllocation Chart={Chart} />
+            <AssetAllocation Chart={Chart} />
+            <IncomeVsExpenditure Chart={Chart} />
+          </div>
+        </div>
+
+        {/* Mobile Layout */}
+        <div className="lg:hidden space-y-6">
+          <MobileGreeting userName={userName} />
+          <MobileNetWorth netWorth={netWorth} />
+          <PortfolioChart
+            Chart={Chart}
+            timeframe={timeframe}
+            onTimeframeChange={setTimeframe}
+          />
+          <div className="bg-white rounded-lg overflow-hidden">
+            <MobileActionItems />
+          </div>
+          <Goals Chart={Chart} />
+          <RiskAllocation Chart={Chart} />
+          <AssetAllocation Chart={Chart} />
+          <IncomeVsExpenditure Chart={Chart} />
+          <GeographicSpread />
+        </div>
+      </div>
     </div>
   );
 };
