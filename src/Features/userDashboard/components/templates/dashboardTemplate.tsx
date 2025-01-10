@@ -12,19 +12,19 @@ import { Goals } from "../molecules/goalsChart";
 import { UserProfile } from "../molecules/userProfile";
 import { IncomeVsExpenditure } from "../molecules/incomeVsExpenditure";
 
-const DEFAULT_USER_DATA = {
-  userName: "Jude",
-  netWorth: 103550.43,
-  riskAttitude: "Somewhat Aggressive",
-  investmentExperience: "Advanced",
-};
-
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
   loading: () => (
     <div className="h-full w-full animate-pulse bg-gray-100 rounded-lg" />
   ),
 }) as unknown as ChartType;
+
+const DEFAULT_USER_DATA = {
+  userName: "Jude",
+  netWorth: 103550.43,
+  riskAttitude: "Somewhat Aggressive",
+  investmentExperience: "Advanced",
+};
 
 // Mobile components
 const MobileGreeting: React.FC<{ userName: string }> = ({ userName }) => (
