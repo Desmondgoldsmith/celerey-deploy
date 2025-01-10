@@ -1,7 +1,14 @@
+"use client";
 import React from "react";
 import { Card } from "@/components/ui/card";
 import { MoreHorizontal } from "lucide-react";
-import { VectorMap } from "@react-jvectormap/core";
+import dynamic from "next/dynamic";
+
+const VectorMap = dynamic(
+  () => import("@react-jvectormap/core").then((mod) => mod.VectorMap),
+  { ssr: false }
+);
+
 import { worldMill } from "@react-jvectormap/world";
 
 export const GeographicSpread: React.FC = () => {
