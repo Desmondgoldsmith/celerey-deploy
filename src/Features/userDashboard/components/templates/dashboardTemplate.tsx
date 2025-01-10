@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { DashboardProps } from "../../types";
+import { ChartType, DashboardProps } from "../../types";
 import { PortfolioChart } from "../molecules/portfolioChart";
 import { GeographicSpread } from "../molecules/geographicSpread";
 import { RiskAllocation } from "../molecules/riskAllocationCharts";
@@ -16,7 +16,7 @@ const Chart = dynamic(() => import("react-apexcharts"), {
   loading: () => (
     <div className="h-full w-full animate-pulse bg-gray-100 rounded-lg" />
   ),
-});
+}) as unknown as ChartType;
 
 // mobile view:  greeting component
 const MobileGreeting: React.FC<{ userName: string }> = ({ userName }) => (
@@ -95,25 +95,20 @@ const DashboardTemplate: React.FC<DashboardProps> = ({
 
         {/* Mobile Layout  */}
         <div className="lg:hidden space-y-6">
-          {/* 1. Raw greeting text */}
           <MobileGreeting userName={userName} />
 
-          {/* 2. Net worth section */}
           <MobileNetWorth netWorth={netWorth} />
 
-          {/* 3. Portfolio performance section */}
           <PortfolioChart
             Chart={Chart}
             timeframe={timeframe}
             onTimeframeChange={setTimeframe}
           />
 
-          {/* 4. Action items (extracted from UserProfile) */}
           <div className="bg-white rounded-lg overflow-hidden">
             <MobileActionItems />
           </div>
 
-          {/* Remaining components */}
           <Goals Chart={Chart} />
           <RiskAllocation Chart={Chart} />
           <AssetAllocation Chart={Chart} />
