@@ -4,13 +4,22 @@ import dynamic from "next/dynamic";
 import { ChartType } from "../../types";
 import Image from "next/image";
 import { ChevronRight, MoreHorizontal } from "lucide-react";
-import BalanceOverview from "../molecules/balanceOverview";
-import { GeographicSpread } from "../molecules/geographicSpread";
-import { IncomeVsDebt } from "../molecules/incomeVsDebt";
-import { FinancialGoals } from "../molecules/financialGoals";
+import { BalanceOverview } from "../molecules/balanceOverview";
+import RiskAllocation from "../molecules/riskAllocationCharts";
+import IncomeVsExpenditure from "../molecules/incomeAndExpenditure";
+import { Goals } from "../molecules/goalsChart";
 import { UserProfile } from "../molecules/userProfile";
-import { FinancialKnowledgeAssessment } from "../molecules/financialKnowledge";
-import IncomeAndExpenditure from "../molecules/incomeAndExpenditure";
+import IncomeVsDebt from "../molecules/incomeVsDebt";
+
+// expense data structure
+const INITIAL_EXPENSE_DATA = {
+  totalExpenses: 43256.45,
+  categories: [
+    { name: "Others", value: 24223.61, color: "#1E1B4B", percentage: 56 },
+    { name: "Home", value: 13842.06, color: "#4ADE80", percentage: 32 },
+    { name: "Loans", value: 5190.78, color: "#FB923C", percentage: 12 },
+  ],
+};
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -21,13 +30,13 @@ const Chart = dynamic(() => import("react-apexcharts"), {
 
 const DEFAULT_USER_DATA = {
   userName: "Jude",
-  netWorth: 103550.43,
-  riskAttitude: "Somewhat Aggressive",
-  investmentExperience: "Advanced",
+  netWorth: 103550.0,
+  riskAttitude: "Low",
+  investmentExperience: "Beginner",
   profileCompletion: 40,
 };
 
-// Mobile components
+// Mobile component
 const MobileGreeting: React.FC<{ userName: string }> = ({ userName }) => (
   <div className="mb-6 lg:hidden">
     <div className="text-center items-center mb-4">
@@ -49,7 +58,7 @@ const MobileNetWorth: React.FC<{ netWorth: number }> = ({ netWorth }) => (
         Your current networth is
       </div>
       <div className="text-[28px] text-navyLight font-cirka mt-1">
-        {netWorth.toLocaleString()}
+        ${netWorth.toLocaleString()}
       </div>
     </div>
   </div>
@@ -62,16 +71,16 @@ const MobileActionItems = () => {
       text: "Book a consultation call with an advisor",
       alt: "Consultation",
     },
-    // {
-    //   icon: "/assets/recommendation.svg",
-    //   text: "View advisors recommendation",
-    //   alt: "Advisor",
-    // },
-    // {
-    //   icon: "/assets/financialDoc.svg",
-    //   text: "Upload financial documents",
-    //   alt: "Upload Financial Document",
-    // },
+    {
+      icon: "/assets/recommendation.svg",
+      text: "View advisors recommendation",
+      alt: "Advisor",
+    },
+    {
+      icon: "/assets/financialDoc.svg",
+      text: "Upload financial documents",
+      alt: "Upload Financial Document",
+    },
   ];
 
   return (
@@ -105,9 +114,7 @@ const MobileActionItems = () => {
 };
 
 const DashboardTemplate: React.FC = () => {
-  const [timeframe, setTimeframe] = useState<"1D" | "1W" | "1M" | "3M" | "1Y">(
-    "1M"
-  );
+  const [selectMonths, setSelectedMonths] = useState<string>("12");
   const {
     userName,
     netWorth,
@@ -116,13 +123,18 @@ const DashboardTemplate: React.FC = () => {
     profileCompletion,
   } = DEFAULT_USER_DATA;
 
+  // Handler for timeframe changes
+  const handleTimeframeChange = (months: string) => {
+    setSelectedMonths(months);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-[1440px] mx-auto">
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-[1990px] mx-auto">
         {/* Desktop Layout */}
-        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-6">
+        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-4">
           {/* Left Column */}
-          <div className="col-span-4 space-y-6">
+          <div className="col-span-4 space-y-5">
             <UserProfile
               userName={userName}
               netWorth={netWorth}
@@ -130,25 +142,24 @@ const DashboardTemplate: React.FC = () => {
               investmentExperience={investmentExperience}
               profileCompletion={profileCompletion}
             />
-            <FinancialGoals Chart={Chart} />
+            <Goals Chart={Chart} />
           </div>
 
           {/* Middle Column */}
-          <div className="col-span-5 space-y-6">
+          <div className="col-span-5 space-y-5">
             <BalanceOverview
-              Chart={Chart}
-              timeframe={timeframe}
-              onTimeframeChange={setTimeframe}
+              totalExpenses={INITIAL_EXPENSE_DATA.totalExpenses}
+              data={INITIAL_EXPENSE_DATA.categories}
+              onTimeframeChange={handleTimeframeChange}
+              lastUpdated={new Date("2025-01-20")}
             />
-            <IncomeAndExpenditure Chart={Chart} />
+            <IncomeVsExpenditure Chart={Chart} />
           </div>
 
           {/* Right Column */}
-          <div className="col-span-3 space-y-6">
-            {/* <RiskAllocation Chart={Chart} /> */}
-            <GeographicSpread />
+          <div className="col-span-3 space-y-5">
+            <RiskAllocation />
             <IncomeVsDebt />
-            <FinancialKnowledgeAssessment progress={72} />
           </div>
         </div>
 
@@ -157,18 +168,18 @@ const DashboardTemplate: React.FC = () => {
           <MobileGreeting userName={userName} />
           <MobileNetWorth netWorth={netWorth} />
           <BalanceOverview
-            Chart={Chart}
-            timeframe={timeframe}
-            onTimeframeChange={setTimeframe}
+            totalExpenses={INITIAL_EXPENSE_DATA.totalExpenses}
+            data={INITIAL_EXPENSE_DATA.categories}
+            onTimeframeChange={handleTimeframeChange}
           />
           <div className="bg-white rounded-lg overflow-hidden">
             <MobileActionItems />
           </div>
-          <FinancialGoals Chart={Chart} />
-          <IncomeAndExpenditure Chart={Chart} />
+          <Goals Chart={Chart} />
+          <RiskAllocation />
+          <IncomeVsExpenditure Chart={Chart} />
           <IncomeVsDebt />
-          <FinancialKnowledgeAssessment progress={72} />
-          <GeographicSpread />
+          <IncomeVsDebt />
         </div>
       </div>
     </div>
