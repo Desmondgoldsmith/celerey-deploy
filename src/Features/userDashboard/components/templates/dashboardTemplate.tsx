@@ -11,6 +11,7 @@ import { FinancialGoals } from "../molecules/financialGoals";
 import { UserProfile } from "../molecules/userProfile";
 import { FinancialKnowledgeAssessment } from "../molecules/financialKnowledge";
 import IncomeAndExpenditure from "../molecules/incomeAndExpenditure";
+import Link from "next/link";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -61,6 +62,7 @@ const MobileActionItems = () => {
       icon: "/assets/consultation.svg",
       text: "Book a consultation call with an advisor",
       alt: "Consultation",
+      link: "/freebie-account/advisors",
     },
     // {
     //   icon: "/assets/recommendation.svg",
@@ -95,9 +97,11 @@ const MobileActionItems = () => {
               {item.text}
             </span>
           </div>
-          <button className="p-2 rounded-full bg-navy flex items-center justify-center">
-            <ChevronRight className="h-6 w-6 text-white" />
-          </button>
+          <Link href={item.link} passHref>
+            <button className="p-2 rounded-full bg-navy flex items-center justify-center">
+              <ChevronRight className="h-6 w-6 text-white" />
+            </button>
+          </Link>
         </div>
       ))}
     </div>
