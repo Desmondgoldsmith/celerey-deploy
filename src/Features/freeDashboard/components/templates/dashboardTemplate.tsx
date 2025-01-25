@@ -115,6 +115,7 @@ const MobileActionItems = () => {
 
 const DashboardTemplate: React.FC = () => {
   const [selectMonths, setSelectedMonths] = useState<string>("12");
+  console.log(selectMonths);
   const {
     userName,
     netWorth,
