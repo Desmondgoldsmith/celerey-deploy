@@ -23,20 +23,19 @@ export const AdvisorsListTemplate: React.FC<AdvisorsListTemplateProps> = ({
   return (
     <div className="min-h-screen">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6">
-        {/* Responsive Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
-          {/* Left Column - UserProfile */}
+          {/* UserProfile */}
           <div className="lg:col-span-4 w-full">
             <UserProfile
               userName={userName}
               netWorth={netWorth}
               riskAttitude={riskAttitude}
               investmentExperience={investmentExperience}
-              // className="mb-4 sm:mb-6" // Added margin for mobile spacing
+              // className="mb-4 sm:mb-6"
             />
           </div>
 
-          {/* Right Column - Advisors List */}
+          {/*Advisors List */}
           <div className="lg:col-span-8">
             <div className="bg-white rounded-xl p-4 sm:p-8">
               {/* Header and Filter Section */}
@@ -60,7 +59,7 @@ export const AdvisorsListTemplate: React.FC<AdvisorsListTemplateProps> = ({
                 </div>
               </div>
 
-              {/* Responsive Advisors Grid */}
+              {/* Advisors Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {DUMMY_ADVISORS.map((advisor) => (
                   <div
