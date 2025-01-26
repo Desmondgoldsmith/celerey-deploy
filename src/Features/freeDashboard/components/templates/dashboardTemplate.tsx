@@ -185,7 +185,6 @@ const DashboardTemplate: React.FC = () => {
           <RiskAllocation />
           <IncomeVsExpenditure Chart={Chart} />
           <IncomeVsDebt />
-          <IncomeVsDebt />
         </div>
       </div>
     </div>
