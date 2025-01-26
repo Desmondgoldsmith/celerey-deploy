@@ -144,7 +144,7 @@ const BalanceOverview: React.FC<BalanceOverviewProps> = ({}) => {
 
       <CardContent>
         {/* Assets Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-2">
+        <div className="flex justify-between items-center mb-2">
           <div className="flex items-center space-x-2 mb-2 md:mb-0">
             <h3 className="text-gray-700 font-cirka text-xl">Assets</h3>
             <Info className="h-3 w-3 text-gray-400" />
